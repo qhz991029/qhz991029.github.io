@@ -23,7 +23,7 @@ Work experience
   * Supervisor: [Yingyan (Celine) Lin](https://eiclab.scs.gatech.edu/pages/team.html)
 
 * Aug. 2022 - May 2023: Undergraduate Research Assistant
-  * Github University
+  * University of Science and Technology of China
   * Projects:
     * GPU occupancy prediction using GNN 
   * Supervisor: [Guangzhong Sun](http://staff.ustc.edu.cn/~gzsun/)
@@ -47,32 +47,5 @@ Work experience
 Publications
 ======
   <ul>{% for post in site.publications %}
-    {% include archive-single-publications-cv.html %}
+    {% include archive-single-cv.html %}
   {% endfor %}</ul>
-  
-[//]: # (Talks)
-
-[//]: # (======)
-
-[//]: # (  <ul>{% for post in site.talks %})
-
-[//]: # (    {% include archive-single-talk-cv.html %})
-
-[//]: # (  {% endfor %}</ul>)
-  
-[//]: # (Teaching)
-
-[//]: # (======)
-
-[//]: # (  <ul>{% for post in site.teaching %})
-
-[//]: # (    {% include archive-single-cv.html %})
-
-[//]: # (  {% endfor %}</ul>)
-
-[//]: # (  )
-[//]: # (Service and leadership)
-
-[//]: # (======)
-
-[//]: # (* Currently signed in to 43 different slack teams)
