@@ -26,7 +26,7 @@ Work experience
   * Github University
   * Projects:
     * GPU occupancy prediction using GNN 
-  * Supervisor: [Gongzhong Sun](http://staff.ustc.edu.cn/~gzsun/)
+  * Supervisor: [Guangzhong Sun](http://staff.ustc.edu.cn/~gzsun/)
   
 [//]: # (Skills)
 
