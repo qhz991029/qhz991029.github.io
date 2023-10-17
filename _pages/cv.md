@@ -30,7 +30,7 @@ Work experience
 
 Publications
 ======
-GEM-NeRF: Generalizable Multitask Neural Radiance Fields towards Unified 3D Scene Reconstruction and Multitask Understanding \
+*GEM-NeRF: Generalizable Multitask Neural Radiance Fields towards Unified 3D Scene Reconstruction and Multitask Understanding* \
 Yonggan Fu<sup>\*</sup>, **Huaizhi Qu**<sup>\*</sup>, Celine Lin \
 The Thirty-Fourth IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR 2024), under review \
 &nbsp;
