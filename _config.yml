@@ -80,41 +80,41 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Sidebar Name"
+  name             : "Huaizhi Qu"
   avatar           : "profile.png"
-  bio              : "Your biography for the left-hand sidebar"
-  location         : "Location"
-  employer         :
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  googlescholar    : "http://yourfullgooglescholarurl.com"
-  email            :
-  researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
-  uri              :
-  bitbucket        :
-  codepen          :
-  dribbble         :
-  flickr           :
-  facebook         :
-  foursquare       :
-  github           : "academicpages"
-  google_plus      :
-  keybase          :
-  instagram        :
-  impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
-  lastfm           :
-  linkedin         :
-  orcid            : "http://orcid.org/yourorcidurl"
-  pinterest        :
-  soundcloud       :
-  stackoverflow    : # http://stackoverflow.com/users/123456/username
-  steam            :
-  tumblr           :
-  twitter          : "replacethistwitterhandle"
-  vine             :
-  weibo            :
-  xing             :
-  youtube          :
-  wikipedia        :
+  bio              : "Undergraduate, CS@USTC"
+#  location         : "Location"
+#  employer         :
+#  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
+#  googlescholar    : "http://yourfullgooglescholarurl.com"
+  email            : "qhz991029@gmail.com"
+#  researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
+#  uri              :
+#  bitbucket        :
+#  codepen          :
+#  dribbble         :
+#  flickr           :
+#  facebook         :
+#  foursquare       :
+  github           : "https://github.com/qhz991029"
+#  google_plus      :
+#  keybase          :
+#  instagram        :
+#  impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
+#  lastfm           :
+  linkedin         : "https://www.linkedin.com/in/huaizhi-qu-632070219/"
+#  orcid            : "http://orcid.org/yourorcidurl"
+#  pinterest        :
+#  soundcloud       :
+#  stackoverflow    : # http://stackoverflow.com/users/123456/username
+#  steam            :
+#  tumblr           :
+  twitter          : "https://twitter.com/qhz991029"
+#  vine             :
+#  weibo            :
+#  xing             :
+#  youtube          :
+#  wikipedia        :
 
 
 # Reading Files
