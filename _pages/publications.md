@@ -12,7 +12,7 @@ author_profile: true
 {% include base_path %}
 
 GEM-NeRF: Generalizable Multitask Neural Radiance Fields towards Unified 3D Scene Reconstruction and Multitask Understanding \
-Yonggan Fu<sup>&ast;</sup>, **Huaizhi Qu**<sup>&ast;</sup>, Celine Lin \
+Yonggan Fu<sup>*</sup>, **Huaizhi Qu**<sup>*</sup>, Celine Lin \
 The Thirty-Fourth IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR 2024), under review \
 &nbsp;
 
@@ -22,5 +22,5 @@ The 38th AAAI Conference on Artificial Intelligence (AAAI 24), under review \
 &nbsp;
 
 *GPU Occupancy Prediction of Deep Learning Models Using Graph Neural Network* \
-Hengquan Mei<sup>&ast;</sup>, **Huaizhi Qu**<sup>&ast;</sup>, Jingwei Sun<sup>†</sup>, Yanjie Gao, Haoxiang Lin, Guangzhong Sun \
+Hengquan Mei<sup>*</sup>, **Huaizhi Qu**<sup>*</sup>, Jingwei Sun<sup>†</sup>, Yanjie Gao, Haoxiang Lin, Guangzhong Sun \
 The 25th IEEE International Conference on Cluster Computing (Cluster 2023)
