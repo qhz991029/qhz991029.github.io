@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "CV"
+#title: "CV"
 permalink: /cv/
 author_profile: true
 redirect_from:
@@ -47,7 +47,7 @@ Work experience
 Publications
 ======
   <ul>{% for post in site.publications %}
-    {% include archive-single-cv.html %}
+    {% include archive-single-publications-cv.html %}
   {% endfor %}</ul>
   
 [//]: # (Talks)
