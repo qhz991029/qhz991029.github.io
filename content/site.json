@@ -1,0 +1,78 @@
+{
+  "_comment": "Your basic info. Edit the values below, then run: npm run dev",
+
+  "name": {
+    "full": "Cookie",
+    "first": "Cookie",
+    "nickname": "Cookie",
+    "last": "",
+    "display": "Cookie",
+    "authorVariants": ["Cookie"]
+  },
+
+  "title": "Woof! I'm Cookie",
+  "avatar": "cookie.jpg",
+
+  "terminal": {
+    "username": "cookie",
+    "rotatingSubtitles": [
+      "fetch some data",
+      "bark at bugs",
+      "sniff out errors",
+      "chase squirrels",
+      "nap on keyboard"
+    ],
+    "skills": [
+      "Fetching", "Sitting", "Rolling Over", "Barking",
+      "Napping", "Treat Detection", "Zoomies", "Tail Wagging"
+    ],
+    "timezone": "America/Los_Angeles"
+  },
+
+  "contact": {
+    "email": "cookie@goodgirl.dev",
+    "academicEmail": "cookie@goodgirl.edu",
+    "hiringEmail": "cookie@goodgirl.dev",
+    "location": "Goodgirl Town, USA"
+  },
+
+  "social": {
+    "github": "https://github.com/H-Freax/TermHub",
+    "linkedin": "",
+    "medium": "",
+    "googleScholar": "",
+    "twitter": "",
+    "youtube": "",
+    "bilibili": "",
+    "zhihu": "",
+    "csdn": "",
+    "blog": ""
+  },
+
+  "pets": [
+    {
+      "name": "Lucas (Lulu)",
+      "emoji": "🐱",
+      "image": "/images/lulu.jpg",
+      "title": "Best Buddy",
+      "description": "Cookie's Ragdoll cat brother and best friend. Partners in crime since day one."
+    }
+  ],
+
+  "features": {
+    "publications": true,
+    "projects": true,
+    "articles": true,
+    "experience": true,
+    "news": true,
+    "pets": true,
+    "guide": true
+  },
+
+  "heroSocialIcons": [
+    { "platform": "twitter", "icon": "SiX", "label": "X", "color": "#000" },
+    { "platform": "youtube", "icon": "FaYoutube", "label": "YouTube", "color": "#FF0000" }
+  ],
+
+  "selectedPublicationIds": ["napcon2025-nap-optimization", "fetchml2024-trajectory"]
+}
