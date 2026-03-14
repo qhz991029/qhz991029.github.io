@@ -13,8 +13,9 @@ SPDX-License-Identifier: GPL-3.0-only
 </p>
 
 <p align="center">
-  <a href="https://h-freax.github.io/TermHub"><img src="https://img.shields.io/badge/Live_Demo-88c0d0?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
-  <a href="https://h-freax.github.io/TermHub/guide"><img src="https://img.shields.io/badge/Documentation-5e81ac?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Docs" /></a>
+  <a href="https://term-hub.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-88c0d0?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
+  <a href="https://h-freax.github.io/"><img src="https://img.shields.io/badge/Author's_Site-b48ead?style=for-the-badge&logo=firefoxbrowser&logoColor=white" alt="Author's Site" /></a>
+  <a href="https://term-hub.vercel.app/guide"><img src="https://img.shields.io/badge/Documentation-5e81ac?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Docs" /></a>
   <a href="https://discord.gg/QV2kyXzaTa"><img src="https://img.shields.io/badge/Discord-7289da?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
 </p>
 
@@ -33,11 +34,11 @@ SPDX-License-Identifier: GPL-3.0-only
 ## <img src="https://img.shields.io/badge/-Demo-88c0d0?style=flat-square&logo=googlechrome&logoColor=white" height="20" /> Demo
 
 <p align="center">
-  <a href="https://h-freax.github.io/TermHub">
+  <a href="https://term-hub.vercel.app/">
     <img src="public/screenshots/home.png" alt="TermHub Demo — Home Page" width="720" />
   </a>
   <br/>
-  <sub><a href="https://h-freax.github.io/TermHub">h-freax.github.io/TermHub</a> — built with TermHub</sub>
+  <sub><a href="https://term-hub.vercel.app/">term-hub.vercel.app</a> — built with TermHub</sub>
 </p>
 
 <details>
