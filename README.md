@@ -3,6 +3,10 @@ SPDX-FileCopyrightText: 2026 Yaoyao(Freax) Qian <limyoonaxi@gmail.com>
 SPDX-License-Identifier: GPL-3.0-only
 -->
 
+<p align="right">
+  <a href="README.md">English</a> | <a href="README_CN.md">中文</a>
+</p>
+
 <p align="center">
   <img src="public/logo.svg" alt="TermHub" width="520" />
 </p>
@@ -29,6 +33,9 @@ SPDX-License-Identifier: GPL-3.0-only
 </p>
 
 ---
+
+> [!TIP]
+> **Don't want to touch code?** We're building a hosted solution at **[terminalai.com](https://terminalai.com)** — upload your resume and get a live portfolio, no Git or terminal needed. **Join the waitlist** to get early access!
 
 <br/>
 
@@ -111,11 +118,6 @@ Instead of writing HTML or learning a framework, you give your CV to any AI — 
 </td>
 </tr>
 </table>
-
-<br/>
-
-> [!TIP]
-> **Don't want to touch code?** We also offer a hosted solution at **[termhubai.com](https://termhubai.com)** — upload your resume and get a live portfolio. No Git, no terminal, no setup required.
 
 <br/>
 
