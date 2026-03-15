@@ -20,6 +20,22 @@ const TYPES_FILE = path.join(PROJECT_ROOT, "src", "types", "index.ts");
 
 let devServerProcess: ChildProcess | null = null;
 
+// ── Language support ────────────────────────────────────────────────
+
+const LanguageEnum = z.enum(["en", "zh"]).default("en").describe(
+  "Content language. 'en' writes to content/, 'zh' writes to content/zh/"
+);
+
+type Language = "en" | "zh";
+
+function getContentDir(language: Language = "en"): string {
+  return language === "zh" ? path.join(CONTENT_DIR, "zh") : CONTENT_DIR;
+}
+
+function getContentRelPath(language: Language, filename: string): string {
+  return language === "zh" ? `content/zh/${filename}` : `content/${filename}`;
+}
+
 // ── Helpers ─────────────────────────────────────────────────────────
 
 function ensureDir(dir: string) {
@@ -55,15 +71,16 @@ function writeMarkdownFile(filePath: string, frontmatter: Record<string, unknown
   fs.writeFileSync(filePath, content, "utf-8");
 }
 
-function listContentFiles(): { json: string[]; markdown: Record<string, string[]> } {
+function listContentFiles(language: Language = "en"): { json: string[]; markdown: Record<string, string[]> } {
   const result: { json: string[]; markdown: Record<string, string[]> } = {
     json: [],
     markdown: {},
   };
 
-  if (!fs.existsSync(CONTENT_DIR)) return result;
+  const dir = getContentDir(language);
+  if (!fs.existsSync(dir)) return result;
 
-  const entries = fs.readdirSync(CONTENT_DIR, { withFileTypes: true });
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     if (entry.isFile() && entry.name.endsWith(".json")) {
       result.json.push(entry.name);
@@ -72,8 +89,8 @@ function listContentFiles(): { json: string[]; markdown: Record<string, string[]
       if (!result.markdown["."]) result.markdown["."] = [];
       result.markdown["."].push(entry.name);
     }
-    if (entry.isDirectory()) {
-      const subDir = path.join(CONTENT_DIR, entry.name);
+    if (entry.isDirectory() && entry.name !== "zh") {
+      const subDir = path.join(dir, entry.name);
       const subEntries = fs.readdirSync(subDir);
       const mdFiles = subEntries.filter((f) => f.endsWith(".md"));
       if (mdFiles.length > 0) {
@@ -112,7 +129,7 @@ const PublicationStatusEnum = z.enum(["accepted", "published", "preprint"]);
 
 const server = new McpServer({
   name: "termhub",
-  version: "1.0.0",
+  version: "1.1.0",
 });
 
 // ── Tool: get_schema ────────────────────────────────────────────────
@@ -120,7 +137,8 @@ const server = new McpServer({
 server.tool(
   "get_schema",
   "Get TermHub TypeScript type definitions and content file schemas. " +
-    "Call this first to understand the data structures before creating content.",
+    "Call this first to understand the data structures before creating content. " +
+    "TermHub supports bilingual content (en/zh). English goes to content/, Chinese goes to content/zh/.",
   {},
   async () => {
     let typesContent = "";
@@ -138,6 +156,14 @@ server.tool(
           type: "text" as const,
           text: `# TermHub Data Schema
 
+## Bilingual Support (i18n)
+TermHub supports English and Chinese content side by side:
+- **English (default):** \`content/\` — site.json, about.md, publications/, projects/, etc.
+- **Chinese:** \`content/zh/\` — zh/site.json, zh/about.md, zh/publications/, zh/projects/, etc.
+
+All content tools accept a \`language\` parameter ("en" or "zh"). Use \`language: "zh"\` to write Chinese versions.
+The website automatically switches between languages based on user preference.
+
 ## TypeScript Interfaces (src/types/index.ts)
 \`\`\`typescript
 ${typesContent}
@@ -149,16 +175,28 @@ ${siteJson}
 \`\`\`
 
 ## Content File Layout
-- \`content/site.json\` — Profile, social links, features, terminal config
-- \`content/experience.json\` — Education, timeline entries, reviewing
-- \`content/news.json\` — News items array
-- \`content/awards.json\` — Awards array
-- \`content/research.json\` — Current research labs
-- \`content/logos.json\` — Institution logo filename map
-- \`content/about.md\` — About page (YAML frontmatter + markdown body)
-- \`content/projects/*.md\` — Project entries (YAML frontmatter + markdown body)
-- \`content/publications/*.md\` — Publication entries (YAML frontmatter + markdown body)
-- \`content/articles/*.md\` — Article entries (YAML frontmatter + markdown body)
+\`\`\`
+content/
+├── site.json              ← Profile, social links, features, terminal config
+├── about.md               ← About page (YAML frontmatter + markdown body)
+├── experience.json        ← Education, timeline entries, reviewing
+├── news.json              ← News items array
+├── awards.json            ← Awards array
+├── research.json          ← Current research labs
+├── logos.json             ← Institution logo filename map
+├── projects/*.md          ← Project entries
+├── publications/*.md      ← Publication entries
+├── articles/*.md          ← Article entries
+└── zh/                    ← Chinese translations (same structure)
+    ├── site.json
+    ├── about.md
+    ├── experience.json
+    ├── news.json
+    ├── awards.json
+    ├── projects/*.md
+    ├── publications/*.md
+    └── articles/*.md
+\`\`\`
 
 ## Markdown Frontmatter Examples
 
@@ -210,15 +248,19 @@ Project description paragraph.
 
 server.tool(
   "list_content",
-  "List all content files in the TermHub content directory",
-  {},
-  async () => {
-    const files = listContentFiles();
+  "List all content files in the TermHub content directory. " +
+    "Use language parameter to list English or Chinese content files.",
+  {
+    language: LanguageEnum,
+  },
+  async ({ language }) => {
+    const lang = language as Language;
+    const files = listContentFiles(lang);
     return {
       content: [
         {
           type: "text" as const,
-          text: JSON.stringify(files, null, 2),
+          text: `# Content files (${lang})\n\n${JSON.stringify(files, null, 2)}`,
         },
       ],
     };
@@ -230,19 +272,23 @@ server.tool(
 server.tool(
   "read_content",
   "Read a content file from TermHub. For JSON files, returns parsed JSON. " +
-    "For Markdown files, returns frontmatter + body separately.",
+    "For Markdown files, returns frontmatter + body separately. " +
+    "Use language parameter to read English or Chinese content.",
   {
     file_path: z
       .string()
       .describe(
         "Relative path within content/ directory, e.g. 'site.json', 'projects/my-project.md', 'about.md'"
       ),
+    language: LanguageEnum,
   },
-  async ({ file_path }) => {
-    const fullPath = path.join(CONTENT_DIR, file_path);
+  async ({ file_path, language }) => {
+    const lang = language as Language;
+    const contentDir = getContentDir(lang);
+    const fullPath = path.join(contentDir, file_path);
     if (!fs.existsSync(fullPath)) {
       return {
-        content: [{ type: "text" as const, text: `Error: File not found: content/${file_path}` }],
+        content: [{ type: "text" as const, text: `Error: File not found: ${getContentRelPath(lang, file_path)}` }],
         isError: true,
       };
     }
@@ -275,21 +321,25 @@ server.tool(
 
 server.tool(
   "write_json_content",
-  "Write or update a JSON content file (site.json, experience.json, news.json, awards.json, research.json, logos.json)",
+  "Write or update a JSON content file (site.json, experience.json, news.json, awards.json, research.json, logos.json). " +
+    "Use language='zh' to write Chinese version to content/zh/.",
   {
     file_name: ContentTypeEnum.describe("Which JSON content file to write"),
     data: z.string().describe("JSON string of the data to write"),
+    language: LanguageEnum,
   },
-  async ({ file_name, data }) => {
+  async ({ file_name, data, language }) => {
     try {
+      const lang = language as Language;
       const parsed = JSON.parse(data);
-      const filePath = path.join(CONTENT_DIR, `${file_name}.json`);
+      const contentDir = getContentDir(lang);
+      const filePath = path.join(contentDir, `${file_name}.json`);
       writeJson(filePath, parsed);
       return {
         content: [
           {
             type: "text" as const,
-            text: `Successfully wrote content/${file_name}.json`,
+            text: `Successfully wrote ${getContentRelPath(lang, `${file_name}.json`)}`,
           },
         ],
       };
@@ -313,7 +363,7 @@ server.tool(
   "write_markdown_content",
   "Write or update a Markdown content file with YAML frontmatter. " +
     "For projects/publications/articles, specify the category and a slug for the filename. " +
-    "For about.md, use category='about'.",
+    "For about.md, use category='about'. Use language='zh' to write Chinese version.",
   {
     category: MarkdownCategoryEnum.describe("Content category folder"),
     slug: z
@@ -322,22 +372,27 @@ server.tool(
       .describe("Filename slug (without .md). Auto-generated from title if omitted. Ignored for 'about'."),
     frontmatter: z.string().describe("JSON string of YAML frontmatter fields"),
     body: z.string().describe("Markdown body content"),
+    language: LanguageEnum,
   },
-  async ({ category, slug, frontmatter, body }) => {
+  async ({ category, slug, frontmatter, body, language }) => {
     try {
+      const lang = language as Language;
+      const contentDir = getContentDir(lang);
       const fm = JSON.parse(frontmatter) as Record<string, unknown>;
 
       let filePath: string;
       if (category === "about") {
-        filePath = path.join(CONTENT_DIR, "about.md");
+        filePath = path.join(contentDir, "about.md");
       } else {
         const fileName = slug || slugify(String(fm.title || "untitled"));
-        filePath = path.join(CONTENT_DIR, category, `${fileName}.md`);
+        filePath = path.join(contentDir, category, `${fileName}.md`);
       }
 
       writeMarkdownFile(filePath, fm, body);
 
-      const relPath = path.relative(PROJECT_ROOT, filePath);
+      const relPath = lang === "zh"
+        ? `content/zh/${path.relative(contentDir, filePath)}`
+        : `content/${path.relative(contentDir, filePath)}`;
       return {
         content: [
           { type: "text" as const, text: `Successfully wrote ${relPath}` },
@@ -361,23 +416,26 @@ server.tool(
 
 server.tool(
   "delete_content",
-  "Delete a content file from TermHub",
+  "Delete a content file from TermHub. Use language='zh' for Chinese content.",
   {
     file_path: z
       .string()
       .describe("Relative path within content/ directory, e.g. 'projects/old-project.md'"),
+    language: LanguageEnum,
   },
-  async ({ file_path }) => {
-    const fullPath = path.join(CONTENT_DIR, file_path);
+  async ({ file_path, language }) => {
+    const lang = language as Language;
+    const contentDir = getContentDir(lang);
+    const fullPath = path.join(contentDir, file_path);
     if (!fs.existsSync(fullPath)) {
       return {
-        content: [{ type: "text" as const, text: `File not found: content/${file_path}` }],
+        content: [{ type: "text" as const, text: `File not found: ${getContentRelPath(lang, file_path)}` }],
         isError: true,
       };
     }
     fs.unlinkSync(fullPath);
     return {
-      content: [{ type: "text" as const, text: `Deleted content/${file_path}` }],
+      content: [{ type: "text" as const, text: `Deleted ${getContentRelPath(lang, file_path)}` }],
     };
   }
 );
@@ -387,13 +445,17 @@ server.tool(
 server.tool(
   "update_site_config",
   "Update specific fields in site.json without overwriting the entire file. " +
-    "Accepts a partial JSON object that will be deep-merged with existing config.",
+    "Accepts a partial JSON object that will be deep-merged with existing config. " +
+    "Use language='zh' to update the Chinese site config.",
   {
     updates: z.string().describe("JSON string of fields to merge into site.json"),
+    language: LanguageEnum,
   },
-  async ({ updates }) => {
+  async ({ updates, language }) => {
     try {
-      const siteJsonPath = path.join(CONTENT_DIR, "site.json");
+      const lang = language as Language;
+      const contentDir = getContentDir(lang);
+      const siteJsonPath = path.join(contentDir, "site.json");
       const existing = fs.existsSync(siteJsonPath)
         ? (readJson(siteJsonPath) as Record<string, unknown>)
         : {};
@@ -429,7 +491,7 @@ server.tool(
         content: [
           {
             type: "text" as const,
-            text: `Successfully updated site.json. Updated fields: ${Object.keys(patch).join(", ")}`,
+            text: `Successfully updated ${getContentRelPath(lang, "site.json")}. Updated fields: ${Object.keys(patch).join(", ")}`,
           },
         ],
       };
@@ -451,7 +513,8 @@ server.tool(
 
 server.tool(
   "add_publication",
-  "Add a single publication entry as a Markdown file in content/publications/",
+  "Add a single publication entry as a Markdown file. " +
+    "Use language='zh' to add Chinese version to content/zh/publications/.",
   {
     id: z.string().describe("Unique publication ID, e.g. 'acl2025-my-paper'"),
     title: z.string().describe("Paper title"),
@@ -475,8 +538,12 @@ server.tool(
       .describe("Related links"),
     emoji: z.string().optional().describe("Display emoji"),
     keywords: z.array(z.string()).optional().describe("Keywords"),
+    language: LanguageEnum,
   },
   async (params) => {
+    const lang = params.language as Language;
+    const contentDir = getContentDir(lang);
+
     const frontmatter: Record<string, unknown> = {
       id: params.id,
       title: params.title,
@@ -500,7 +567,7 @@ server.tool(
 
     const body = params.abstract || "";
     const slug = slugify(params.id);
-    const filePath = path.join(CONTENT_DIR, "publications", `${slug}.md`);
+    const filePath = path.join(contentDir, "publications", `${slug}.md`);
 
     writeMarkdownFile(filePath, frontmatter, body);
 
@@ -508,7 +575,7 @@ server.tool(
       content: [
         {
           type: "text" as const,
-          text: `Added publication: content/publications/${slug}.md`,
+          text: `Added publication: ${getContentRelPath(lang, `publications/${slug}.md`)}`,
         },
       ],
     };
@@ -519,7 +586,8 @@ server.tool(
 
 server.tool(
   "add_project",
-  "Add a single project entry as a Markdown file in content/projects/",
+  "Add a single project entry as a Markdown file. " +
+    "Use language='zh' to add Chinese version to content/zh/projects/.",
   {
     title: z.string().describe("Project title"),
     category: ProjectCategoryEnum.describe("Project category"),
@@ -531,8 +599,12 @@ server.tool(
     badge: z.string().optional().describe("Display badge text"),
     highlights: z.array(z.string()).optional().describe("Key highlights as bullet points"),
     slug: z.string().optional().describe("Filename slug (auto-generated from title if omitted)"),
+    language: LanguageEnum,
   },
   async (params) => {
+    const lang = params.language as Language;
+    const contentDir = getContentDir(lang);
+
     const frontmatter: Record<string, unknown> = {
       title: params.title,
       category: params.category,
@@ -553,7 +625,7 @@ server.tool(
     }
 
     const fileName = params.slug || slugify(params.title);
-    const filePath = path.join(CONTENT_DIR, "projects", `${fileName}.md`);
+    const filePath = path.join(contentDir, "projects", `${fileName}.md`);
 
     writeMarkdownFile(filePath, frontmatter, body);
 
@@ -561,7 +633,7 @@ server.tool(
       content: [
         {
           type: "text" as const,
-          text: `Added project: content/projects/${fileName}.md`,
+          text: `Added project: ${getContentRelPath(lang, `projects/${fileName}.md`)}`,
         },
       ],
     };
@@ -572,7 +644,8 @@ server.tool(
 
 server.tool(
   "add_experience",
-  "Add a timeline entry to experience.json",
+  "Add a timeline entry to experience.json. " +
+    "Use language='zh' to add to Chinese content.",
   {
     title: z.string().describe("Job/position title"),
     company: z.string().describe("Company or organization name"),
@@ -585,9 +658,12 @@ server.tool(
     summary: z.string().optional().describe("Brief summary"),
     highlights: z.array(z.string()).describe("Key achievements"),
     is_current: z.boolean().optional().describe("Whether this is a current position"),
+    language: LanguageEnum,
   },
   async (params) => {
-    const expPath = path.join(CONTENT_DIR, "experience.json");
+    const lang = params.language as Language;
+    const contentDir = getContentDir(lang);
+    const expPath = path.join(contentDir, "experience.json");
     const existing = fs.existsSync(expPath)
       ? (readJson(expPath) as Record<string, unknown>)
       : { education: { courses: [] }, reviewing: [], timeline: [] };
@@ -617,7 +693,7 @@ server.tool(
       content: [
         {
           type: "text" as const,
-          text: `Added experience entry: ${params.title} at ${params.company}`,
+          text: `Added experience entry (${lang}): ${params.title} at ${params.company}`,
         },
       ],
     };
@@ -628,14 +704,18 @@ server.tool(
 
 server.tool(
   "add_education",
-  "Add an education entry to experience.json",
+  "Add an education entry to experience.json. " +
+    "Use language='zh' to add to Chinese content.",
   {
     course: z.string().describe("Degree or course name, e.g. 'M.S. Computer Science'"),
     institution: z.string().describe("Institution name"),
     year: z.string().describe("Year range, e.g. '2022-2024'"),
+    language: LanguageEnum,
   },
   async (params) => {
-    const expPath = path.join(CONTENT_DIR, "experience.json");
+    const lang = params.language as Language;
+    const contentDir = getContentDir(lang);
+    const expPath = path.join(contentDir, "experience.json");
     const existing = fs.existsSync(expPath)
       ? (readJson(expPath) as Record<string, unknown>)
       : { education: { courses: [] }, reviewing: [], timeline: [] };
@@ -655,7 +735,7 @@ server.tool(
       content: [
         {
           type: "text" as const,
-          text: `Added education: ${params.course} at ${params.institution}`,
+          text: `Added education (${lang}): ${params.course} at ${params.institution}`,
         },
       ],
     };
@@ -666,7 +746,7 @@ server.tool(
 
 server.tool(
   "add_news",
-  "Add a news item to news.json",
+  "Add a news item to news.json. Use language='zh' to add to Chinese content.",
   {
     type: z.string().describe("News type: publication, talk, release, award, etc."),
     badge: z.string().describe("Badge label displayed on the news item"),
@@ -686,9 +766,12 @@ server.tool(
       )
       .optional()
       .describe("Related links"),
+    language: LanguageEnum,
   },
   async (params) => {
-    const newsPath = path.join(CONTENT_DIR, "news.json");
+    const lang = params.language as Language;
+    const contentDir = getContentDir(lang);
+    const newsPath = path.join(contentDir, "news.json");
     const existing = fs.existsSync(newsPath) ? (readJson(newsPath) as unknown[]) : [];
 
     const item: Record<string, unknown> = {
@@ -710,7 +793,7 @@ server.tool(
 
     return {
       content: [
-        { type: "text" as const, text: `Added news item: ${params.title}` },
+        { type: "text" as const, text: `Added news item (${lang}): ${params.title}` },
       ],
     };
   }
@@ -720,7 +803,7 @@ server.tool(
 
 server.tool(
   "add_award",
-  "Add an award/honor to awards.json",
+  "Add an award/honor to awards.json. Use language='zh' to add to Chinese content.",
   {
     title: z.string().describe("Award title"),
     org: z.string().optional().describe("Awarding organization"),
@@ -730,9 +813,12 @@ server.tool(
       .optional()
       .describe("Award type"),
     link: z.string().optional().describe("Link URL"),
+    language: LanguageEnum,
   },
   async (params) => {
-    const awardsPath = path.join(CONTENT_DIR, "awards.json");
+    const lang = params.language as Language;
+    const contentDir = getContentDir(lang);
+    const awardsPath = path.join(contentDir, "awards.json");
     const existing = fs.existsSync(awardsPath) ? (readJson(awardsPath) as unknown[]) : [];
 
     const item: Record<string, unknown> = {
@@ -748,7 +834,7 @@ server.tool(
 
     return {
       content: [
-        { type: "text" as const, text: `Added award: ${params.title}` },
+        { type: "text" as const, text: `Added award (${lang}): ${params.title}` },
       ],
     };
   }
@@ -805,7 +891,7 @@ server.tool(
   "All-in-one tool: Takes resume/CV text content and generates a structured extraction " +
     "with instructions for populating all TermHub content files. Returns a JSON blueprint " +
     "that maps resume sections to TermHub tools. The AI should then call individual tools " +
-    "to actually write the files.",
+    "to actually write the files. Supports generating both English and Chinese content.",
   {
     resume_text: z.string().describe("Plain text content of the resume/CV"),
     owner_name: z.string().describe("Full name of the portfolio owner"),
@@ -816,6 +902,10 @@ server.tool(
     linkedin: z.string().optional().describe("LinkedIn profile URL"),
     google_scholar: z.string().optional().describe("Google Scholar URL"),
     avatar_path: z.string().optional().describe("Path to avatar image file"),
+    languages: z
+      .array(z.enum(["en", "zh"]))
+      .default(["en"])
+      .describe("Languages to generate content for. Use ['en', 'zh'] for bilingual."),
   },
   async (params) => {
     // Copy avatar if provided
@@ -833,10 +923,21 @@ server.tool(
         "Below is a structured blueprint extracted from the resume. " +
         "Use the individual TermHub MCP tools (update_site_config, add_publication, " +
         "add_project, add_experience, add_education, write_markdown_content, etc.) " +
-        "to populate each section. The resume text is included for reference.",
+        "to populate each section. All tools accept a 'language' parameter. " +
+        (params.languages.includes("zh")
+          ? "IMPORTANT: Generate content for BOTH English (language='en') and Chinese (language='zh'). " +
+            "For Chinese content, translate all user-facing text (titles, descriptions, highlights) to Chinese. " +
+            "Keep technical terms, venue names, and proper nouns in English."
+          : "The resume text is included for reference."),
+
+      target_languages: params.languages,
 
       site_config: {
         tool: "update_site_config",
+        note: params.languages.includes("zh")
+          ? "Call update_site_config twice: once with language='en' and once with language='zh'. " +
+            "Chinese site.json can have translated title, rotating subtitles, etc."
+          : undefined,
         suggested_data: {
           name: {
             full: params.owner_name,
@@ -867,40 +968,47 @@ server.tool(
         {
           section: "Education",
           tool: "add_education",
-          hint: "Extract degree, institution, year range for each education entry",
+          hint: "Extract degree, institution, year range for each education entry. " +
+            (params.languages.includes("zh") ? "For zh: translate degree names (e.g. '计算机科学硕士')." : ""),
         },
         {
           section: "Experience / Work History",
           tool: "add_experience",
           hint: "Extract title, company, dates, highlights for each position. " +
-            "Set category: research|industry|academic|leadership, roleType: research|mle|sde|teaching|leadership",
+            "Set category: research|industry|academic|leadership, roleType: research|mle|sde|teaching|leadership. " +
+            (params.languages.includes("zh") ? "For zh: translate job titles, summaries, and highlights." : ""),
         },
         {
           section: "Publications",
           tool: "add_publication",
           hint: "Extract title, authors, venue, year, status, links for each paper. " +
-            "Generate a unique ID like 'venue2025-short-title'",
+            "Generate a unique ID like 'venue2025-short-title'. " +
+            (params.languages.includes("zh") ? "For zh: translate abstract. Keep title/venue/authors in English." : ""),
         },
         {
           section: "Projects",
           tool: "add_project",
           hint: "Extract title, summary, tags, category, highlights for each project. " +
-            "Map to categories: robotics|nlp|web-app|data|tooling|healthcare",
+            "Map to categories: robotics|nlp|web-app|data|tooling|healthcare. " +
+            (params.languages.includes("zh") ? "For zh: translate summary and highlights." : ""),
         },
         {
           section: "Awards & Honors",
           tool: "add_award",
-          hint: "Extract title, org, date, kind for each award",
+          hint: "Extract title, org, date, kind for each award. " +
+            (params.languages.includes("zh") ? "For zh: translate award titles." : ""),
         },
         {
           section: "Research Interests",
           tool: "write_json_content (file_name: 'research')",
-          hint: "Extract current research labs/groups with advisor, focus, link",
+          hint: "Extract current research labs/groups with advisor, focus, link. " +
+            (params.languages.includes("zh") ? "For zh: translate research focus descriptions." : ""),
         },
         {
           section: "About / Bio",
           tool: "write_markdown_content (category: 'about')",
-          hint: "Generate a narrative journey description and timeline phases from the resume",
+          hint: "Generate a narrative journey description and timeline phases from the resume. " +
+            (params.languages.includes("zh") ? "For zh: write a Chinese version of the bio narrative." : ""),
         },
       ],
 
@@ -1092,7 +1200,8 @@ server.tool(
 server.tool(
   "get_site_status",
   "Get an overview of the current TermHub portfolio content — what's configured, " +
-    "how many publications/projects/etc exist, and what's missing.",
+    "how many publications/projects/etc exist, and what's missing. " +
+    "Shows counts for both English and Chinese content.",
   {},
   async () => {
     const status: Record<string, unknown> = {};
@@ -1111,48 +1220,47 @@ server.tool(
       status.profile = "(site.json not found)";
     }
 
-    // Count content
-    const files = listContentFiles();
-
-    status.content_counts = {
-      publications: files.markdown["publications"]?.length || 0,
-      projects: files.markdown["projects"]?.length || 0,
-      articles: files.markdown["articles"]?.length || 0,
-      has_about: files.markdown["."]?.includes("about.md") || false,
-    };
-
-    // JSON data counts
-    const newsPath = path.join(CONTENT_DIR, "news.json");
-    const awardsPath = path.join(CONTENT_DIR, "awards.json");
-    const expPath = path.join(CONTENT_DIR, "experience.json");
-
-    if (fs.existsSync(newsPath)) {
-      const news = readJson(newsPath) as unknown[];
-      status.content_counts = {
-        ...(status.content_counts as Record<string, unknown>),
-        news: news.length,
+    // Count content for both languages
+    function countContent(lang: Language) {
+      const files = listContentFiles(lang);
+      const contentDir = getContentDir(lang);
+      const counts: Record<string, unknown> = {
+        publications: files.markdown["publications"]?.length || 0,
+        projects: files.markdown["projects"]?.length || 0,
+        articles: files.markdown["articles"]?.length || 0,
+        has_about: files.markdown["."]?.includes("about.md") || false,
       };
+
+      const newsPath = path.join(contentDir, "news.json");
+      const awardsPath = path.join(contentDir, "awards.json");
+      const expPath = path.join(contentDir, "experience.json");
+
+      if (fs.existsSync(newsPath)) {
+        const news = readJson(newsPath) as unknown[];
+        counts.news = news.length;
+      }
+      if (fs.existsSync(awardsPath)) {
+        const awards = readJson(awardsPath) as unknown[];
+        counts.awards = awards.length;
+      }
+      if (fs.existsSync(expPath)) {
+        const exp = readJson(expPath) as Record<string, unknown>;
+        const timeline = (exp.timeline as unknown[]) || [];
+        const edu = (exp.education as Record<string, unknown>) || {};
+        const courses = (edu.courses as unknown[]) || [];
+        counts.experience_entries = timeline.length;
+        counts.education_entries = courses.length;
+      }
+
+      return counts;
     }
 
-    if (fs.existsSync(awardsPath)) {
-      const awards = readJson(awardsPath) as unknown[];
-      status.content_counts = {
-        ...(status.content_counts as Record<string, unknown>),
-        awards: awards.length,
-      };
-    }
+    status.content_en = countContent("en");
+    status.content_zh = countContent("zh");
 
-    if (fs.existsSync(expPath)) {
-      const exp = readJson(expPath) as Record<string, unknown>;
-      const timeline = (exp.timeline as unknown[]) || [];
-      const edu = (exp.education as Record<string, unknown>) || {};
-      const courses = (edu.courses as unknown[]) || [];
-      status.content_counts = {
-        ...(status.content_counts as Record<string, unknown>),
-        experience_entries: timeline.length,
-        education_entries: courses.length,
-      };
-    }
+    // Check zh site.json
+    const zhSiteJsonPath = path.join(CONTENT_DIR, "zh", "site.json");
+    status.has_zh_site_config = fs.existsSync(zhSiteJsonPath);
 
     // Assets
     const imgDir = path.join(PUBLIC_DIR, "img");
@@ -1178,6 +1286,7 @@ server.tool(
 server.tool(
   "reset_content",
   "Reset all content to empty/default state. WARNING: This deletes all existing content! " +
+    "Resets both English and Chinese content. " +
     "Useful when starting fresh from a resume import.",
   {
     confirm: z
@@ -1193,45 +1302,52 @@ server.tool(
       };
     }
 
-    // Clear markdown directories
-    for (const dir of ["projects", "publications", "articles"]) {
-      const dirPath = path.join(CONTENT_DIR, dir);
-      if (fs.existsSync(dirPath)) {
-        for (const file of fs.readdirSync(dirPath)) {
-          if (file.endsWith(".md")) {
-            fs.unlinkSync(path.join(dirPath, file));
+    // Clear markdown directories for both languages
+    for (const lang of ["en", "zh"] as Language[]) {
+      const contentDir = getContentDir(lang);
+      for (const dir of ["projects", "publications", "articles"]) {
+        const dirPath = path.join(contentDir, dir);
+        if (fs.existsSync(dirPath)) {
+          for (const file of fs.readdirSync(dirPath)) {
+            if (file.endsWith(".md")) {
+              fs.unlinkSync(path.join(dirPath, file));
+            }
           }
         }
       }
+
+      // Reset JSON files to empty defaults
+      if (lang === "en" || fs.existsSync(contentDir)) {
+        writeJson(path.join(contentDir, "news.json"), []);
+        writeJson(path.join(contentDir, "awards.json"), []);
+        writeJson(path.join(contentDir, "experience.json"), {
+          education: { courses: [] },
+          reviewing: [],
+          timeline: [],
+        });
+
+        if (lang === "en") {
+          writeJson(path.join(contentDir, "research.json"), { currentResearch: [] });
+          writeJson(path.join(contentDir, "logos.json"), {});
+        }
+
+        // Reset about.md
+        writeMarkdownFile(
+          path.join(contentDir, "about.md"),
+          {
+            journeyPhases: [],
+            version: { current: "v1.0.0", history: [] },
+          },
+          ""
+        );
+      }
     }
 
-    // Reset JSON files to empty defaults
-    writeJson(path.join(CONTENT_DIR, "news.json"), []);
-    writeJson(path.join(CONTENT_DIR, "awards.json"), []);
-    writeJson(path.join(CONTENT_DIR, "experience.json"), {
-      education: { courses: [] },
-      reviewing: [],
-      timeline: [],
-    });
-    writeJson(path.join(CONTENT_DIR, "research.json"), { currentResearch: [] });
-    writeJson(path.join(CONTENT_DIR, "logos.json"), {});
-
-    // Reset about.md
-    writeMarkdownFile(
-      path.join(CONTENT_DIR, "about.md"),
-      {
-        journeyPhases: [],
-        version: { current: "v1.0.0", history: [] },
-      },
-      ""
-    );
-
-    // Reset site.json to minimal
+    // Reset site.json to minimal (English)
     const siteJsonPath = path.join(CONTENT_DIR, "site.json");
     const existing = fs.existsSync(siteJsonPath)
       ? (readJson(siteJsonPath) as Record<string, unknown>)
       : {};
-    // Keep features config but reset personal data
     writeJson(siteJsonPath, {
       _comment: "Your basic info. Edit the values below, then run: npm run dev",
       name: { full: "", first: "", nickname: "", last: "", display: "", authorVariants: [] },
@@ -1254,11 +1370,17 @@ server.tool(
       selectedPublicationIds: [],
     });
 
+    // Reset zh site.json if exists
+    const zhSiteJsonPath = path.join(CONTENT_DIR, "zh", "site.json");
+    if (fs.existsSync(zhSiteJsonPath)) {
+      fs.unlinkSync(zhSiteJsonPath);
+    }
+
     return {
       content: [
         {
           type: "text" as const,
-          text: "All content has been reset to defaults. Ready for fresh content generation.",
+          text: "All content has been reset to defaults (both en and zh). Ready for fresh content generation.",
         },
       ],
     };
