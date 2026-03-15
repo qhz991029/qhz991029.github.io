@@ -269,9 +269,9 @@ const HeroSection = ({ title, avatar, research = [], researchLogos = {}, educati
                   </Tooltip>
                 ))}
               </HStack>
-              {(siteConfig.pets as { name: string; emoji: string; image: string }[]).length > 0 && (
+              {((siteConfig.pets ?? []) as { name: string; emoji: string; image: string }[]).length > 0 && (
                 <HStack spacing={[4, 5]} justify="center">
-                  {(siteConfig.pets as { name: string; emoji: string; image: string }[]).map((pet) => (
+                  {((siteConfig.pets ?? []) as { name: string; emoji: string; image: string }[]).map((pet) => (
                     <VStack key={pet.name} spacing={2}>
                       {pet.image && (
                         <Image

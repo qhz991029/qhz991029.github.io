@@ -37,7 +37,7 @@ export const navItems = [
 ] as const
 
 /** Hero social icons with resolved URLs from social config */
-export const heroSocialIcons = siteConfig.heroSocialIcons.map(item => ({
+export const heroSocialIcons = (siteConfig.heroSocialIcons ?? []).map(item => ({
   icon: item.icon,
   label: item.label,
   color: item.color,
@@ -61,5 +61,5 @@ export const siteOwner = {
   social: siteConfig.social,
   timezone: siteConfig.terminal.timezone,
   skills: siteConfig.terminal.skills,
-  pets: siteConfig.pets as { name: string; emoji: string; image: string; title: string; description: string }[],
+  pets: (siteConfig.pets ?? []) as { name: string; emoji: string; image: string; title: string; description: string }[],
 } as const

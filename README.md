@@ -9,7 +9,7 @@ SPDX-License-Identifier: GPL-3.0-only
 
 <p align="center">
   <strong>A terminal-themed academic portfolio you can set up in 5 minutes.</strong><br/>
-  <sub>Edit text files. Get a website. No coding needed.</sub>
+  <sub>Edit text files. Get a website. No coding needed. Now with <b>MCP support</b> — let AI build it for you.</sub>
 </p>
 
 <p align="center">
@@ -25,6 +25,7 @@ SPDX-License-Identifier: GPL-3.0-only
   <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white" alt="React" />
   <img src="https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
   <img src="https://img.shields.io/badge/Chakra_UI-319795?style=flat-square&logo=chakraui&logoColor=white" alt="Chakra UI" />
+  <a href="#-ai-integration--supports-mcp"><img src="https://img.shields.io/badge/NEW-Supports_MCP-bf616a?style=flat-square&logo=openai&logoColor=white" alt="Supports MCP" /></a>
 </p>
 
 ---
@@ -61,6 +62,24 @@ SPDX-License-Identifier: GPL-3.0-only
 
 <br/>
 
+## <img src="https://img.shields.io/badge/-Design_Philosophy-88c0d0?style=flat-square&logo=lightbulb&logoColor=white" height="20" /> Design Philosophy
+
+TermHub is built around one simple idea:
+
+<p align="center">
+  <img src="https://img.shields.io/badge/CV-d08770?style=for-the-badge" height="28" />
+  <img src="https://img.shields.io/badge/→-434c5e?style=flat-square" height="28" />
+  <img src="https://img.shields.io/badge/AI-88c0d0?style=for-the-badge&logo=openai&logoColor=white" height="28" />
+  <img src="https://img.shields.io/badge/→-434c5e?style=flat-square" height="28" />
+  <img src="https://img.shields.io/badge/Markdown-a3be8c?style=for-the-badge&logo=markdown&logoColor=white" height="28" />
+  <img src="https://img.shields.io/badge/→-434c5e?style=flat-square" height="28" />
+  <img src="https://img.shields.io/badge/Homepage-b48ead?style=for-the-badge&logo=googlechrome&logoColor=white" height="28" />
+</p>
+
+Instead of writing HTML or learning a framework, you give your CV to any AI tool — **ChatGPT, Claude, Gemini, or any LLM** — and it generates Markdown files that plug directly into TermHub. With our **built-in MCP server**, Claude can even do this fully automatically: read your resume, call 19 specialized tools, and populate your entire site in under a minute.
+
+<br/>
+
 ## <img src="https://img.shields.io/badge/-Features-a3be8c?style=flat-square&logo=checkmarx&logoColor=white" height="20" /> Features
 
 <table>
@@ -75,6 +94,7 @@ SPDX-License-Identifier: GPL-3.0-only
 - <img src="https://img.shields.io/badge/Hot-reload-a3be8c?style=flat-square&logoColor=white" height="14" /> Edit content files, site updates instantly
 - <img src="https://img.shields.io/badge/Setup-wizard-b48ead?style=flat-square&logoColor=white" height="14" /> One-command setup wizard
 - <img src="https://img.shields.io/badge/No_code-needed-ebcb8b?style=flat-square&logoColor=black" height="14" /> Just edit text files
+- <img src="https://img.shields.io/badge/MCP-AI_powered-88c0d0?style=flat-square&logoColor=white" height="14" /> Resume → AI → portfolio in minutes
 
 </td>
 <td width="50%">
@@ -164,6 +184,72 @@ When a feature is `false`, its page and nav link disappear completely.
 | <img src="https://img.shields.io/badge/GitHub_Pages-222?style=flat-square&logo=github&logoColor=white" /> | Push to `main` — the included workflow deploys automatically |
 | <img src="https://img.shields.io/badge/Vercel-000?style=flat-square&logo=vercel&logoColor=white" /> | Import repo → click Deploy (auto-detects Vite) |
 | <img src="https://img.shields.io/badge/Netlify-00C7B7?style=flat-square&logo=netlify&logoColor=white" /> | Import repo → click Deploy |
+
+<br/>
+
+## <img src="https://img.shields.io/badge/-NEW-bf616a?style=flat-square" height="20" /> <img src="https://img.shields.io/badge/-AI_Integration_(MCP)-88c0d0?style=flat-square&logo=openai&logoColor=white" height="20" /> AI Integration — Supports MCP
+
+The **CV → AI → Markdown → Homepage** pipeline taken to its logical conclusion: TermHub includes a built-in **MCP server** that lets Claude directly read your resume, generate all Markdown/JSON content files, and build your site — zero manual editing.
+
+<table>
+<tr>
+<td width="50%">
+
+<img src="https://img.shields.io/badge/-What_It_Does-5e81ac?style=flat-square" height="18" />
+
+- <img src="https://img.shields.io/badge/-Resume_→_Portfolio-88c0d0?style=flat-square" height="14" /> Give AI your resume PDF or text, get a complete site
+- <img src="https://img.shields.io/badge/-19_Tools-a3be8c?style=flat-square" height="14" /> Add publications, projects, experience, awards via AI
+- <img src="https://img.shields.io/badge/-PDF_Parsing-b48ead?style=flat-square" height="14" /> Built-in PDF text extraction
+- <img src="https://img.shields.io/badge/-Live_Preview-ebcb8b?style=flat-square&logoColor=black" height="14" /> AI can start dev server and build your site
+
+</td>
+<td width="50%">
+
+<img src="https://img.shields.io/badge/-Quick_Setup-a3be8c?style=flat-square" height="18" />
+
+```bash
+# 1. Install MCP server
+cd mcp-server && npm install
+
+# 2. Configure Claude Desktop / Code
+# (see mcp-server/mcp-config.json)
+
+# 3. Tell Claude:
+# "Parse my resume and generate my portfolio"
+```
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><img src="https://img.shields.io/badge/-Available_Tools-434c5e?style=flat-square&logo=puzzle&logoColor=white" height="18" /></summary>
+
+<br/>
+
+| Tool | Description |
+|------|-------------|
+| `get_schema` | Get all data types — AI calls this first |
+| `parse_pdf` | Extract text from resume PDF |
+| `generate_from_resume` | Create structured blueprint from resume text |
+| `update_site_config` | Set name, email, social links |
+| `add_publication` | Add a paper with full metadata |
+| `add_project` | Add a project with tags and highlights |
+| `add_experience` | Add work/research timeline entry |
+| `add_education` | Add education entry |
+| `add_news` / `add_award` | Add news items and awards |
+| `write_markdown_content` | Write any Markdown content file |
+| `write_json_content` | Write any JSON content file |
+| `manage_assets` | Copy images to public directory |
+| `preview_site` | Start dev server or production build |
+| `get_site_status` | Overview of current portfolio content |
+| `reset_content` | Clear all content for fresh start |
+
+</details>
+
+> **Workflow:** Resume → `parse_pdf` → `generate_from_resume` → AI calls `add_*` tools → `preview_site` — done in under a minute.
+
+For detailed setup instructions, see the [AI Integration guide](https://term-hub.vercel.app/docs#mcp-server).
 
 <br/>
 

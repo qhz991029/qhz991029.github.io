@@ -10,7 +10,7 @@ import {
   FaBook, FaGraduationCap, FaBriefcase, FaNewspaper, FaTrophy,
   FaImage, FaArrowRight, FaGithub, FaFileAlt, FaCode, FaPen,
   FaTerminal, FaCog, FaChevronRight, FaStar, FaCodeBranch,
-  FaBalanceScale, FaHeart, FaDiscord,
+  FaBalanceScale, FaHeart, FaDiscord, FaRobot,
 } from 'react-icons/fa'
 import { terminalPalette } from '@/config/theme'
 
@@ -231,12 +231,57 @@ const GuideLanding: React.FC = () => {
             color={subtitleColor}
             maxW="520px"
             mx="auto"
-            mb={8}
+            mb={6}
             lineHeight="1.8"
           >
             Open-source portfolio template with a terminal aesthetic.
-            Edit simple text files, and your site builds itself —
-            publications, projects, experience, and more.
+            Designed around one simple idea:
+          </Text>
+
+          {/* CV → AI → Markdown → Homepage pipeline */}
+          <Flex
+            justify="center" align="center" gap={[2, 3]}
+            mb={8} flexWrap="wrap"
+          >
+            {[
+              { label: 'CV', icon: FaFileAlt, color: '#d08770' },
+              { label: 'AI', icon: FaRobot, color: '#88c0d0' },
+              { label: 'Markdown', icon: FaCode, color: '#a3be8c' },
+              { label: 'Homepage', icon: FaGlobe, color: '#b48ead' },
+            ].map((step, i, arr) => (
+              <React.Fragment key={step.label}>
+                <VStack spacing={1}>
+                  <Flex
+                    w={['40px', '48px']} h={['40px', '48px']}
+                    borderRadius="lg"
+                    bg={`${step.color}18`}
+                    border={`1.5px solid ${step.color}40`}
+                    align="center" justify="center"
+                  >
+                    <Icon as={step.icon} color={step.color} boxSize={[4, 5]} />
+                  </Flex>
+                  <Text fontSize="2xs" fontWeight="bold" color={step.color} fontFamily="mono">
+                    {step.label}
+                  </Text>
+                </VStack>
+                {i < arr.length - 1 && (
+                  <Icon as={FaArrowRight} color={tc.muted} boxSize={[2.5, 3]} mt="-12px" />
+                )}
+              </React.Fragment>
+            ))}
+          </Flex>
+
+          <Text
+            fontSize={['xs', 'sm']}
+            color={subtitleColor}
+            maxW="500px"
+            mx="auto"
+            mb={8}
+            lineHeight="1.8"
+          >
+            Give your CV to any AI (ChatGPT, Claude, Gemini...),
+            generate Markdown, and plug it in. Or use our built-in MCP server
+            to let Claude do it all automatically.
           </Text>
 
           {/* CTA buttons */}
@@ -409,6 +454,147 @@ const GuideLanding: React.FC = () => {
               </Text>
             </Box>
           </Box>
+        </Container>
+      </Box>
+
+      {/* ═══════════ MCP SHOWCASE (NEW) ═══════════ */}
+      <Box
+        bg={isDark
+          ? 'linear-gradient(135deg, rgba(136,192,208,0.06) 0%, rgba(94,129,172,0.06) 100%)'
+          : 'linear-gradient(135deg, rgba(136,192,208,0.08) 0%, rgba(94,129,172,0.04) 100%)'
+        }
+        borderY="1px solid"
+        borderColor={isDark ? 'rgba(136,192,208,0.15)' : 'rgba(136,192,208,0.2)'}
+      >
+        <Container maxW="5xl" py={[10, 14]}>
+          <VStack spacing={2} mb={8} textAlign="center">
+            <Flex align="center" gap={2}>
+              <Flex
+                px={2} py={0.5} borderRadius="full"
+                bg="#bf616a" color="white"
+                fontSize="2xs" fontWeight="bold" letterSpacing="wider"
+              >
+                NEW
+              </Flex>
+              <Text fontSize="xs" fontWeight="bold" color="#88c0d0" textTransform="uppercase" letterSpacing="wider" fontFamily="mono">
+                AI-Powered
+              </Text>
+            </Flex>
+            <Heading as="h2" fontSize={['lg', 'xl']} fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')}>
+              Supports MCP — CV to Homepage, Fully Automated
+            </Heading>
+            <Text fontSize="sm" color={subtitleColor} maxW="600px">
+              TermHub is designed around <Text as="span" fontWeight="semibold" color={tc.command}>CV → AI → Markdown → Homepage</Text>.
+              With our built-in MCP server, Claude reads your resume and generates
+              every content file automatically — no copy-paste, no manual editing.
+            </Text>
+          </VStack>
+
+          <Grid templateColumns={['1fr', '1fr', '1fr 1fr']} gap={6}>
+            {/* Left: terminal demo */}
+            <GridItem>
+              <Box
+                border={`1px solid ${tc.border}`}
+                borderRadius="md"
+                overflow="hidden"
+                boxShadow={isDark ? '0 8px 32px rgba(0,0,0,0.4)' : '0 8px 32px rgba(0,0,0,0.08)'}
+              >
+                <Flex h="3px" w="full">
+                  {terminalPalette.rainbow.map((c, i) =>
+                    Array.from({ length: 4 }, (_, j) => (
+                      <Box key={`mcp-${i}-${j}`} flex={1} h="full" bg={c} opacity={0.5 + 0.5 * Math.sin((i * 4 + j) * 0.3)} />
+                    ))
+                  )}
+                </Flex>
+                <Flex bg={tc.header} px={3} py={1.5} align="center" gap={2} borderBottom={`1px solid ${tc.border}`}>
+                  <HStack spacing={1}>
+                    <Box w="8px" h="8px" borderRadius="full" bg="#bf616a" />
+                    <Box w="8px" h="8px" borderRadius="full" bg="#ebcb8b" />
+                    <Box w="8px" h="8px" borderRadius="full" bg="#a3be8c" />
+                  </HStack>
+                  <Text fontSize="2xs" color={tc.secondary} fontFamily="mono" ml={1}>claude — MCP workflow</Text>
+                </Flex>
+                <Box bg={tc.bg} px={3} py={3} fontFamily="mono" fontSize="xs" lineHeight="2.2">
+                  <Text color={tc.secondary}># You say to Claude:</Text>
+                  <Text><Text as="span" color={tc.prompt}>{'>'}</Text> <Text as="span" color={tc.text}>"Parse my resume and build my portfolio"</Text></Text>
+                  <Text color={tc.secondary} mt={1}># Claude automatically runs:</Text>
+                  <Text><Text as="span" color={tc.info}>{'[1/7]'}</Text> <Text as="span" color={tc.command}>parse_pdf</Text> <Text as="span" color={tc.secondary}>~/resume.pdf</Text></Text>
+                  <Text><Text as="span" color={tc.info}>{'[2/7]'}</Text> <Text as="span" color={tc.command}>reset_content</Text></Text>
+                  <Text><Text as="span" color={tc.info}>{'[3/7]'}</Text> <Text as="span" color={tc.command}>update_site_config</Text> <Text as="span" color={tc.secondary}>name, email, links</Text></Text>
+                  <Text><Text as="span" color={tc.info}>{'[4/7]'}</Text> <Text as="span" color={tc.command}>add_publication</Text> <Text as="span" color={tc.param}>x4</Text></Text>
+                  <Text><Text as="span" color={tc.info}>{'[5/7]'}</Text> <Text as="span" color={tc.command}>add_project</Text> <Text as="span" color={tc.param}>x3</Text></Text>
+                  <Text><Text as="span" color={tc.info}>{'[6/7]'}</Text> <Text as="span" color={tc.command}>add_experience</Text> <Text as="span" color={tc.param}>x5</Text></Text>
+                  <Text><Text as="span" color={tc.info}>{'[7/7]'}</Text> <Text as="span" color={tc.command}>preview_site</Text></Text>
+                  <Text mt={1} color={tc.success}>Done! Portfolio live at http://localhost:5173</Text>
+                </Box>
+              </Box>
+            </GridItem>
+
+            {/* Right: feature highlights */}
+            <GridItem>
+              <VStack spacing={3} align="stretch">
+                {[
+                  { icon: FaFileAlt, title: 'Resume to Portfolio', desc: 'Give Claude your PDF or text resume — it extracts education, experience, publications, projects, awards, and generates all content files.', color: '#88c0d0' },
+                  { icon: FaRobot, title: '19 MCP Tools', desc: 'Purpose-built tools for every content type: add_publication, add_project, add_experience, update_site_config, manage_assets, and more.', color: '#a3be8c' },
+                  { icon: FaTerminal, title: 'Works with Claude Desktop & Code', desc: 'Built on the Model Context Protocol standard. Configure once, then use natural language to manage your entire portfolio.', color: '#5e81ac' },
+                  { icon: FaRocket, title: 'Incremental Updates', desc: '"Add my new paper to the site" — Claude calls add_publication. No need to regenerate everything.', color: '#b48ead' },
+                ].map(item => (
+                  <HStack
+                    key={item.title}
+                    bg={cardBg}
+                    border="1px solid" borderColor={borderColor}
+                    borderRadius="lg"
+                    p={4} spacing={4} align="start"
+                    _hover={{ borderColor: item.color, shadow: isDark ? 'dark-lg' : 'md' }}
+                    transition="all 0.2s"
+                  >
+                    <Flex w="36px" h="36px" borderRadius="md" flexShrink={0} bg={`${item.color}18`} align="center" justify="center">
+                      <Icon as={item.icon} color={item.color} boxSize={4} />
+                    </Flex>
+                    <Box>
+                      <Text fontWeight="semibold" fontSize="sm" color={useColorModeValue('gray.800', 'gray.100')} mb={0.5}>{item.title}</Text>
+                      <Text fontSize="xs" color={subtitleColor} lineHeight="1.6">{item.desc}</Text>
+                    </Box>
+                  </HStack>
+                ))}
+              </VStack>
+            </GridItem>
+          </Grid>
+
+          {/* Setup hint */}
+          <Flex
+            mt={6}
+            bg={isDark ? 'rgba(136,192,208,0.06)' : 'rgba(136,192,208,0.08)'}
+            border={`1px solid ${isDark ? 'rgba(136,192,208,0.2)' : 'rgba(136,192,208,0.25)'}`}
+            borderRadius="md"
+            px={4} py={3}
+            align="center"
+            justify="space-between"
+            flexWrap="wrap"
+            gap={3}
+          >
+            <HStack spacing={2}>
+              <Text fontSize="xs" color="#88c0d0" fontWeight="bold" fontFamily="mono" flexShrink={0}>MCP</Text>
+              <Text fontSize="xs" color={useColorModeValue('gray.600', 'gray.300')} lineHeight="1.7">
+                Setup: <Text as="span" fontFamily="mono" color={tc.command}>cd mcp-server && npm install</Text> — then configure Claude Desktop or Code.
+              </Text>
+            </HStack>
+            <Flex
+              as="button"
+              onClick={() => navigate('/docs#mcp-server')}
+              fontSize="xs"
+              fontWeight="semibold"
+              color="#88c0d0"
+              align="center"
+              gap={1}
+              _hover={{ opacity: 0.8 }}
+              transition="opacity 0.15s"
+              flexShrink={0}
+            >
+              Full Setup Guide
+              <Icon as={FaArrowRight} boxSize={2.5} />
+            </Flex>
+          </Flex>
         </Container>
       </Box>
 
@@ -678,7 +864,7 @@ const GuideLanding: React.FC = () => {
         />
 
         <SimpleGrid columns={[1, 2, 3]} spacing={3}>
-          {[
+          {([
             { id: 'quickstart', icon: FaRocket, title: 'Quick Start', desc: 'Install, setup wizard, first run', color: '#a3be8c' },
             { id: 'structure', icon: FaFolderOpen, title: 'Project Structure', desc: 'Content folder layout explained', color: '#ebcb8b' },
             { id: 'site-config', icon: FaCog, title: 'Site Config', desc: 'Name, social links, avatar, skills', color: '#88c0d0' },
@@ -687,15 +873,16 @@ const GuideLanding: React.FC = () => {
             { id: 'edit-experience', icon: FaBriefcase, title: 'Edit Experience', desc: 'Education, timeline, reviewing', color: '#d08770' },
             { id: 'edit-news', icon: FaNewspaper, title: 'News & Awards', desc: 'Announcements, honors, icons', color: '#ebcb8b' },
             { id: 'images', icon: FaImage, title: 'Images & Logos', desc: 'Avatar, logos, references', color: '#b48ead' },
+            { id: 'mcp-server', icon: FaRobot, title: 'AI Integration (MCP)', desc: 'Resume to portfolio via AI', color: '#88c0d0', isNew: true },
             { id: 'deploy', icon: FaGlobe, title: 'Deploy', desc: 'GitHub Pages, Vercel, Netlify', color: '#bf616a' },
-          ].map(item => (
+          ] as const).map(item => (
             <Flex
               key={item.id}
               as="button"
               onClick={() => navigate(`/docs#${item.id}`)}
-              bg={cardBg}
+              bg={'isNew' in item && item.isNew ? (isDark ? 'rgba(136,192,208,0.06)' : 'rgba(136,192,208,0.05)') : cardBg}
               border="1px solid"
-              borderColor={borderColor}
+              borderColor={'isNew' in item && item.isNew ? (isDark ? 'rgba(136,192,208,0.25)' : 'rgba(136,192,208,0.3)') : borderColor}
               borderRadius="lg"
               px={4} py={3.5}
               align="center"
@@ -703,7 +890,18 @@ const GuideLanding: React.FC = () => {
               _hover={{ borderColor: item.color, shadow: isDark ? 'dark-lg' : 'sm' }}
               transition="all 0.2s ease"
               textAlign="left"
+              position="relative"
             >
+              {'isNew' in item && item.isNew && (
+                <Flex
+                  position="absolute" top="-8px" right="8px"
+                  px={1.5} py={0.5} borderRadius="full"
+                  bg="#bf616a" color="white"
+                  fontSize="2xs" fontWeight="bold" letterSpacing="wide"
+                >
+                  NEW
+                </Flex>
+              )}
               <HStack spacing={3}>
                 <Icon as={item.icon} color={item.color} boxSize={4} />
                 <Box>
