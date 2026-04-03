@@ -9,7 +9,6 @@
     "newsDisplay",
     "journey",
     "accomplishments",
-    "contact",
     "footer"
   ],
   "name": {
@@ -22,7 +21,7 @@
   },
   "title": "HKUST PhD student",
   "tagline": "I work on foundation models, efficient multimodal learning, uncertainty quantification, 3D vision, and neural rendering.",
-  "avatar": "avatar.svg",
+  "avatar": "avatar.jpg",
   "terminal": {
     "username": "huaizhi",
     "rotatingSubtitles": [
