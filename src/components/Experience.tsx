@@ -86,6 +86,9 @@ const Experience: React.FC = () => {
       .map(e => ({ ...e, isCurrent: !e.end || e.end.toLowerCase() === 'present' }))
       .sort((a, b) => {
         if (a.isCurrent !== b.isCurrent) return a.isCurrent ? -1 : 1
+        const endA = a.end ? new Date(a.end).getTime() : Infinity
+        const endB = b.end ? new Date(b.end).getTime() : Infinity
+        if (endA !== endB) return endB - endA
         return new Date(b.start).getTime() - new Date(a.start).getTime()
       })
   }, [experienceTimeline])
@@ -111,7 +114,12 @@ const Experience: React.FC = () => {
       })
       .map(([year, items]) => ({
         year,
-        items: items.sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime()),
+        items: items.sort((a, b) => {
+          const endA = a.end ? new Date(a.end).getTime() : Infinity
+          const endB = b.end ? new Date(b.end).getTime() : Infinity
+          if (endA !== endB) return endB - endA
+          return new Date(b.start).getTime() - new Date(a.start).getTime()
+        }),
       }))
   }, [filtered])
 
