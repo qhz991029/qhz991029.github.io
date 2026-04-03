@@ -40,6 +40,14 @@ const HeroSection = ({ title, avatar, research = [], researchLogos = {}, educati
   const textColor = useColorModeValue('gray.600', 'gray.400')
   const bg = useColorModeValue('gray.50', 'gray.900')
   const accentBg = useColorModeValue('blue.50', 'blue.900')
+  const primaryEmail = siteOwner.contact.academicEmail || siteOwner.contact.email
+  const contactLinks = [
+    primaryEmail && { icon: 'FaEnvelope', label: 'email', href: `mailto:${primaryEmail}` },
+    siteOwner.social.github && { icon: 'FaGithub', label: 'github', href: siteOwner.social.github },
+    siteOwner.social.googleScholar && { icon: 'SiGooglescholar', label: 'scholar', href: siteOwner.social.googleScholar },
+    siteOwner.social.linkedin && { icon: 'FaLinkedin', label: 'linkedin', href: siteOwner.social.linkedin },
+    siteOwner.social.twitter && { icon: 'SiX', label: 'x', href: siteOwner.social.twitter },
+  ].filter(Boolean) as { icon: string; label: string; href: string }[]
 
   return (
     <Box
@@ -181,7 +189,7 @@ const HeroSection = ({ title, avatar, research = [], researchLogos = {}, educati
                             <VStack align="start" spacing={0} flex={1}>
                               <Text fontSize={["xs", "sm"]} fontWeight="medium" lineHeight="short" color={headingColor}>{item.lab}</Text>
                               <Text fontSize="2xs" color={textColor} lineHeight="short" noOfLines={1}>
-                                {item.advisor ? `w/ ${item.advisor}` : item.focus}
+                                {item.advisor ? `w/ ${item.advisor} • ${item.focus}` : item.focus}
                               </Text>
                             </VStack>
                           </HStack>
@@ -225,21 +233,21 @@ const HeroSection = ({ title, avatar, research = [], researchLogos = {}, educati
               <Text fontSize="xs" color={textColor} lineHeight="tall" textAlign={['center', 'center', 'left']} flex={1} fontStyle="italic">
                 {siteConfig.tagline ?? ''}
               </Text>
-              <HStack spacing={2} flexShrink={0}>
-                <Link href={`mailto:${siteOwner.contact.academicEmail}`} isExternal _hover={{ textDecoration: 'none' }}>
-                  <HStack spacing={1.5} color={textColor} transition="all 0.15s" _hover={{ color: 'cyan.400' }}>
-                    <DynamicIcon name="FaEnvelope" boxSize={3.5} />
-                    <Text fontSize="xs" fontFamily="mono">email</Text>
-                  </HStack>
-                </Link>
-                <Text color={textColor} opacity={0.2}>/</Text>
-                <Link href={siteOwner.social.linkedin} isExternal _hover={{ textDecoration: 'none' }}>
-                  <HStack spacing={1.5} color={textColor} transition="all 0.15s" _hover={{ color: 'cyan.400' }}>
-                    <DynamicIcon name="FaLinkedin" boxSize={3.5} />
-                    <Text fontSize="xs" fontFamily="mono">linkedin</Text>
-                  </HStack>
-                </Link>
-              </HStack>
+              {contactLinks.length > 0 && (
+                <HStack spacing={2} flexShrink={0} flexWrap="wrap" justify={['center', 'center', 'flex-end']}>
+                  {contactLinks.map((item, index) => (
+                    <HStack key={item.label} spacing={2}>
+                      {index > 0 && <Text color={textColor} opacity={0.2}>/</Text>}
+                      <Link href={item.href} isExternal _hover={{ textDecoration: 'none' }}>
+                        <HStack spacing={1.5} color={textColor} transition="all 0.15s" _hover={{ color: 'cyan.400' }}>
+                          <DynamicIcon name={item.icon} boxSize={3.5} />
+                          <Text fontSize="xs" fontFamily="mono">{item.label}</Text>
+                        </HStack>
+                      </Link>
+                    </HStack>
+                  ))}
+                </HStack>
+              )}
             </Flex>
           </VStack>
           <MotionBox

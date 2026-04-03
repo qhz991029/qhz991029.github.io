@@ -2,66 +2,90 @@
   "education": {
     "courses": [
       {
-        "course": "Master of Cuddle Sciences",
-        "institution": "Yaoyao's Lap Lab",
-        "year": "2024-2026"
+        "course": "PhD in Computer Science",
+        "institution": "The Hong Kong University of Science and Technology",
+        "year": "Sep 2026 -"
       },
       {
-        "course": "Bachelor of Good Girl Arts",
-        "institution": "Home Sweet Home",
-        "year": "2020-2024"
+        "course": "M.S. in Computer Science",
+        "institution": "University of North Carolina at Chapel Hill",
+        "year": "Aug 2024 - Dec 2025"
+      },
+      {
+        "course": "B.E. in Computer Science",
+        "institution": "University of Science and Technology of China",
+        "year": "Aug 2018 - Jul 2024"
       }
     ]
   },
   "reviewing": [
-    { "venue": "International Conference on Treat Fairness 2026", "role": "Reviewer" },
-    { "venue": "Workshop on Cross-Species Play Dynamics 2025", "role": "Reviewer" }
+    { "venue": "CVPR 2026", "role": "Reviewer" },
+    { "venue": "CPAL 2026", "role": "Reviewer" },
+    { "venue": "ICLR 2026", "role": "Reviewer" },
+    { "venue": "NeurIPS 2025", "role": "Reviewer" },
+    { "venue": "ICML 2025", "role": "Reviewer" },
+    { "venue": "AAAI 2025", "role": "Reviewer" },
+    { "venue": "ICLR 2025", "role": "Reviewer" },
+    { "venue": "NeurIPS 2024", "role": "Reviewer" }
   ],
   "timeline": [
     {
-      "title": "Senior Cuddle Researcher",
-      "company": "The Cozy Corner",
-      "companyUrl": "#",
-      "location": "Next to Yaoyao",
-      "start": "2024-09-01",
-      "category": "research",
+      "title": "PhD Student",
+      "company": "The Hong Kong University of Science and Technology",
+      "companyUrl": "https://www.cse.ust.hk/",
+      "location": "Hong Kong SAR",
+      "start": "2026-09-01",
+      "category": "academic",
       "roleType": "research",
-      "isCurrent": true,
-      "summary": "Focus: warmth-seeking optimization and human-proximity maximization.",
+      "summary": "PhD student in Computer Science advised by Professor Fangneng Zhan.",
       "highlights": [
-        "Achieved 100% lap occupation rate during work-from-home hours.",
-        "Discovered that paw shakes increase treat yield by 60%.",
-        "Co-authored a paper with Lucas on optimal sunbeam sharing schedules."
+        "Research focus: multimodal LLMs, efficient foundation models, uncertainty quantification, 3D vision, and neural rendering.",
+        "Building on prior work in vision-language grounding, multimodal model merging, and reliable LLM evaluation."
       ]
     },
     {
-      "title": "Junior Play Companion",
-      "company": "Lucas & Cookie Inc.",
-      "companyUrl": "#",
-      "location": "Living Room",
-      "start": "2023-01-15",
-      "end": "2024-05-20",
+      "title": "Graduate Student Researcher",
+      "company": "University of North Carolina at Chapel Hill",
+      "companyUrl": "https://www.cs.unc.edu/",
+      "location": "Chapel Hill, NC, USA",
+      "start": "2024-08-01",
+      "end": "2025-12-31",
       "category": "research",
       "roleType": "research",
+      "summary": "Worked with Professor Tianlong Chen on efficient and reliable machine learning, multimodal models, and LLM evaluation.",
       "highlights": [
-        "Developed a multi-species play protocol with Ragdoll cat brother Lucas.",
-        "Optimized chase-and-tumble sequences for maximum fun with minimum furniture damage.",
-        "Won Best Duo Award at the annual living room play session."
+        "Co-authored papers accepted to CVPR 2026, NeurIPS 2025, ACL Findings 2025, EMNLP 2025, and IEEE S&P 2026.",
+        "Led first-author work on MonoVLM, BetaConform, and UQ-Merge."
       ]
     },
     {
-      "title": "Treat Quality Intern",
-      "company": "Kitchen Counter Labs",
-      "companyUrl": "#",
-      "location": "Kitchen",
-      "start": "2025-06-01",
-      "end": "2025-08-31",
-      "category": "industry",
-      "roleType": "sde",
+      "title": "Undergraduate Researcher",
+      "company": "Georgia Tech EIC Lab",
+      "companyUrl": "https://eiclab.scs.gatech.edu/",
+      "location": "Atlanta, GA, USA",
+      "start": "2023-01-01",
+      "end": "2024-03-31",
+      "category": "research",
+      "roleType": "research",
+      "summary": "Conducted undergraduate research with Professor Yingyan (Celine) Lin on 3D vision and neural rendering.",
       "highlights": [
-        "Evaluated 200+ treat varieties using advanced sniff-and-taste methodology.",
-        "Reduced treat waste to 0% (consumed all samples).",
-        "Developed a paw-shake-to-treat conversion pipeline with 3x throughput improvement."
+        "Contributed to research on foundation neural radiance fields and high-efficiency hologram compression.",
+        "Co-authored Omni-Recon (ECCV 2024 Oral) and HoloZip (ICCP 2025)."
+      ]
+    },
+    {
+      "title": "Undergraduate Researcher",
+      "company": "USTC Algorithm and Data Application Lab",
+      "companyUrl": "https://cs.ustc.edu.cn/",
+      "location": "Hefei, China",
+      "start": "2022-08-01",
+      "end": "2023-05-31",
+      "category": "research",
+      "roleType": "research",
+      "summary": "Worked with Professor Guangzhong Sun on AI systems and performance prediction for deep learning workloads.",
+      "highlights": [
+        "Co-authored GPU Occupancy Prediction of Deep Learning Models Using Graph Neural Network.",
+        "Built early research experience at the intersection of systems and machine learning."
       ]
     }
   ]

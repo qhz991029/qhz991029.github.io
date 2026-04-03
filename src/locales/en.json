@@ -30,7 +30,8 @@
     "dataset": "Dataset",
     "awardsAndHonors": "Awards & Honors",
     "awardsSpanning": "awards spanning",
-    "categories": "categories"
+    "categories": "categories",
+    "contact": "Contact"
   },
   "hero": {
     "greeting": "Hi there, I'm",
@@ -91,8 +92,11 @@
     "contactInfo": "Contact Information",
     "quickLinks": "Quick Links",
     "email": "Email:",
+    "academicEmail": "Academic Email:",
     "linkedin": "LinkedIn:",
     "github": "GitHub:",
+    "location": "Location:",
+    "x": "X:",
     "medium": "Medium:",
     "googleScholar": "Google Scholar:",
     "viewProfile": "View Profile"
@@ -165,6 +169,7 @@
   },
   "publications": {
     "conference": "CONFERENCE",
+    "journal": "JOURNAL",
     "workshop": "WORKSHOP",
     "demo": "DEMO TRACK",
     "preprint": "PREPRINT"

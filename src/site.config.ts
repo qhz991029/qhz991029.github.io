@@ -49,7 +49,7 @@ export const heroSocialIcons = (siteConfig.heroSocialIcons ?? []).map(item => ({
   label: item.label,
   color: item.color,
   href: (siteConfig.social as Record<string, string>)[item.platform] ?? '',
-}))
+})).filter(item => item.href)
 
 /**
  * Backward-compatible `siteOwner` — components import this shape.

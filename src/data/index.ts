@@ -111,7 +111,7 @@ const enData = {
   talks: talksJsonEn as Talk[],
   teaching: teachingJsonEn as TeachingEntry[],
   institutionLogos: logosJsonEn as Record<string, string>,
-  siteConfig: siteJsonEn,
+  siteConfig: siteJsonEn as Record<string, unknown>,
 }
 
 const zhData = {
@@ -127,7 +127,7 @@ const zhData = {
   talks: talksJsonZh as Talk[],
   teaching: teachingJsonZh as TeachingEntry[],
   institutionLogos: logosJsonZh as Record<string, string>,
-  siteConfig: siteJsonZh,
+  siteConfig: siteJsonZh as Record<string, unknown>,
 }
 
 const dataByLang: Record<string, typeof enData> = { en: enData, zh: zhData }

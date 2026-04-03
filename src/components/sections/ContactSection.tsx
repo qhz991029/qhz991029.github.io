@@ -8,14 +8,18 @@ const ContactSection: React.FC = () => {
   const { siteOwner } = useLocalizedData()
   const textColor = useColorModeValue('gray.600', 'gray.400')
   const linkColor = useColorModeValue('gray.700', 'gray.200')
+  const academicEmail = siteOwner.contact.academicEmail && siteOwner.contact.academicEmail !== siteOwner.contact.email
+    ? siteOwner.contact.academicEmail
+    : ''
 
   const items = [
     siteOwner.contact.email && { icon: 'FaEnvelope', label: t('contact.email', 'Email'), value: siteOwner.contact.email, href: `mailto:${siteOwner.contact.email}` },
-    siteOwner.contact.academicEmail && { icon: 'FaGraduationCap', label: t('contact.academicEmail', 'Academic'), value: siteOwner.contact.academicEmail, href: `mailto:${siteOwner.contact.academicEmail}` },
+    academicEmail && { icon: 'FaGraduationCap', label: t('contact.academicEmail', 'Academic Email'), value: academicEmail, href: `mailto:${academicEmail}` },
     siteOwner.contact.location && { icon: 'FaMapMarkerAlt', label: t('contact.location', 'Location'), value: siteOwner.contact.location },
-    siteOwner.social.github && { icon: 'FaGithub', label: 'GitHub', value: siteOwner.social.github, href: siteOwner.social.github },
-    siteOwner.social.linkedin && { icon: 'FaLinkedin', label: 'LinkedIn', value: 'LinkedIn', href: siteOwner.social.linkedin },
-    siteOwner.social.googleScholar && { icon: 'SiGooglescholar', label: 'Scholar', value: 'Google Scholar', href: siteOwner.social.googleScholar },
+    siteOwner.social.github && { icon: 'FaGithub', label: t('contact.github', 'GitHub'), value: '@' + siteOwner.social.github.split('/').filter(Boolean).pop(), href: siteOwner.social.github },
+    siteOwner.social.linkedin && { icon: 'FaLinkedin', label: t('contact.linkedin', 'LinkedIn'), value: 'LinkedIn', href: siteOwner.social.linkedin },
+    siteOwner.social.googleScholar && { icon: 'SiGooglescholar', label: t('contact.googleScholar', 'Google Scholar'), value: t('contact.viewProfile', 'View Profile'), href: siteOwner.social.googleScholar },
+    siteOwner.social.twitter && { icon: 'SiX', label: t('contact.x', 'X'), value: '@' + siteOwner.social.twitter.split('/').filter(Boolean).pop(), href: siteOwner.social.twitter },
   ].filter(Boolean) as { icon: string; label: string; value: string; href?: string }[]
 
   if (items.length === 0) return null

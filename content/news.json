@@ -1,41 +1,68 @@
 [
   {
+    "type": "education",
+    "badge": "PhD",
+    "icon": "FaGraduationCap",
+    "iconColor": "cyan.400",
+    "title": "Joining HKUST as a PhD student in Computer Science",
+    "description": "Will join The Hong Kong University of Science and Technology as a PhD student in Computer Science under the supervision of Professor Fangneng Zhan.",
+    "date": "2026",
+    "sortDate": "2026-04-01",
+    "links": []
+  },
+  {
     "type": "publication",
-    "badge": "Publication",
+    "badge": "CVPR 2026",
     "icon": "FaFileAlt",
     "iconColor": "blue.400",
-    "title": "Paper on cuddle optimization accepted at CozyCon 2025",
-    "description": "Cookie's paper \"Optimal Lap Positioning for Warmth-Seeking Pomeranians\" has been accepted at CozyCon 2025.",
-    "date": "Dec 2025",
+    "title": "Two papers accepted to CVPR 2026",
+    "description": "MonoVLM and VLM-3R were accepted to CVPR 2026, covering monocular 3D visual grounding and instruction-aligned 3D reconstruction.",
+    "date": "2026",
+    "sortDate": "2026-02-01",
+    "links": []
+  },
+  {
+    "type": "award",
+    "badge": "Award",
+    "icon": "FaMedal",
+    "iconColor": "yellow.400",
+    "title": "Received the NeurIPS 2025 Scholar Award",
+    "description": "Honored with the NeurIPS 2025 Scholar Award.",
+    "date": "2025",
     "sortDate": "2025-12-01",
-    "links": [
-      { "text": "Paper", "url": "#", "icon": "FaFilePdf" }
-    ]
+    "links": []
   },
   {
-    "type": "talk",
-    "badge": "Talk",
-    "icon": "FaMicrophone",
+    "type": "publication",
+    "badge": "NeurIPS 2025",
+    "icon": "FaFileAlt",
     "iconColor": "purple.400",
-    "title": "Invited bark at International Cross-Species Play Workshop",
-    "description": "Presented findings on cooperative play dynamics between Pomeranians and Ragdoll cats, featuring case study with brother Lucas.",
-    "date": "Mar 2025",
-    "sortDate": "2025-03-10",
-    "links": [
-      { "text": "Slides", "url": "#", "icon": "FaDesktop" }
-    ]
+    "title": "Two papers accepted to NeurIPS 2025",
+    "description": "BetaConform and Multi-Agent Debate for LLM Judges were accepted to NeurIPS 2025.",
+    "date": "2025",
+    "sortDate": "2025-09-01",
+    "links": []
   },
   {
-    "type": "release",
-    "badge": "Release",
-    "icon": "FaRocket",
+    "type": "publication",
+    "badge": "ACL 2025 Findings",
+    "icon": "FaFileAlt",
     "iconColor": "green.400",
-    "title": "PawShake.js v1.0 released",
-    "description": "Released PawShake.js, an open-source library for modeling treat-acquisition strategies through handshake protocols.",
-    "date": "Jul 2024",
-    "sortDate": "2024-07-01",
-    "links": [
-      { "text": "GitHub", "url": "#", "icon": "FaGithub" }
-    ]
+    "title": "UQ-Merge accepted to ACL 2025 Findings",
+    "description": "UQ-Merge studies uncertainty-guided multimodal large language model merging.",
+    "date": "2025",
+    "sortDate": "2025-05-01",
+    "links": []
+  },
+  {
+    "type": "publication",
+    "badge": "ECCV 2024",
+    "icon": "FaFileAlt",
+    "iconColor": "orange.400",
+    "title": "Omni-Recon presented as an ECCV 2024 Oral",
+    "description": "Omni-Recon advocated a pretrain-bake-finetune paradigm towards foundation neural radiance fields.",
+    "date": "2024",
+    "sortDate": "2024-09-01",
+    "links": []
   }
 ]

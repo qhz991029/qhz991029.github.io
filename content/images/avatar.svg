@@ -1,4 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-  <rect width="200" height="200" fill="#4c566a" rx="100"/>
-  <text x="100" y="115" text-anchor="middle" font-size="80" fill="#eceff4" font-family="sans-serif">AC</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#2e3440"/>
+      <stop offset="100%" stop-color="#3b4252"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="120" fill="url(#bg)"/>
+  <circle cx="120" cy="120" r="86" fill="none" stroke="#88c0d0" stroke-width="4" stroke-dasharray="6 10"/>
+  <text x="120" y="138" text-anchor="middle" font-size="82" font-weight="700" fill="#eceff4" font-family="Arial, sans-serif">HQ</text>
 </svg>
