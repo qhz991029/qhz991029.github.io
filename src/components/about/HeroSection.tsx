@@ -5,7 +5,6 @@ import DynamicIcon from '../DynamicIcon'
 import { useTranslation } from 'react-i18next'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 
-const MotionBox = motion(Box)
 const MotionText = motion(Text)
 
 interface EducationItem {
@@ -117,12 +116,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
             {/* Avatar + Education */}
             {education.length > 0 && (
               <Stack direction={['column', 'row']} spacing={[3, 4, 6]} align={['center', 'flex-start']} w="full">
-                <MotionBox
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  flexShrink={0}
-                >
+                <Box flexShrink={0}>
                   <Image
                     src={withBase(`images/${avatar}`)}
                     alt={title}
@@ -132,7 +126,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                     objectFit="cover"
                     bg={useColorModeValue('gray.100', 'gray.700')}
                   />
-                </MotionBox>
+                </Box>
                 <VStack align="start" spacing={2}>
                   <Heading size="xs" color={textColor} textTransform="uppercase" letterSpacing="wider" fontSize="2xs">
                     Education
