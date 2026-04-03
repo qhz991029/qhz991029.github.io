@@ -78,6 +78,8 @@
   "selectedPublicationIds": [
     "monovlm-cvpr-2026",
     "betaconform-neurips-2025",
-    "uq-merge-acl-findings-2025"
+    "uq-merge-acl-findings-2025",
+    "editcast3d-ijcv-submission",
+    "cryonerf-bioinformatics-submission"
   ]
 }
