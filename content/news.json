@@ -121,6 +121,28 @@
     "links": []
   },
   {
+    "type": "education",
+    "badge": "M.S.",
+    "icon": "FaGraduationCap",
+    "iconColor": "blue.400",
+    "title": "Graduated from UNC Chapel Hill with M.S. in Computer Science",
+    "description": "Received M.S. in Computer Science from the University of North Carolina at Chapel Hill.",
+    "date": "2025",
+    "sortDate": "2025-12-15",
+    "links": []
+  },
+  {
+    "type": "education",
+    "badge": "B.E.",
+    "icon": "FaGraduationCap",
+    "iconColor": "blue.400",
+    "title": "Graduated from USTC with B.E. in Computer Science",
+    "description": "Received B.E. in Computer Science from the University of Science and Technology of China.",
+    "date": "2024",
+    "sortDate": "2024-07-01",
+    "links": []
+  },
+  {
     "type": "publication",
     "badge": "ECCV 2024",
     "icon": "FaFileAlt",
