@@ -56,6 +56,17 @@
   },
   {
     "type": "publication",
+    "badge": "ICCP 2025",
+    "icon": "FaFileAlt",
+    "iconColor": "teal.400",
+    "title": "HoloZip accepted to ICCP 2025",
+    "description": "HoloZip studies high-efficiency hologram compression via latent-of-latent coding.",
+    "date": "2025",
+    "sortDate": "2025-06-01",
+    "links": []
+  },
+  {
+    "type": "publication",
     "badge": "ACL 2025 Findings",
     "icon": "FaFileAlt",
     "iconColor": "green.400",
