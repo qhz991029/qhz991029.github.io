@@ -12,7 +12,8 @@ venue: IEEE S&P
 venueType: conference
 year: 2026
 status: accepted
-links: {}
+links:
+  paper: "https://andrewkwong.org/docs/keytar-camera.pdf"
 ---
 
 This work studies practical keystroke timing attacks and input reconstruction.

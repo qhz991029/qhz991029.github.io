@@ -21,7 +21,8 @@ coFirstAuthors:
   - Yujie Wang
 specialBadges:
   - Co-First
-links: {}
+links:
+  paper: "https://ieeexplore.ieee.org/abstract/document/11143849" {}
 ---
 
 This paper studies high-efficiency hologram compression via latent-of-latent coding.
