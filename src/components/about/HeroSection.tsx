@@ -126,10 +126,11 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                   <Image
                     src={withBase(`images/${avatar}`)}
                     alt={title}
-                    fallbackSrc={withBase('img/avatar.svg')}
+                    loading="eager"
                     borderRadius="xl"
                     boxSize={["150px", "180px", "200px"]}
                     objectFit="cover"
+                    bg={useColorModeValue('gray.100', 'gray.700')}
                   />
                 </MotionBox>
                 <VStack align="start" spacing={2}>
