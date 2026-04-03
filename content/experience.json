@@ -57,6 +57,21 @@
       "highlights": []
     },
     {
+      "title": "Graduate Student Researcher",
+      "company": "University of North Carolina at Chapel Hill",
+      "companyUrl": "https://www.cs.unc.edu/",
+      "location": "Chapel Hill, NC, USA",
+      "start": "2024-08-01",
+      "end": "2025-12-31",
+      "category": "research",
+      "roleType": "research",
+      "summary": "Worked with Professor Tianlong Chen on efficient and reliable machine learning, multimodal models, and LLM evaluation.",
+      "highlights": [
+        "Co-authored papers accepted to CVPR 2026, NeurIPS 2025, ACL Findings 2025, EMNLP 2025, and IEEE S&P 2026.",
+        "Led work on MonoVLM, BetaConform, and UQ-Merge."
+      ]
+    },
+    {
       "title": "Graduate Research Assistant",
       "company": "University of North Carolina at Chapel Hill",
       "companyUrl": "https://www.cs.unc.edu/",
@@ -91,21 +106,6 @@
       "roleType": "teaching",
       "summary": "Teaching assistant at UNC Department of Computer Science.",
       "highlights": []
-    },
-    {
-      "title": "Graduate Student Researcher",
-      "company": "University of North Carolina at Chapel Hill",
-      "companyUrl": "https://www.cs.unc.edu/",
-      "location": "Chapel Hill, NC, USA",
-      "start": "2024-08-01",
-      "end": "2025-12-31",
-      "category": "research",
-      "roleType": "research",
-      "summary": "Worked with Professor Tianlong Chen on efficient and reliable machine learning, multimodal models, and LLM evaluation.",
-      "highlights": [
-        "Co-authored papers accepted to CVPR 2026, NeurIPS 2025, ACL Findings 2025, EMNLP 2025, and IEEE S&P 2026.",
-        "Led work on MonoVLM, BetaConform, and UQ-Merge."
-      ]
     },
     {
       "title": "Undergraduate Researcher",
