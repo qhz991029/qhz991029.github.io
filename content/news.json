@@ -33,6 +33,17 @@
     "links": []
   },
   {
+    "type": "publication",
+    "badge": "IEEE S&P 2026",
+    "icon": "FaFileAlt",
+    "iconColor": "red.400",
+    "title": "KeyTAR accepted to IEEE S&P 2026",
+    "description": "KeyTAR studies practical keystroke timing attacks and input reconstruction.",
+    "date": "2026",
+    "sortDate": "2026-01-01",
+    "links": []
+  },
+  {
     "type": "award",
     "badge": "Award",
     "icon": "FaMedal",
@@ -52,6 +63,28 @@
     "description": "BetaConform and Multi-Agent Debate for LLM Judges were accepted to NeurIPS 2025.",
     "date": "2025",
     "sortDate": "2025-09-01",
+    "links": []
+  },
+  {
+    "type": "publication",
+    "badge": "EMNLP 2025",
+    "icon": "FaFileAlt",
+    "iconColor": "orange.400",
+    "title": "Bit-Flip Error Resilience accepted to EMNLP 2025",
+    "description": "A comprehensive analysis and defense framework for bit-flip error resilience in LLMs.",
+    "date": "2025",
+    "sortDate": "2025-08-01",
+    "links": []
+  },
+  {
+    "type": "publication",
+    "badge": "MICRO 2025",
+    "icon": "FaFileAlt",
+    "iconColor": "blue.400",
+    "title": "RTGSSLAM accepted to MICRO 2025",
+    "description": "RTGSSLAM proposes an edge GPU plug-in for real-time 3D Gaussian Splatting-based SLAM systems.",
+    "date": "2025",
+    "sortDate": "2025-07-01",
     "links": []
   },
   {
@@ -78,6 +111,17 @@
   },
   {
     "type": "publication",
+    "badge": "TMLR 2025",
+    "icon": "FaFileAlt",
+    "iconColor": "purple.400",
+    "title": "LucidAtlas accepted to TMLR",
+    "description": "LucidAtlas studies learning uncertainty-aware, covariate-disentangled, individualized atlas representations.",
+    "date": "2025",
+    "sortDate": "2025-03-01",
+    "links": []
+  },
+  {
+    "type": "publication",
     "badge": "ECCV 2024",
     "icon": "FaFileAlt",
     "iconColor": "orange.400",
@@ -85,6 +129,17 @@
     "description": "Omni-Recon advocated a pretrain-bake-finetune paradigm towards foundation neural radiance fields.",
     "date": "2024",
     "sortDate": "2024-09-01",
+    "links": []
+  },
+  {
+    "type": "publication",
+    "badge": "Cluster 2023",
+    "icon": "FaFileAlt",
+    "iconColor": "gray.400",
+    "title": "GPU Occupancy Prediction accepted to Cluster 2023",
+    "description": "GPU occupancy prediction of deep learning models using graph neural network.",
+    "date": "2023",
+    "sortDate": "2023-08-01",
     "links": []
   }
 ]
