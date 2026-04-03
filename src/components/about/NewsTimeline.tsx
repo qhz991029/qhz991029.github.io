@@ -591,7 +591,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                 </Box>
                 <Text w={idColumnWidth} color={termInfo} fontFamily="mono" display={isWideEnough ? "block" : "none"}>
                   <Box as="span" color={termSecondary}>0x</Box>
-                  {index.toString(16).padStart(4, '0')}
+                  {(news.length - 1 - index).toString(16).padStart(4, '0')}
                 </Text>
                 <Box flex="1">
                   <Flex align="center" gap={1}>
