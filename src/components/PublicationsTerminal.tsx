@@ -31,7 +31,7 @@ import {
 import { keyframes } from '@emotion/react'
 import { getPublicationStats } from '../data'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
-import { FaChartBar, FaVideo, FaProjectDiagram, FaFileAlt, FaAtom, FaStar, FaRobot, FaGlobe, FaHandRock, FaCloudSun, FaFutbol } from 'react-icons/fa'
+import { FaChartBar, FaVideo, FaProjectDiagram, FaFileAlt, FaAtom, FaStar, FaRobot, FaGlobe, FaHandRock, FaCloudSun, FaFutbol, FaGithub } from 'react-icons/fa'
 import { IconType } from 'react-icons'
 import { highlightData } from '../utils/highlightData'
 import { publicationVenueColors, terminalPalette } from '@/config/theme'
@@ -527,6 +527,16 @@ const PublicationsTerminal: React.FC = () => {
                           {badge}
                         </Badge>
                       ))}
+                      {pub.links.code && (
+                        <Link href={pub.links.code} isExternal onClick={(e) => e.stopPropagation()} _hover={{ color: termHighlight }}>
+                          <Icon as={FaGithub} boxSize="14px" color={termSuccess} />
+                        </Link>
+                      )}
+                      {pub.links.arxiv && (
+                        <Link href={pub.links.arxiv} isExternal onClick={(e) => e.stopPropagation()} _hover={{ color: termHighlight }}>
+                          <Icon as={FaFileAlt} boxSize="12px" color={termCommand} />
+                        </Link>
+                      )}
                     </HStack>
                     <Text fontSize="xs" color={termSecondary}>
                       {pub.authors.map((author, i) => {
@@ -610,7 +620,7 @@ const PublicationsTerminal: React.FC = () => {
                             </HStack>
                           </Box>
                         )}
-                        
+
                       </Box>
                       
                       {/* Right side - Featured Image */}

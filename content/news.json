@@ -113,7 +113,9 @@
     "description": "UQ-Merge studies uncertainty-guided multimodal large language model merging.",
     "date": "2025",
     "sortDate": "2025-05-01",
-    "links": []
+    "links": [
+      { "text": "Code", "url": "https://github.com/UNITES-Lab/UQ-Merge", "icon": "FaGithub" }
+    ]
   },
   {
     "type": "publication",
