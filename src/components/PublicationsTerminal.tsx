@@ -532,11 +532,6 @@ const PublicationsTerminal: React.FC = () => {
                           <Icon as={FaGithub} boxSize="14px" color={termSuccess} />
                         </Link>
                       )}
-                      {pub.links.arxiv && (
-                        <Link href={pub.links.arxiv} isExternal onClick={(e) => e.stopPropagation()} _hover={{ color: termHighlight }}>
-                          <Icon as={FaFileAlt} boxSize="12px" color={termCommand} />
-                        </Link>
-                      )}
                     </HStack>
                     <Text fontSize="xs" color={termSecondary}>
                       {pub.authors.map((author, i) => {

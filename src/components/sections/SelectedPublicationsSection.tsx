@@ -75,24 +75,6 @@ const PublicationCard = ({ pub }: { pub: any }) => {
                 <Text>{t('about.abstract')}</Text>
               </HStack>
             )}
-            {pub.links.arxiv && (
-              <Link href={pub.links.arxiv} isExternal _hover={{ textDecoration: 'none' }}>
-                <HStack spacing={1.5} px={2.5} py={1} borderRadius="sm" border="1px solid" borderColor={borderColor}
-                  color={useColorModeValue('gray.600', 'gray.400')} fontSize="xs" fontFamily="mono" transition="all 0.15s" _hover={{ borderColor: 'cyan.400', color: 'cyan.400' }}>
-                  <DynamicIcon name="FaFileAlt" boxSize={2.5} />
-                  <Text>arXiv</Text>
-                </HStack>
-              </Link>
-            )}
-            {pub.links.paper && !pub.links.arxiv && (
-              <Link href={pub.links.paper} isExternal _hover={{ textDecoration: 'none' }}>
-                <HStack spacing={1.5} px={2.5} py={1} borderRadius="sm" border="1px solid" borderColor={borderColor}
-                  color={useColorModeValue('gray.600', 'gray.400')} fontSize="xs" fontFamily="mono" transition="all 0.15s" _hover={{ borderColor: 'cyan.400', color: 'cyan.400' }}>
-                  <DynamicIcon name="FaBook" boxSize={2.5} />
-                  <Text>Paper</Text>
-                </HStack>
-              </Link>
-            )}
             {pub.links.code && (
               <Link href={pub.links.code} isExternal _hover={{ textDecoration: 'none' }}>
                 <HStack spacing={1.5} px={2.5} py={1} borderRadius="sm" border="1px solid" borderColor={borderColor}
