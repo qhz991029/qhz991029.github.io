@@ -9,7 +9,7 @@ authors:
   - Jie Peng
   - Sijia Liu
   - Tianlong Chen
-venue: ICML 2026 Submission
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint

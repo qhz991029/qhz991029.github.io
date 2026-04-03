@@ -9,7 +9,7 @@ authors:
   - Yanjun Han
   - Tianlong Chen
   - Zhun Deng
-venue: ICML 2026 Submission
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint
@@ -18,6 +18,7 @@ coFirstAuthors:
   - Huaizhi Qu
   - Zhangyi Liu
   - Xiaowei Yin
+coFirstNote: "sorted alphabetically"
 specialBadges:
   - Under Review
   - Co-First

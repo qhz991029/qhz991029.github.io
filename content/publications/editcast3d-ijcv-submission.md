@@ -10,7 +10,7 @@ authors:
   - Xiaoming Liu
   - Roni Sengupta
   - Tianlong Chen
-venue: IJCV Submission
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint

@@ -158,6 +158,7 @@ export interface Publication {
   isCorrespondingAuthor?: boolean
   isCoFirst?: boolean
   coFirstAuthors?: string[]
+  coFirstNote?: string
   emoji?: string
   featuredImage?: string
 }

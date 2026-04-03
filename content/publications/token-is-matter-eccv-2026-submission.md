@@ -11,7 +11,7 @@ authors:
   - Kwonjoon Lee
   - Ehsan Moradi Pari
   - Tianlong Chen
-venue: ECCV 2026 Submission
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint

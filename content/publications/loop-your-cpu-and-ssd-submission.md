@@ -10,12 +10,12 @@ authors:
   - Yanyong Zhang
   - Zhichao Cao
   - Tianlong Chen
-venue: To Be Submitted
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint
 specialBadges:
-  - To Be Submitted
+  - Under Review
 links:
   arxiv: "https://arxiv.org/abs/2410.14740"
 ---

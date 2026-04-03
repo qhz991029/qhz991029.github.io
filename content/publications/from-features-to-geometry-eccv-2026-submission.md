@@ -7,7 +7,7 @@ authors:
   - Huaizhi Qu
   - Tianlong Chen
   - Xiaoming Liu
-venue: ECCV 2026 Submission
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint

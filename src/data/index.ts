@@ -161,7 +161,7 @@ export const getPublicationsByVenue = (venueType: string) =>
   publications.filter(pub => pub.venueType === venueType)
 
 export const getFirstAuthorPublications = () =>
-  publications.filter(pub => pub.isFirstAuthor)
+  publications.filter(pub => pub.isFirstAuthor || pub.isCoFirst)
 
 export const getPublicationStats = () => {
   const stats = {
@@ -176,7 +176,7 @@ export const getPublicationStats = () => {
   publications.forEach(pub => {
     stats.byYear[pub.year] = (stats.byYear[pub.year] || 0) + 1
     stats.byVenue[pub.venueType] = (stats.byVenue[pub.venueType] || 0) + 1
-    if (pub.isFirstAuthor) stats.firstAuthor++
+    if (pub.isFirstAuthor || pub.isCoFirst) stats.firstAuthor++
     if (pub.isCorrespondingAuthor) stats.correspondingAuthor++
     if (pub.links.code) stats.withCode++
     if (pub.links.dataset) stats.withDataset++

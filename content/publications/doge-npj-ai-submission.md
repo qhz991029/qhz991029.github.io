@@ -7,7 +7,7 @@ authors:
   - Huaizhi Qu
   - Huan Liu
   - Tianlong Chen
-venue: npj AI Submission
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint

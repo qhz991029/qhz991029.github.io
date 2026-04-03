@@ -490,9 +490,13 @@ const PublicationsTerminal: React.FC = () => {
                       {pub.emoji && emojiIconMap[pub.emoji] && (
                         <Icon as={emojiIconMap[pub.emoji]} boxSize="14px" color={venueColors[pub.venueType].fg} mr={1} flexShrink={0} />
                       )}
-                      <Text fontWeight="medium" flex="1">
-                        {pub.title}
-                      </Text>
+                      {(pub.links.arxiv || pub.links.paper || pub.links.projectPage) ? (
+                        <Link href={pub.links.arxiv || pub.links.paper || pub.links.projectPage} isExternal onClick={(e) => e.stopPropagation()} _hover={{ textDecoration: 'underline', color: termCommand }} flex="1">
+                          <Text fontWeight="medium">{pub.title}</Text>
+                        </Link>
+                      ) : (
+                        <Text fontWeight="medium" flex="1">{pub.title}</Text>
+                      )}
                     </HStack>
                     {/* Venue, Year and Special Badges */}
                     <HStack spacing={1} mb={1} flexWrap="wrap">
@@ -551,9 +555,9 @@ const PublicationsTerminal: React.FC = () => {
                     <Text fontSize="xs" color={termSecondary}>
                       {pub.authors.map((author, i) => {
                         const cleanAuthor = author.replace('*', '')
-                        const hasAsterisk = author.includes('*')
+                        const hasAsterisk = author.includes('*') || (pub.coFirstAuthors?.includes(cleanAuthor))
                         const isOwner = (siteOwner.name.authorVariants as readonly string[]).includes(cleanAuthor)
-                        
+
                         return (
                           <Text as="span" key={i}>
                             {isOwner ? (
@@ -575,7 +579,7 @@ const PublicationsTerminal: React.FC = () => {
                       {/* Co-first author note */}
                       {pub.coFirstAuthors && pub.coFirstAuthors.length > 0 && (
                         <Text as="span" fontSize="2xs" color={termInfo} ml={2}>
-                          (* co-first)
+                          (* co-first{pub.coFirstNote ? `, ${pub.coFirstNote}` : ''})
                         </Text>
                       )}
                     </Text>
@@ -827,7 +831,7 @@ const PublicationsTerminal: React.FC = () => {
           </Text>
           <HStack spacing={4}>
             <Text color={termSuccess}>
-              First Author: {filteredPublications.filter(p => p.isFirstAuthor).length}
+              First Author: {filteredPublications.filter(p => p.isFirstAuthor || p.isCoFirst).length}
             </Text>
             <Text color={termCommand}>
               With Code: {filteredPublications.filter(p => p.links.code).length}

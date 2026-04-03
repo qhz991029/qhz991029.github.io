@@ -7,7 +7,7 @@ authors:
   - Gengwei Zhang
   - Jie Peng
   - Tianlong Chen
-venue: ECCV 2026 Submission
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint

@@ -52,7 +52,13 @@ const PublicationCard = ({ pub }: { pub: any }) => {
             </Text>
             {pub.venueType && <Text fontSize="2xs" color={useColorModeValue('gray.400', 'gray.500')} fontFamily="mono">/ {pub.venueType}</Text>}
           </HStack>
-          <Heading size="sm" lineHeight="tall" fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')}>{pub.title}</Heading>
+          {(pub.links.arxiv || pub.links.paper || pub.links.projectPage) ? (
+                    <Link href={pub.links.arxiv || pub.links.paper || pub.links.projectPage} isExternal _hover={{ textDecoration: 'underline' }}>
+                      <Heading size="sm" lineHeight="tall" fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')}>{pub.title}</Heading>
+                    </Link>
+                  ) : (
+                    <Heading size="sm" lineHeight="tall" fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')}>{pub.title}</Heading>
+                  )}
           <VStack align="start" spacing={1.5} w="full">
             <Text fontSize="xs" color={useColorModeValue('gray.500', 'gray.400')} lineHeight="base" noOfLines={2}>
               {pub.authors.map((author: string, idx: number) => {

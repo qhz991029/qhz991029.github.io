@@ -8,7 +8,7 @@ authors:
   - Sheng Wang
   - William Stafford Noble
   - Tianlong Chen
-venue: Bioinformatics Submission
+venue: Preprint
 venueType: preprint
 year: 2026
 status: preprint
