@@ -36,6 +36,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
     siteOwner.social.googleScholar && { icon: 'SiGooglescholar', label: 'scholar', href: siteOwner.social.googleScholar },
     siteOwner.social.linkedin && { icon: 'FaLinkedin', label: 'linkedin', href: siteOwner.social.linkedin },
     siteOwner.social.twitter && { icon: 'SiX', label: 'x', href: siteOwner.social.twitter },
+    siteOwner.social.xiaohongshu && { icon: 'SiXiaohongshu', label: '小红书', href: siteOwner.social.xiaohongshu },
   ].filter(Boolean) as { icon: string; label: string; href: string }[]
 
   return (
