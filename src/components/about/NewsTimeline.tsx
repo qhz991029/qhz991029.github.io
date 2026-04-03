@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react'
-import { Box, HStack, Text, Link, Flex, useColorMode, Collapse, useBreakpointValue } from '@chakra-ui/react'
+import React, { useEffect, useState, useCallback } from 'react'
+import { Box, HStack, Text, Link, Flex, useColorMode, Collapse } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
 import DynamicIcon from '../DynamicIcon'
@@ -37,18 +37,18 @@ const rainbow = keyframes`
 // Format date to YYYY-MM-DD
 const formatDate = (dateString: string = ""): string => {
   if (!dateString) return "0000-00-00";
-  
+
   // Simple conversion for dates like "Jan 2023"
   const months: Record<string, string> = {
     'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
     'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
   };
-  
+
   const parts = dateString.split(' ');
   if (parts.length === 2 && months[parts[0]]) {
     return `${parts[1]}-${months[parts[0]]}-01`;
   }
-  
+
   return dateString;
 };
 
@@ -57,34 +57,6 @@ const truncateText = (text: string, maxLength: number): string => {
   if (!text) return "";
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength).trim() + '...';
-};
-
-// Get responsive text length based on screen size
-const getResponsiveTextLength = (
-  text: string, 
-  isVerySmallScreen: boolean | undefined, 
-  isMobile: boolean | undefined, 
-  isSmallScreen: boolean | undefined
-): string => {
-  if (!text) return "";
-  
-  // Very small screens (xs): Very short text
-  if (isVerySmallScreen) {
-    return truncateText(text, 20);
-  }
-  
-  // Mobile screens (sm): Short text
-  if (isMobile) {
-    return truncateText(text, 60);
-  }
-  
-  // Medium screens (md): Medium length text
-  if (isSmallScreen) {
-    return truncateText(text, 150);
-  }
-  
-  // Large screens (lg and above): Full text or longer text
-  return text.length > 300 ? truncateText(text, 300) : text;
 };
 
 // Terminal "processes" for status bar (like -zsh • -zsh)
@@ -105,6 +77,13 @@ const researchStatuses = [
   { label: "CODE.SHIPPING", suffix: "📦", colorKey: "info" },
 ];
 
+// Responsive column widths — CSS media queries, no JS evaluation needed
+const COL_DATE = { base: "70px", sm: "100px", md: "120px" };
+const COL_TYPE = { base: "60px", sm: "80px", md: "100px" };
+const COL_ID = { base: "60px", sm: "70px", md: "80px" };
+const COL_LINKS = { base: "80px", sm: "100px", md: "130px" };
+const COL_CTRL = { base: "30px", sm: "40px", md: "50px" };
+
 const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHeader = false }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === 'dark';
@@ -113,30 +92,12 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
   const [currentTime, setCurrentTime] = useState(new Date());
   const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>({});
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
-  
-  // Responsive check
-  const isMobile = useBreakpointValue({ base: true, sm: false });
-  const isSmallScreen = useBreakpointValue({ base: true, md: false });
-  const isVerySmallScreen = useBreakpointValue({ base: true, xs: false });
-  const dateColumnWidth = useBreakpointValue({ base: "70px", xs: "75px", sm: "100px", md: "120px" });
-  const typeColumnWidth = useBreakpointValue({ base: "60px", xs: "65px", sm: "80px", md: "100px" });
-  const idColumnWidth = useBreakpointValue({ base: "60px", sm: "70px", md: "80px" });
-  const linksColumnWidth = useBreakpointValue({ base: "80px", sm: "100px", md: "130px" });
-  const controlColumnWidth = useBreakpointValue({ base: "30px", sm: "40px", md: "50px" });
-  
-  // Check if narrow screen
-  // Simplified to two modes: narrow (mobile) and wide
-  const isNarrowScreen = useBreakpointValue({ base: true, md: false });
-  
-  // Check if screen is wide enough - only show details at lg breakpoint and above
-  // Medium widths also use simplified layout to avoid awkward positioning
-  const isWideEnough = useBreakpointValue({ base: false, lg: true });
-  
+
   // Interactive elements state
   const [researchStatusIndex, setResearchStatusIndex] = useState(0);
   const [processIndex, setProcessIndex] = useState(0);
   const [interactions, setInteractions] = useState(0);
-  const [memoryUsage, setMemoryUsage] = useState(65 + Math.floor(Math.random() * 20));
+  const [memoryUsage, setMemoryUsage] = useState(72);
 
   // Handle system interaction
   const handleSystemInteraction = useCallback(() => {
@@ -150,41 +111,29 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
     });
   }, []);
 
-  // Update time every second - Boston time
+  // Single consolidated interval for all timers
   useEffect(() => {
+    let tick = 0;
     const interval = setInterval(() => {
+      tick++;
       setCurrentTime(new Date());
+      if (tick % 6 === 0) setResearchStatusIndex(p => (p + 1) % researchStatuses.length);
+      if (tick % 8 === 0) setProcessIndex(p => (p + 1) % termProcesses.length);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  // Cycle research process status every 6 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setResearchStatusIndex(prev => (prev + 1) % researchStatuses.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Cycle terminal "processes" every 8 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProcessIndex(prev => (prev + 1) % termProcesses.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, []);
-  
   // Toggle expanded state for an item
   const toggleExpanded = (index: number) => {
     setExpandedItems(prev => ({
       ...prev,
       [index]: !prev[index]
     }));
-    
+
     // Trigger system interaction when expanding/collapsing
     handleSystemInteraction();
   };
-  
+
   // Terminal palette from centralized config
   const tc = terminalPalette.colors(isDark);
   const termBg = tc.bg;
@@ -200,7 +149,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
   const termSuccess = tc.success;
   const termWarning = tc.warning;
   const termSecondary = tc.secondary;
-  
+
   // Type colors (for ANSI-like color coding)
   const typeColors: Record<string, { bg: string, fg: string, icon: string }> = {
     publication: {
@@ -229,7 +178,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
       icon: 'FaCode'
     }
   };
-  
+
   // Format the time as HH:MM:SS in the configured timezone
   const bostonTime = new Date(currentTime.toLocaleString("en-US", {timeZone: siteOwner.timezone}));
   const formattedTime = bostonTime.toLocaleTimeString('en-US', {
@@ -245,30 +194,15 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
   const sparkOffset = Math.floor(currentTime.getTime() / 1000) % sparkChars.length;
   const sparkDisplay = (sparkChars + sparkChars).slice(sparkOffset, sparkOffset + 8);
 
-  // Based on browser width, decide whether to show description
-  // Higher threshold: only show on wide enough screens (lg and above)
-  const showDescription = useMemo(() => {
-    return isWideEnough;
-  }, [isWideEnough]);
-  
-  // Based on browser width, decide how much description text to show
-  const getDescriptionLength = useCallback((description: string) => {
+  // Description text with [+more] indicator for wide screens
+  const getDescriptionText = useCallback((description: string) => {
     if (!description) return "";
-    
-    // Not wide enough, hide description
-    if (!isWideEnough) return "";
-    
-    // Limit display length on wide screens too, keep around 60 chars
-    // Account for the [+more] indicator taking some space
     const maxLength = 60;
-    
     if (description.length > maxLength) {
       const truncated = truncateText(description, maxLength);
-      // Remove trailing ellipsis since we add a custom [+more] indicator
-      const withoutEllipsis = truncated.endsWith('...') 
-        ? truncated.slice(0, -3) 
+      const withoutEllipsis = truncated.endsWith('...')
+        ? truncated.slice(0, -3)
         : truncated;
-      
       return (
         <>
           {withoutEllipsis}{' '}
@@ -278,23 +212,9 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
         </>
       );
     }
-    
     return description;
-  }, [isWideEnough, termCommand]);
-  
-  // Based on browser width, decide category display
-  const getCategoryLength = useCallback((type: string) => {
-    if (!type) return "";
-    
-    // Narrow screen: show only 3 characters
-    if (isNarrowScreen) {
-      return type.substring(0, 3);
-    }
-    
-    // Wide screen: show full category name
-    return type;
-  }, [isNarrowScreen]);
-  
+  }, [termCommand]);
+
   // Interaction tier for title bar right side
   const interactionTier = interactions >= 25 ? { label: t('interactionTier.singularity'), isRainbow: true, color: termHighlight }
     : interactions >= 18 ? { label: t('interactionTier.overclocked'), isRainbow: false, color: termWarning }
@@ -504,7 +424,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
           fontSize={["3xs", "2xs"]}
           color={termInfo}
           borderBottom={`1px dotted ${termBorder}`}
-          display={isVerySmallScreen ? "none" : "block"}
+          display={{ base: "none", sm: "block" }}
         >
           <Flex align="center" gap={[1, 2]}>
             <DynamicIcon name="FaChevronRight" boxSize={[1.5, 2]} color={termPrompt} />
@@ -531,16 +451,25 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
             fontSize={["3xs", "2xs", "xs"]}
             fontWeight="bold"
           >
-            <Text w={dateColumnWidth} color={termHighlight} isTruncated>{isVerySmallScreen ? t('newsTimeline.time') : t('newsTimeline.timestamp')}</Text>
-            <Text w={typeColumnWidth} color={termParam} isTruncated>{isVerySmallScreen ? t('newsTimeline.cat') : t('newsTimeline.category')}</Text>
-            <Text w={idColumnWidth} color={termInfo} display={["none", "none", "block"]}>{t('newsTimeline.pid')}</Text>
+            <Text w={COL_DATE} color={termHighlight} isTruncated>
+              <Box as="span" display={{ base: "inline", sm: "none" }}>{t('newsTimeline.time')}</Box>
+              <Box as="span" display={{ base: "none", sm: "inline" }}>{t('newsTimeline.timestamp')}</Box>
+            </Text>
+            <Text w={COL_TYPE} color={termParam} isTruncated>
+              <Box as="span" display={{ base: "inline", sm: "none" }}>{t('newsTimeline.cat')}</Box>
+              <Box as="span" display={{ base: "none", sm: "inline" }}>{t('newsTimeline.category')}</Box>
+            </Text>
+            <Text w={COL_ID} color={termInfo} display={{ base: "none", lg: "block" }}>{t('newsTimeline.pid')}</Text>
             <Text flex="1">
               <Box as="span" color={termSuccess}>MEMORY</Box>
               <Box as="span" color={termSecondary}>.</Box>
               <Box as="span" color={termCommand}>DUMP</Box>
             </Text>
-            <Text w={linksColumnWidth} color={termWarning} display={["none", "block"]}>{t('newsTimeline.links')}</Text>
-            <Text w={controlColumnWidth} color={termPrompt} textAlign="center">{isVerySmallScreen ? "+" : t('newsTimeline.ctrl')}</Text>
+            <Text w={COL_LINKS} color={termWarning} display={{ base: "none", lg: "block" }}>{t('newsTimeline.links')}</Text>
+            <Text w={COL_CTRL} color={termPrompt} textAlign="center">
+              <Box as="span" display={{ base: "inline", sm: "none" }}>+</Box>
+              <Box as="span" display={{ base: "none", sm: "inline" }}>{t('newsTimeline.ctrl')}</Box>
+            </Text>
           </Flex>
 
           {/* Table rows */}
@@ -562,10 +491,10 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                 _hover={{ bg: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)' }}
                 bg={expandedItems[index] ? (isDark ? 'rgba(76,86,106,0.2)' : 'rgba(203,213,225,0.3)') : 'transparent'}
               >
-                <Text w={dateColumnWidth} color={termHighlight} fontWeight="medium" isTruncated>
+                <Text w={COL_DATE} color={termHighlight} fontWeight="medium" isTruncated>
                   {formatDate(item.date)}
                 </Text>
-                <Box w={typeColumnWidth}>
+                <Box w={COL_TYPE}>
                   <Flex
                     as="span"
                     align="center"
@@ -580,16 +509,17 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                     display="inline-flex"
                     w="fit-content"
                   >
-                    {!isNarrowScreen && (
+                    <Box display={{ base: "none", md: "inline-flex" }}>
                       <DynamicIcon
                         name={typeColors[item.type.toLowerCase()]?.icon || typeColors.default.icon}
                         boxSize={[2, 2.5]}
                       />
-                    )}
-                    {getCategoryLength(item.type)}
+                    </Box>
+                    <Box as="span" display={{ base: "inline", md: "none" }}>{item.type.substring(0, 3)}</Box>
+                    <Box as="span" display={{ base: "none", md: "inline" }}>{item.type}</Box>
                   </Flex>
                 </Box>
-                <Text w={idColumnWidth} color={termInfo} fontFamily="mono" display={isWideEnough ? "block" : "none"}>
+                <Text w={COL_ID} color={termInfo} fontFamily="mono" display={{ base: "none", lg: "block" }}>
                   <Box as="span" color={termSecondary}>0x</Box>
                   {(news.length - 1 - index).toString(16).padStart(4, '0')}
                 </Text>
@@ -609,30 +539,30 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                       </Text>
                     )}
                     <Text fontWeight="medium" color={termText} isTruncated fontSize={["2xs", "xs"]}>
-                      {isNarrowScreen ? truncateText(item.title, 60) : item.title}
+                      {item.title}
                     </Text>
                   </Flex>
-                  {showDescription && (
+                  <Box display={{ base: "none", lg: "block" }}>
                     <Text color={termSecondary} fontSize={["3xs", "2xs"]} isTruncated mt={0.5}>
-                      {getDescriptionLength(item.description)}
+                      {getDescriptionText(item.description)}
                     </Text>
-                  )}
+                  </Box>
                 </Box>
-                <Flex w={linksColumnWidth} align="center" justify="flex-start" display={isWideEnough ? "flex" : "none"}>
+                <Flex w={COL_LINKS} align="center" justify="flex-start" display={{ base: "none", lg: "flex" }}>
                   {item.links.length > 0 ? (
                     <HStack spacing={1}>
-                      {item.links.slice(0, isSmallScreen ? 2 : 3).map((link, i) => (
+                      {item.links.slice(0, 3).map((link, i) => (
                         <Link key={i} href={link.url} isExternal color={termCommand} _hover={{ color: termHighlight }} onClick={(e) => e.stopPropagation()}>
                           <Box>[<DynamicIcon name={link.icon || 'FaExternalLinkAlt'} boxSize={[2, 2.5, 3]} />]</Box>
                         </Link>
                       ))}
-                      {item.links.length > (isSmallScreen ? 2 : 3) && <Text color={termInfo}>+{item.links.length - (isSmallScreen ? 2 : 3)}</Text>}
+                      {item.links.length > 3 && <Text color={termInfo}>+{item.links.length - 3}</Text>}
                     </HStack>
                   ) : (
                     <Text color={termInfo}>{t('newsTimeline.devNull')}</Text>
                   )}
                 </Flex>
-                <Flex w={controlColumnWidth} align="center" justify="center">
+                <Flex w={COL_CTRL} align="center" justify="center">
                   <Box
                     color={expandedItems[index] ? termInfo : termCommand}
                     fontWeight="bold"
@@ -702,12 +632,12 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                       mb={2}
                       whiteSpace="pre-line"
                       lineHeight="1.6"
-                      maxH={isVerySmallScreen ? "100px" : isMobile ? "200px" : "none"}
-                      overflowY={isVerySmallScreen || isMobile ? "auto" : "visible"}
-                      sx={(isVerySmallScreen || isMobile) ? {
+                      maxH={{ base: "100px", sm: "200px", md: "none" }}
+                      overflowY={{ base: "auto", md: "visible" }}
+                      sx={{
                         '&::-webkit-scrollbar': { width: '4px', background: 'transparent' },
                         '&::-webkit-scrollbar-thumb': { background: tc.border, borderRadius: '2px' },
-                      } : {}}
+                      }}
                     >
                       {highlightData(item.description, { num: termHighlight, kw: termCommand, str: termSuccess })}
                     </Text>
@@ -731,7 +661,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                             _hover={{ bg: isDark ? 'rgba(136,192,208,0.15)' : 'rgba(42,118,156,0.1)', borderColor: termCommand }}
                           >
                             <DynamicIcon name={link.icon || 'FaExternalLinkAlt'} boxSize={[2, 2.5]} />
-                            <Text>{getResponsiveTextLength(link.text, isVerySmallScreen, isMobile, isSmallScreen)}</Text>
+                            <Text isTruncated maxW={{ base: "60px", sm: "120px", md: "200px" }}>{link.text}</Text>
                           </Flex>
                         </Link>
                       ))}
@@ -757,7 +687,9 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
       >
         <Flex align="center" gap={1} mr={1.5} flexShrink={0}>
           <DynamicIcon name="FaChevronRight" boxSize={[1.5, 2]} color={termPrompt} />
-          {!isVerySmallScreen && <DynamicIcon name="FaChevronRight" boxSize={[1.5, 2]} color={termCommand} />}
+          <Box display={{ base: "none", sm: "inline" }}>
+            <DynamicIcon name="FaChevronRight" boxSize={[1.5, 2]} color={termCommand} />
+          </Box>
         </Flex>
         <Text color={termSecondary} isTruncated>
           {hoveredItem !== null
@@ -765,7 +697,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                 <Box as="span" color={termSuccess} fontWeight="bold">cat</Box>{' '}
                 <Box as="span" color={termParam}>./brain/memories/</Box>
                 <Box as="span" color={termHighlight}>
-                  {truncateText(news[hoveredItem]?.title, isVerySmallScreen ? 12 : 25).replace(/\s+/g, '_').toLowerCase()}
+                  {truncateText(news[hoveredItem]?.title, 25).replace(/\s+/g, '_').toLowerCase()}
                 </Box>
               </>)
             : (<>
@@ -793,22 +725,21 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
           sx={{ animation: `${blink} 1s step-end infinite` }}
         />
         {/* Easter egg: changes with interaction count */}
-        {!isMobile && (
-          <Text
-            position="absolute"
-            right={[2, 3]}
-            color={termInfo}
-            opacity={0.5}
-            fontSize={["4xs", "3xs"]}
-            fontStyle="italic"
-          >
-            {interactions >= 6
-              ? t('newsTimeline.easterEgg3')
-              : interactions >= 3
-                ? t('newsTimeline.easterEgg2')
-                : t('newsTimeline.easterEgg1')}
-          </Text>
-        )}
+        <Text
+          position="absolute"
+          right={[2, 3]}
+          color={termInfo}
+          opacity={0.5}
+          fontSize={["4xs", "3xs"]}
+          fontStyle="italic"
+          display={{ base: "none", sm: "block" }}
+        >
+          {interactions >= 6
+            ? t('newsTimeline.easterEgg3')
+            : interactions >= 3
+              ? t('newsTimeline.easterEgg2')
+              : t('newsTimeline.easterEgg1')}
+        </Text>
       </Flex>
     </Box>
   )
