@@ -22,7 +22,7 @@ coFirstAuthors:
 specialBadges:
   - Co-First
 links:
-  paper: "https://ieeexplore.ieee.org/abstract/document/11143849" {}
+  paper: "https://ieeexplore.ieee.org/abstract/document/11143849"
 ---
 
 This paper studies high-efficiency hologram compression via latent-of-latent coding.
