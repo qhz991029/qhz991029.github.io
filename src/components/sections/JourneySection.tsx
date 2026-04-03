@@ -3,12 +3,16 @@ import { useTranslation } from 'react-i18next'
 import { Link as RouterLink } from 'react-router-dom'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 
-/** Parse **bold** markers in text */
-const renderBoldText = (text: string, color: string, boldColor: string) => {
-  const parts = text.split(/(\*\*.*?\*\*)/g)
+/** Parse **bold** and [link](url) markers in text */
+const renderRichText = (text: string, color: string, boldColor: string) => {
+  const parts = text.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g)
   return parts.map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return <Text as="span" key={i} fontWeight="semibold" color={boldColor}>{part.slice(2, -2)}</Text>
+    }
+    const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/)
+    if (linkMatch) {
+      return <Link key={i} href={linkMatch[2]} isExternal color="cyan.400" _hover={{ textDecoration: 'underline' }}>{linkMatch[1]}</Link>
     }
     return <Text as="span" key={i} color={color}>{part}</Text>
   })
@@ -59,7 +63,7 @@ const JourneySection: React.FC = () => {
                   </HStack>
                   <Text fontSize="sm" fontWeight="semibold" color={headingColor} mb={1}>{phase.title}</Text>
                   <Text fontSize="xs" lineHeight="tall" mb={2}>
-                    {renderBoldText(phase.description, textColor, boldColor)}
+                    {renderRichText(phase.description, textColor, boldColor)}
                   </Text>
                   {phase.tags && (
                     <HStack spacing={1.5} flexWrap="wrap">

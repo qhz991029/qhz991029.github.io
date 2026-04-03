@@ -1,6 +1,18 @@
-import { Box, Container, Text, Heading, Flex, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, Text, Heading, Flex, Link, useColorModeValue } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
+
+/** Parse [link](url) markers in text */
+const renderLinkedText = (text: string) => {
+  const parts = text.split(/(\[.*?\]\(.*?\))/g)
+  return parts.map((part, i) => {
+    const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/)
+    if (linkMatch) {
+      return <Link key={i} href={linkMatch[2]} isExternal color="cyan.400" _hover={{ textDecoration: 'underline' }}>{linkMatch[1]}</Link>
+    }
+    return <Text as="span" key={i}>{part}</Text>
+  })
+}
 
 const BioSection: React.FC = () => {
   const { t } = useTranslation()
@@ -18,7 +30,7 @@ const BioSection: React.FC = () => {
           <Box flex="1" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
         </Flex>
         <Text fontSize="sm" lineHeight="tall" color={textColor}>
-          {about.journey}
+          {renderLinkedText(about.journey)}
         </Text>
       </Container>
     </Box>
