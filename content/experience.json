@@ -45,6 +45,54 @@
       ]
     },
     {
+      "title": "Research Intern",
+      "company": "ByteDance",
+      "companyUrl": "https://www.bytedance.com/",
+      "location": "San Jose, CA, USA",
+      "start": "2025-09-01",
+      "category": "industry",
+      "roleType": "research",
+      "isCurrent": true,
+      "summary": "Part-time research internship at ByteDance.",
+      "highlights": []
+    },
+    {
+      "title": "Graduate Research Assistant",
+      "company": "University of North Carolina at Chapel Hill",
+      "companyUrl": "https://www.cs.unc.edu/",
+      "location": "Chapel Hill, NC, USA",
+      "start": "2025-08-01",
+      "end": "2025-12-31",
+      "category": "research",
+      "roleType": "research",
+      "summary": "Graduate research assistant at UNC Department of Computer Science.",
+      "highlights": []
+    },
+    {
+      "title": "Research Intern",
+      "company": "Honda Research Institute USA, Inc.",
+      "companyUrl": "https://www.honda-ri.com/",
+      "location": "San Jose, CA, USA",
+      "start": "2025-05-01",
+      "end": "2025-08-31",
+      "category": "industry",
+      "roleType": "research",
+      "summary": "Full-time research internship at Honda Research Institute USA.",
+      "highlights": []
+    },
+    {
+      "title": "Graduate Teaching Assistant",
+      "company": "University of North Carolina at Chapel Hill",
+      "companyUrl": "https://www.cs.unc.edu/",
+      "location": "Chapel Hill, NC, USA",
+      "start": "2024-08-01",
+      "end": "2025-05-31",
+      "category": "academic",
+      "roleType": "teaching",
+      "summary": "Teaching assistant at UNC Department of Computer Science.",
+      "highlights": []
+    },
+    {
       "title": "Graduate Student Researcher",
       "company": "University of North Carolina at Chapel Hill",
       "companyUrl": "https://www.cs.unc.edu/",
