@@ -10,18 +10,21 @@
       content="Academic homepage of Huaizhi Qu, HKUST PhD student working on foundation models, multimodal learning, 3D vision, and neural rendering."
     />
     <title>Huaizhi Qu</title>
-    <style>
-      /* Prevent flash: set initial bg based on saved color mode */
-      html { background: #1a202c; }
-      html[data-theme="light"] { background: #f7fafc; }
-    </style>
     <script>
-      try {
-        var m = localStorage.getItem('chakra-ui-color-mode') || 'dark';
-        document.documentElement.setAttribute('data-theme', m);
-        document.documentElement.style.colorScheme = m;
-      } catch(e) {}
+      (function(){
+        try {
+          var stored = localStorage.getItem('chakra-ui-color-mode');
+          var m = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', m);
+          document.documentElement.style.colorScheme = m;
+          document.documentElement.className = m === 'dark' ? 'chakra-ui-dark' : 'chakra-ui-light';
+        } catch(e) {}
+      })();
     </script>
+    <style>
+      html { background: #f8f9fa; color: #212529; }
+      html.chakra-ui-dark { background: #0d1117; color: #c9d1d9; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

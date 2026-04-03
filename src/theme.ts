@@ -2,8 +2,8 @@ import { extendTheme } from '@chakra-ui/react'
 
 const theme = extendTheme({
   config: {
-    initialColorMode: 'dark',
-    useSystemColorMode: false,
+    initialColorMode: 'system',
+    useSystemColorMode: true,
   },
   fonts: {
     body: '"SF Mono", Consolas, "Liberation Mono", Menlo, monospace',

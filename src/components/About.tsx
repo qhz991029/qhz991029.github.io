@@ -1,4 +1,4 @@
-import { Box, VStack, Flex, Heading, Badge, Container, useColorModeValue } from '@chakra-ui/react'
+import { Box, VStack, Flex, Heading, Container, useColorModeValue } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { institutionLogos } from '../data'
@@ -59,7 +59,6 @@ function About() {
               <Flex align="center" gap={3} mb={4}>
                 <Box h="2px" w="20px" bg="cyan.400" borderRadius="full" flexShrink={0} />
                 <Heading size="md" fontWeight="semibold">{t('about.recentUpdates')}</Heading>
-                <Badge colorScheme="green" variant="subtle" fontSize="2xs" fontFamily="mono">{t('about.news')}</Badge>
                 <Box flex="1" h="1px" bg={lineColor} />
               </Flex>
               <NewsDisplay news={sortedNews} showHeader={false} />
