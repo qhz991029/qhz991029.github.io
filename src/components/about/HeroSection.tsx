@@ -143,7 +143,15 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                           </Flex>
                         )}
                         <VStack align="start" spacing={0} flex={1}>
-                          <Text fontSize={["xs", "sm"]} fontWeight="medium" lineHeight="short" color={headingColor}>{item.course}</Text>
+                          <Text fontSize={["xs", "sm"]} fontWeight="medium" lineHeight="short" color={headingColor}>
+                            {item.course.includes('World Mind Lab') ? (
+                              <>
+                                {item.course.split('World Mind Lab')[0]}
+                                <Link href="https://github.com/World-Mind-Lab" isExternal color="blue.500" _hover={{ textDecoration: 'underline' }}>World Mind Lab</Link>
+                                {item.course.split('World Mind Lab')[1]}
+                              </>
+                            ) : item.course}
+                          </Text>
                           <Text fontSize="2xs" color={textColor} lineHeight="short">{item.institution} · {item.year}</Text>
                         </VStack>
                       </HStack>

@@ -30,7 +30,9 @@
     "description": "MonoVLM and VLM-3R were accepted to CVPR 2026, covering monocular 3D visual grounding and instruction-aligned 3D reconstruction.",
     "date": "2026",
     "sortDate": "2026-02-01",
-    "links": []
+    "links": [
+      { "text": "VLM-3R Code", "url": "https://github.com/VITA-Group/VLM-3R", "icon": "FaGithub" }
+    ]
   },
   {
     "type": "publication",
@@ -63,7 +65,9 @@
     "description": "BetaConform and Multi-Agent Debate for LLM Judges were accepted to NeurIPS 2025.",
     "date": "2025",
     "sortDate": "2025-09-01",
-    "links": []
+    "links": [
+      { "text": "Multi-LLM-Debate Code", "url": "https://github.com/tyrionhuu/Multi-LLM-Debate", "icon": "FaGithub" }
+    ]
   },
   {
     "type": "publication",
@@ -85,7 +89,9 @@
     "description": "RTGSSLAM proposes an edge GPU plug-in for real-time 3D Gaussian Splatting-based SLAM systems.",
     "date": "2025",
     "sortDate": "2025-07-01",
-    "links": []
+    "links": [
+      { "text": "Code", "url": "https://github.com/UMN-ZhaoLab/RTGS", "icon": "FaGithub" }
+    ]
   },
   {
     "type": "publication",
@@ -151,7 +157,9 @@
     "description": "Omni-Recon advocated a pretrain-bake-finetune paradigm towards foundation neural radiance fields.",
     "date": "2024",
     "sortDate": "2024-09-01",
-    "links": []
+    "links": [
+      { "text": "Code", "url": "https://github.com/GATECH-EIC/Omni-Recon", "icon": "FaGithub" }
+    ]
   },
   {
     "type": "publication",
