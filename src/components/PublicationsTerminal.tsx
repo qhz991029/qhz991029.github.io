@@ -498,9 +498,8 @@ const PublicationsTerminal: React.FC = () => {
                         <Text fontWeight="medium" flex="1">{pub.title}</Text>
                       )}
                     </HStack>
-                    {/* Venue, Year and Special Badges */}
+                    {/* Venue Badge */}
                     <HStack spacing={1} mb={1} flexWrap="wrap">
-                      {/* Venue Badge */}
                       <Badge
                         bg={venueColors[pub.venueType].bg}
                         color={venueColors[pub.venueType].fg}
@@ -513,37 +512,12 @@ const PublicationsTerminal: React.FC = () => {
                           ? pub.venue
                           : `${pub.venue} ${pub.year}`}
                       </Badge>
-                      
-                      {/* Venue Type Badge */}
-                      <Badge
-                        colorScheme={
-                          pub.venueType === 'conference' ? 'blue' :
-                          pub.venueType === 'journal' ? 'teal' :
-                          pub.venueType === 'workshop' ? 'purple' :
-                          pub.venueType === 'demo' ? 'orange' :
-                          'green'
-                        }
-                        fontSize="2xs"
-                        px={1.5}
-                        py={0}
-                      >
-                        {venueColors[pub.venueType].label}
-                      </Badge>
-                      
-                      {/* Special Badges */}
-                      {pub.specialBadges && pub.specialBadges.filter(badge => badge !== 'First Author').map((badge, i) => (
+                      {pub.specialBadges && pub.specialBadges
+                        .filter(badge => ['Oral', 'Spotlight', 'Best Paper'].includes(badge))
+                        .map((badge, i) => (
                         <Badge
                           key={i}
-                          colorScheme={
-                            badge === 'Best Paper' ? 'red' :
-                            badge === 'Oral' ? 'orange' :
-                            badge === 'Spotlight' ? 'yellow' :
-                            badge === 'Main Track' ? 'blue' :
-                            badge === 'Corresponding' ? 'purple' :
-                            badge === 'Demo' ? 'teal' :
-                            badge === 'Co-First' ? 'cyan' :
-                            'gray'
-                          }
+                          colorScheme={badge === 'Best Paper' ? 'red' : badge === 'Oral' ? 'orange' : 'yellow'}
                           fontSize="2xs"
                           px={1}
                           py={0}

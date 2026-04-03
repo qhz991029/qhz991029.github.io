@@ -30,7 +30,7 @@ const PublicationCard = ({ pub }: { pub: any }) => {
   const { isOpen: isImageOpen, onOpen: onImageOpen, onClose: onImageClose } = useDisclosure()
   const borderColor = useColorModeValue('gray.200', 'gray.700')
   const authorVariants = new Set((siteOwner.name.authorVariants as string[]) ?? [])
-  const visibleBadges = (pub.specialBadges ?? []).filter((badge: string) => badge !== 'First Author')
+
 
   return (
     <Box p={[4, 5, 6]} bg={useColorModeValue('white', 'gray.800')} borderRadius="md" border="1px solid" borderColor={borderColor} transition="all 0.2s" _hover={{ borderColor: useColorModeValue('cyan.300', 'cyan.600') }}>
@@ -50,7 +50,6 @@ const PublicationCard = ({ pub }: { pub: any }) => {
             <Text fontSize="xs" fontFamily="mono" color="cyan.400" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase">
               {pub.venue && String(pub.year) && pub.venue.includes(String(pub.year)) ? pub.venue : `${pub.venue} ${pub.year}`}
             </Text>
-            {pub.venueType && <Text fontSize="2xs" color={useColorModeValue('gray.400', 'gray.500')} fontFamily="mono">/ {pub.venueType}</Text>}
           </HStack>
           {(pub.links.arxiv || pub.links.paper || pub.links.projectPage) ? (
                     <Link href={pub.links.arxiv || pub.links.paper || pub.links.projectPage} isExternal _hover={{ textDecoration: 'underline' }}>
@@ -76,18 +75,6 @@ const PublicationCard = ({ pub }: { pub: any }) => {
                 )
               })}
             </Text>
-            {visibleBadges.length > 0 && (
-              <HStack spacing={1.5} flexWrap="wrap">
-                {visibleBadges.map((badge: string) => (
-                  <Text key={badge} fontSize="2xs" fontFamily="mono" px={2} py={0.5} borderRadius="sm" border="1px solid"
-                    borderColor={badge === 'Co-First' ? useColorModeValue('cyan.200', 'cyan.700') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.200', 'orange.700') : useColorModeValue('gray.200', 'gray.600')}
-                    color={badge === 'Co-First' ? useColorModeValue('cyan.600', 'cyan.300') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.600', 'orange.300') : useColorModeValue('gray.500', 'gray.400')}
-                    bg={badge === 'Co-First' ? useColorModeValue('cyan.50', 'whiteAlpha.50') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.50', 'whiteAlpha.50') : 'transparent'}
-                  >{badge}</Text>
-                ))}
-                {pub.isCoFirst && <Text fontSize="2xs" color={useColorModeValue('gray.400', 'gray.500')} fontStyle="italic">{t('about.equalContribution')}</Text>}
-              </HStack>
-            )}
           </VStack>
           <Box w="full" h="1px" bg={useColorModeValue('gray.100', 'gray.700')} />
           <HStack spacing={1.5} flexWrap="wrap">
