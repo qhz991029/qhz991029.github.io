@@ -14,7 +14,6 @@ import {
   Icon,
   IconButton,
   Collapse,
-  Tooltip,
   SimpleGrid,
   Stat,
   StatLabel,
@@ -420,7 +419,7 @@ const PublicationsTerminal: React.FC = () => {
             >
               {!isMobile && <Text w="320px" mr={6}>PREVIEW</Text>}
               <Text flex="1">PUBLICATION</Text>
-              {!isMobile && <Text w="150px">RESOURCES</Text>}
+
               <Text w="50px" textAlign="center">MORE</Text>
             </Flex>
             
@@ -561,36 +560,6 @@ const PublicationsTerminal: React.FC = () => {
                     </Text>
                   </Box>
                   
-                  {/* Resources */}
-                  {!isMobile && (
-                    <HStack w="150px" spacing={1}>
-                      {pub.links.paper && (
-                        <Tooltip label="Paper">
-                          <Link href={pub.links.paper} isExternal onClick={(e) => e.stopPropagation()}>
-                            <Badge colorScheme="blue" fontSize="2xs">PDF</Badge>
-                          </Link>
-                        </Tooltip>
-                      )}
-                      {pub.links.code && (
-                        <Tooltip label="Code">
-                          <Link href={pub.links.code} isExternal onClick={(e) => e.stopPropagation()}>
-                            <Badge colorScheme="green" fontSize="2xs">CODE</Badge>
-                          </Link>
-                        </Tooltip>
-                      )}
-                      {pub.links.projectPage && (
-                        <Tooltip label="Project">
-                          <Link href={pub.links.projectPage} isExternal onClick={(e) => e.stopPropagation()}>
-                            <Badge colorScheme="purple" fontSize="2xs">PROJ</Badge>
-                          </Link>
-                        </Tooltip>
-                      )}
-                      {Object.keys(pub.links).length > 3 && (
-                        <Badge colorScheme="gray" fontSize="2xs">+{Object.keys(pub.links).length - 3}</Badge>
-                      )}
-                    </HStack>
-                  )}
-                  
                   {/* Expand Button */}
                   <Text
                     w="50px"
@@ -641,34 +610,6 @@ const PublicationsTerminal: React.FC = () => {
                           </Box>
                         )}
                         
-                        {/* All Resources */}
-                        <Box>
-                          <Text fontSize="xs" color={termInfo} mb={2}>
-                            ── RESOURCES ────────────
-                          </Text>
-                          <Flex flexWrap="wrap" gap={2}>
-                            {Object.entries(pub.links).map(([key, url]) => url && (
-                              <Link key={key} href={url} isExternal>
-                                <Badge
-                                  colorScheme={
-                                    key === 'code' ? 'green' :
-                                    key === 'paper' || key === 'arxiv' ? 'blue' :
-                                    key === 'projectPage' ? 'purple' :
-                                    key === 'demo' ? 'orange' :
-                                    key === 'dataset' ? 'teal' :
-                                    'gray'
-                                  }
-                                  fontSize="xs"
-                                  px={2}
-                                  py={1}
-                                  textTransform="capitalize"
-                                >
-                                  {key.replace(/([A-Z])/g, ' $1').trim()}
-                                </Badge>
-                              </Link>
-                            ))}
-                          </Flex>
-                        </Box>
                       </Box>
                       
                       {/* Right side - Featured Image */}

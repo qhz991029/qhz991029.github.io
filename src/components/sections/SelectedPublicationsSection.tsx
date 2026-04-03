@@ -8,20 +8,6 @@ import { selectedPublicationIds } from '@/site.config'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 import DynamicIcon from '../DynamicIcon'
 
-const PubLink = ({ href, icon, label }: { href: string; icon: string; label: string }) => (
-  <Link href={href} isExternal _hover={{ textDecoration: 'none' }}>
-    <HStack
-      spacing={1.5} px={2.5} py={1} borderRadius="sm" border="1px solid"
-      borderColor={useColorModeValue('gray.200', 'gray.600')}
-      color={useColorModeValue('gray.600', 'gray.400')}
-      fontSize="xs" fontFamily="mono" transition="all 0.15s"
-      _hover={{ borderColor: 'cyan.400', color: 'cyan.400', bg: useColorModeValue('gray.50', 'whiteAlpha.50') }}
-    >
-      <DynamicIcon name={icon} boxSize={3} />
-      <Text>{label}</Text>
-    </HStack>
-  </Link>
-)
 
 const PublicationCard = ({ pub }: { pub: any }) => {
   const { t } = useTranslation()
@@ -78,12 +64,6 @@ const PublicationCard = ({ pub }: { pub: any }) => {
           </VStack>
           <Box w="full" h="1px" bg={useColorModeValue('gray.100', 'gray.700')} />
           <HStack spacing={1.5} flexWrap="wrap">
-            {pub.links.paper && <PubLink href={pub.links.paper} icon="FaFileAlt" label={t('about.paper')} />}
-            {pub.links.arxiv && <PubLink href={pub.links.arxiv} icon="SiArxiv" label={t('about.arXiv')} />}
-            {pub.links.projectPage && <PubLink href={pub.links.projectPage} icon="FaGlobe" label={t('about.project')} />}
-            {pub.links.code && <PubLink href={pub.links.code} icon="FaGithub" label={t('about.code')} />}
-            {pub.links.demo && <PubLink href={pub.links.demo} icon="FaPlay" label={t('about.demo')} />}
-            {pub.links.dataset && <PubLink href={pub.links.dataset} icon="FaDatabase" label={t('about.dataset')} />}
             {pub.abstract && (
               <HStack as="button" spacing={1.5} px={2.5} py={1} borderRadius="sm" border="1px solid"
                 borderColor={isAbstractOpen ? useColorModeValue('cyan.300', 'cyan.600') : borderColor}
