@@ -48,7 +48,7 @@ const PublicationCard = ({ pub }: { pub: any }) => {
           <HStack spacing={2} flexWrap="wrap" align="center">
             <Box h="2px" w="16px" bg="cyan.400" borderRadius="full" />
             <Text fontSize="xs" fontFamily="mono" color="cyan.400" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase">
-              {pub.venue && String(pub.year) && pub.venue.includes(String(pub.year)) ? pub.venue : `${pub.venue} ${pub.year}`}
+              {pub.venueType === 'preprint' ? pub.venue : pub.venue.includes(String(pub.year)) ? pub.venue : `${pub.venue} ${pub.year}`}
             </Text>
           </HStack>
           {(pub.links.arxiv || pub.links.paper || pub.links.projectPage) ? (

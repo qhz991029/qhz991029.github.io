@@ -508,9 +508,11 @@ const PublicationsTerminal: React.FC = () => {
                         py={0.5}
                         fontWeight="bold"
                       >
-                        {pub.venue && String(pub.year) && pub.venue.includes(String(pub.year))
+                        {pub.venueType === 'preprint'
                           ? pub.venue
-                          : `${pub.venue} ${pub.year}`}
+                          : pub.venue.includes(String(pub.year))
+                            ? pub.venue
+                            : `${pub.venue} ${pub.year}`}
                       </Badge>
                       {pub.specialBadges && pub.specialBadges
                         .filter(badge => ['Oral', 'Spotlight', 'Best Paper'].includes(badge))
