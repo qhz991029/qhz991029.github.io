@@ -49,8 +49,8 @@ const JourneySection: React.FC = () => {
                 <Box flexShrink={0} mt="6px">
                   <Box
                     w="14px" h="14px" borderRadius="full" border="2px solid"
-                    borderColor={index === about.journeyPhases!.length - 1 ? 'cyan.400' : dotBorder}
-                    bg={index === about.journeyPhases!.length - 1 ? 'cyan.400' : dotBg}
+                    borderColor={index === 0 ? 'cyan.400' : dotBorder}
+                    bg={index === 0 ? 'cyan.400' : dotBg}
                   />
                 </Box>
                 <Box flex={1} pb={2}>
