@@ -506,6 +506,7 @@ const PublicationsTerminal: React.FC = () => {
                         px={2}
                         py={0.5}
                         fontWeight="bold"
+                        textTransform="none"
                       >
                         {pub.venueType === 'preprint'
                           ? pub.venue
