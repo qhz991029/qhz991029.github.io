@@ -137,7 +137,7 @@ const SelectedPublicationsSection: React.FC = () => {
   const { publications } = useLocalizedData()
 
   const selectedPubs = useMemo(
-    () => publications.filter((pub) => selectedPublicationIds.has(pub.id)),
+    () => publications.filter((pub) => selectedPublicationIds.has(pub.id)).sort((a, b) => b.year - a.year),
     [publications]
   )
 
