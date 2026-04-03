@@ -93,4 +93,14 @@ code {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-} 
+}
+
+/* Prevent flash on initial load */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#root {
+  animation: fadeIn 0.15s ease-in;
+}
