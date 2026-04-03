@@ -18,4 +18,4 @@ specialBadges:
 links: {}
 ---
 
-This paper studies robustness limitations of bio-foundation models under biologically plausible perturbations and ML transformations.
+We explore the robustness of bio-foundation models under biologically plausible perturbations and machine learning transformations. Across diverse bio-representation models, we observe that performance degrades substantially under realistic perturbations despite strong in-distribution results. Our analysis shows that these failures are systematic rather than isolated corner cases, highlighting a gap between benchmark accuracy and robustness in practical biological settings. The findings suggest that current bio-foundation models remain insufficiently reliable for deployment in scenarios where robustness to plausible biological variation matters.

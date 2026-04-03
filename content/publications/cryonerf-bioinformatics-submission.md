@@ -19,7 +19,8 @@ coFirstAuthors:
 specialBadges:
   - Under Review
   - Co-First
-links: {}
+links:
+  paper: "https://doi.org/10.1101/2025.01.10.632460"
 ---
 
-This paper studies generalizable automated cryo-EM reconstruction using neural radiance fields.
+Cryogenic electron microscopy has become a widely used technique for determining the 3D structures of proteins. However, cryo-EM datasets often exhibit heterogeneity, with particle images from multiple conformations or compositional states. CryoNeRF is a neural radiance field based cryo-EM reconstruction framework operating directly in Euclidean 3D space. It introduces a multi-resolution hash encoding and a heterogeneity-aware cryo-EM encoder to model cryo-EM heterogeneity. Experiments demonstrate stability and strong performance in both homogeneous and heterogeneous settings. On homogeneous datasets, CryoNeRF achieves a 15.8% improvement over previous state-of-the-art methods, and on simulated and experimental heterogeneous datasets it effectively handles both conformational and compositional variations.

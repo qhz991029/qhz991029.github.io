@@ -1,9 +1,9 @@
 {
   "currentResearch": [
     {
-      "lab": "HKUST CSE",
+      "lab": "HKUST AMC, World Mind Lab",
       "emoji": "🎓",
-      "advisor": "Professor Fangneng Zhan",
+      "advisor": "Prof. Fangneng Zhan and Prof. Hongbo Fu",
       "focus": "multimodal LLMs, efficient foundation models, 3D vision, and neural rendering",
       "link": "https://www.cse.ust.hk/"
     }

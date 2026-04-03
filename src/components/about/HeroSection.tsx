@@ -1,9 +1,8 @@
-import { Box, VStack, Text, useColorModeValue, Image, HStack, Container, Stack, Link, Flex, SimpleGrid, Heading, Tooltip } from '@chakra-ui/react'
+import { Box, VStack, Text, useColorModeValue, Image, HStack, Container, Stack, Link, Flex, SimpleGrid, Heading } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { withBase } from '@/utils/asset'
 import DynamicIcon from '../DynamicIcon'
 import { useTranslation } from 'react-i18next'
-import { heroSocialIcons } from '@/site.config'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 
 const MotionBox = motion(Box)
@@ -128,42 +127,6 @@ const HeroSection = ({ title, avatar, research = [], researchLogos = {}, educati
               </MotionText>
             </MotionText>
 
-            <HStack
-              spacing={[1, 2]}
-              mb={[2, 3, 4]}
-              justify={['center', 'center', 'flex-start']}
-              flexWrap="wrap"
-              w="full"
-            >
-              <Text color="yellow.400" fontSize={["xs", "sm"]}>$</Text>
-              <Text fontSize={["xs", "sm"]} color={useColorModeValue('gray.600', 'gray.400')}>{t('hero.sometimesI')}</Text>
-              <Box h={["18px", "20px", "24px"]} overflow="hidden">
-                <MotionBox
-                  animate={{ y: [0, -18, -36, -54, -72, -90, 0] }}
-                  transition={{
-                    duration: 8,
-                    times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9],
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                >
-                  {siteOwner.rotatingSubtitles.map((text, index) => (
-                    <Text
-                      key={index}
-                      h={["18px", "20px", "24px"]}
-                      color="cyan.400"
-                      fontWeight="bold"
-                      fontSize={["xs", "sm"]}
-                      fontFamily="mono"
-                    >
-                      {text}
-                    </Text>
-                  ))}
-                </MotionBox>
-              </Box>
-            </HStack>
-
-
             <Box w="full" borderTop="1px dashed" borderColor={useColorModeValue('gray.200', 'gray.700')} />
 
             {/* Research & Education compact section */}
@@ -228,11 +191,8 @@ const HeroSection = ({ title, avatar, research = [], researchLogos = {}, educati
 
             <Box w="full" borderTop="1px dashed" borderColor={useColorModeValue('gray.200', 'gray.700')} />
 
-            {/* Welcome + contact */}
-            <Flex w="full" direction={['column', 'column', 'row']} align={['center', 'center', 'center']} gap={[2, 2, 4]}>
-              <Text fontSize="xs" color={textColor} lineHeight="tall" textAlign={['center', 'center', 'left']} flex={1} fontStyle="italic">
-                {siteConfig.tagline ?? ''}
-              </Text>
+            {/* Contact */}
+            <Flex w="full" justify={['center', 'center', 'flex-end']}>
               {contactLinks.length > 0 && (
                 <HStack spacing={2} flexShrink={0} flexWrap="wrap" justify={['center', 'center', 'flex-end']}>
                   {contactLinks.map((item, index) => (
@@ -259,28 +219,11 @@ const HeroSection = ({ title, avatar, research = [], researchLogos = {}, educati
               <Image
                 src={withBase(`images/${avatar}`)}
                 alt={title}
+                fallbackSrc={withBase('img/avatar.svg')}
                 borderRadius="xl"
                 boxSize={["150px", "180px", "220px"]}
                 objectFit="cover"
               />
-              {/* Social icons row below avatar */}
-              <HStack spacing={[1, 1.5]} justify="center">
-                {heroSocialIcons.map((item) => (
-                  <Tooltip key={item.label} label={item.label} fontSize="xs" hasArrow placement="bottom" openDelay={200} fontFamily="mono">
-                    <Link href={item.href} isExternal _hover={{ textDecoration: 'none' }}>
-                      <Box
-                        p={1.5}
-                        cursor="pointer"
-                        color={useColorModeValue('gray.400', 'gray.500')}
-                        transition="all 0.2s"
-                        _hover={{ color: item.color, transform: 'scale(1.2)' }}
-                      >
-                        <DynamicIcon name={item.icon} boxSize={[3, 3.5]} />
-                      </Box>
-                    </Link>
-                  </Tooltip>
-                ))}
-              </HStack>
               {((siteConfig.pets ?? []) as { name: string; emoji: string; image: string }[]).length > 0 && (
                 <HStack spacing={[4, 5]} justify="center">
                   {((siteConfig.pets ?? []) as { name: string; emoji: string; image: string }[]).map((pet) => (

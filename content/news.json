@@ -5,9 +5,20 @@
     "icon": "FaGraduationCap",
     "iconColor": "cyan.400",
     "title": "Joining HKUST as a PhD student in Computer Science",
-    "description": "Will join The Hong Kong University of Science and Technology as a PhD student in Computer Science under the supervision of Professor Fangneng Zhan.",
+    "description": "Will join The Hong Kong University of Science and Technology as a PhD student in AMC and World Mind Lab under the supervision of Professor Fangneng Zhan and Professor Hongbo Fu.",
     "date": "2026",
     "sortDate": "2026-04-01",
+    "links": []
+  },
+  {
+    "type": "award",
+    "badge": "Award",
+    "icon": "FaMedal",
+    "iconColor": "green.400",
+    "title": "Received HKUST Postgraduate Studentship",
+    "description": "Awarded the HKUST Postgraduate Studentship upon joining the PhD program.",
+    "date": "2026",
+    "sortDate": "2026-03-01",
     "links": []
   },
   {

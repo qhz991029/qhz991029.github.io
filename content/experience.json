@@ -2,7 +2,7 @@
   "education": {
     "courses": [
       {
-        "course": "PhD in Computer Science",
+        "course": "PhD in AMC, World Mind Lab",
         "institution": "The Hong Kong University of Science and Technology",
         "year": "Sep 2026 -"
       },
@@ -19,6 +19,7 @@
     ]
   },
   "reviewing": [
+    { "venue": "ECCV 2026", "role": "Reviewer" },
     { "venue": "CVPR 2026", "role": "Reviewer" },
     { "venue": "CPAL 2026", "role": "Reviewer" },
     { "venue": "ICLR 2026", "role": "Reviewer" },
@@ -37,7 +38,7 @@
       "start": "2026-09-01",
       "category": "academic",
       "roleType": "research",
-      "summary": "PhD student in Computer Science advised by Professor Fangneng Zhan.",
+      "summary": "PhD student in AMC, World Mind Lab advised by Professor Fangneng Zhan and Professor Hongbo Fu.",
       "highlights": [
         "Research focus: multimodal LLMs, efficient foundation models, uncertainty quantification, 3D vision, and neural rendering.",
         "Building on prior work in vision-language grounding, multimodal model merging, and reliable LLM evaluation."
@@ -55,7 +56,7 @@
       "summary": "Worked with Professor Tianlong Chen on efficient and reliable machine learning, multimodal models, and LLM evaluation.",
       "highlights": [
         "Co-authored papers accepted to CVPR 2026, NeurIPS 2025, ACL Findings 2025, EMNLP 2025, and IEEE S&P 2026.",
-        "Led first-author work on MonoVLM, BetaConform, and UQ-Merge."
+        "Led work on MonoVLM, BetaConform, and UQ-Merge."
       ]
     },
     {

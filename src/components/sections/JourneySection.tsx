@@ -1,5 +1,6 @@
 import { Box, Container, VStack, HStack, Text, Heading, Flex, Link, useColorModeValue } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
+import { Link as RouterLink } from 'react-router-dom'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 
 /** Parse **bold** markers in text */
@@ -77,7 +78,7 @@ const JourneySection: React.FC = () => {
               <Box flexShrink={0} mt="6px">
                 <Box w="14px" h="14px" borderRadius="full" border="2px dashed" borderColor={dotBorder} />
               </Box>
-              <Link href="/experience" _hover={{ textDecoration: 'none' }}>
+            <Link as={RouterLink} to="/experience" _hover={{ textDecoration: 'none' }}>
                 <HStack spacing={2} color={textColor} fontSize="xs" fontFamily="mono" transition="all 0.15s" _hover={{ color: 'cyan.400' }} mt="3px">
                   <Text>{t('about.viewAllExperience')}</Text>
                   <Text>→</Text>

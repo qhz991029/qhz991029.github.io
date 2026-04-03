@@ -527,7 +527,7 @@ const PublicationsTerminal: React.FC = () => {
                       </Badge>
                       
                       {/* Special Badges */}
-                      {pub.specialBadges && pub.specialBadges.map((badge, i) => (
+                      {pub.specialBadges && pub.specialBadges.filter(badge => badge !== 'First Author').map((badge, i) => (
                         <Badge
                           key={i}
                           colorScheme={
@@ -535,7 +535,6 @@ const PublicationsTerminal: React.FC = () => {
                             badge === 'Oral' ? 'orange' :
                             badge === 'Spotlight' ? 'yellow' :
                             badge === 'Main Track' ? 'blue' :
-                            badge === 'First Author' ? 'green' :
                             badge === 'Corresponding' ? 'purple' :
                             badge === 'Demo' ? 'teal' :
                             badge === 'Co-First' ? 'cyan' :
@@ -558,10 +557,9 @@ const PublicationsTerminal: React.FC = () => {
                         return (
                           <Text as="span" key={i}>
                             {isOwner ? (
-                              <Text as="span" color={termSuccess} fontWeight="bold">
+                              <Text as="span" fontWeight="bold">
                                 {cleanAuthor}
                                 {hasAsterisk && <Text as="sup" color={termWarning}>*</Text>}
-                                {pub.isFirstAuthor && i === 0 && !hasAsterisk && " (1st)"}
                                 {pub.isCorrespondingAuthor && " (†)"}
                               </Text>
                             ) : (

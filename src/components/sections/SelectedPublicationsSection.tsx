@@ -3,6 +3,7 @@ import { Box, Container, VStack, HStack, Text, Heading, Flex, Link,
   useColorModeValue } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link as RouterLink } from 'react-router-dom'
 import { selectedPublicationIds } from '@/site.config'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 import DynamicIcon from '../DynamicIcon'
@@ -24,9 +25,12 @@ const PubLink = ({ href, icon, label }: { href: string; icon: string; label: str
 
 const PublicationCard = ({ pub }: { pub: any }) => {
   const { t } = useTranslation()
+  const { siteOwner } = useLocalizedData()
   const { isOpen: isAbstractOpen, onToggle: onToggleAbstract } = useDisclosure()
   const { isOpen: isImageOpen, onOpen: onImageOpen, onClose: onImageClose } = useDisclosure()
   const borderColor = useColorModeValue('gray.200', 'gray.700')
+  const authorVariants = new Set((siteOwner.name.authorVariants as string[]) ?? [])
+  const visibleBadges = (pub.specialBadges ?? []).filter((badge: string) => badge !== 'First Author')
 
   return (
     <Box p={[4, 5, 6]} bg={useColorModeValue('white', 'gray.800')} borderRadius="md" border="1px solid" borderColor={borderColor} transition="all 0.2s" _hover={{ borderColor: useColorModeValue('cyan.300', 'cyan.600') }}>
@@ -52,21 +56,27 @@ const PublicationCard = ({ pub }: { pub: any }) => {
           <VStack align="start" spacing={1.5} w="full">
             <Text fontSize="xs" color={useColorModeValue('gray.500', 'gray.400')} lineHeight="base" noOfLines={2}>
               {pub.authors.map((author: string, idx: number) => {
+                const isOwner = authorVariants.has(author.replace('*', ''))
                 const isHighlighted = pub.isCoFirst && pub.coFirstAuthors?.includes(author)
                 return (
-                  <Text as="span" key={idx} fontWeight={isHighlighted ? 'semibold' : 'normal'} color={isHighlighted ? useColorModeValue('gray.700', 'gray.200') : undefined}>
+                  <Text
+                    as="span"
+                    key={idx}
+                    fontWeight={isOwner || isHighlighted ? 'bold' : 'normal'}
+                    color={isHighlighted ? useColorModeValue('gray.700', 'gray.200') : undefined}
+                  >
                     {author}{isHighlighted && <Text as="sup" fontSize="2xs" color="cyan.400">*</Text>}{idx < pub.authors.length - 1 && ', '}
                   </Text>
                 )
               })}
             </Text>
-            {pub.specialBadges && pub.specialBadges.length > 0 && (
+            {visibleBadges.length > 0 && (
               <HStack spacing={1.5} flexWrap="wrap">
-                {pub.specialBadges.map((badge: string) => (
+                {visibleBadges.map((badge: string) => (
                   <Text key={badge} fontSize="2xs" fontFamily="mono" px={2} py={0.5} borderRadius="sm" border="1px solid"
-                    borderColor={badge === 'First Author' || badge === 'Co-First' ? useColorModeValue('cyan.200', 'cyan.700') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.200', 'orange.700') : useColorModeValue('gray.200', 'gray.600')}
-                    color={badge === 'First Author' || badge === 'Co-First' ? useColorModeValue('cyan.600', 'cyan.300') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.600', 'orange.300') : useColorModeValue('gray.500', 'gray.400')}
-                    bg={badge === 'First Author' || badge === 'Co-First' ? useColorModeValue('cyan.50', 'whiteAlpha.50') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.50', 'whiteAlpha.50') : 'transparent'}
+                    borderColor={badge === 'Co-First' ? useColorModeValue('cyan.200', 'cyan.700') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.200', 'orange.700') : useColorModeValue('gray.200', 'gray.600')}
+                    color={badge === 'Co-First' ? useColorModeValue('cyan.600', 'cyan.300') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.600', 'orange.300') : useColorModeValue('gray.500', 'gray.400')}
+                    bg={badge === 'Co-First' ? useColorModeValue('cyan.50', 'whiteAlpha.50') : badge === 'Oral' || badge === 'Spotlight' || badge === 'Best Paper' ? useColorModeValue('orange.50', 'whiteAlpha.50') : 'transparent'}
                   >{badge}</Text>
                 ))}
                 {pub.isCoFirst && <Text fontSize="2xs" color={useColorModeValue('gray.400', 'gray.500')} fontStyle="italic">{t('about.equalContribution')}</Text>}
@@ -146,7 +156,7 @@ const SelectedPublicationsSection: React.FC = () => {
             <PublicationCard key={pub.id} pub={pub} />
           ))}
           <Box textAlign="center" pt={2}>
-            <Link href="/publications" _hover={{ textDecoration: 'none' }}>
+            <Link as={RouterLink} to="/publications" _hover={{ textDecoration: 'none' }}>
               <HStack spacing={2} justify="center" color={useColorModeValue('gray.500', 'gray.400')} fontSize="sm" fontFamily="mono" transition="all 0.15s" _hover={{ color: 'cyan.400' }}>
                 <Text>{t('about.viewAllPublications')}</Text>
                 <Text>→</Text>
