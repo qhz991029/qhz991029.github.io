@@ -14,12 +14,12 @@ const PublicationCard = ({ pub }: { pub: any }) => {
   const { siteOwner } = useLocalizedData()
   const { isOpen: isAbstractOpen, onToggle: onToggleAbstract } = useDisclosure()
   const { isOpen: isImageOpen, onOpen: onImageOpen, onClose: onImageClose } = useDisclosure()
-  const borderColor = useColorModeValue('gray.200', 'gray.700')
+  const borderColor = 'var(--border-color)'
   const authorVariants = new Set((siteOwner.name.authorVariants as string[]) ?? [])
 
 
   return (
-    <Box p={[4, 5, 6]} bg="var(--card-bg)" borderRadius="md" border="1px solid" borderColor={borderColor} transition="all 0.2s" _hover={{ borderColor: useColorModeValue('cyan.300', 'cyan.600') }}>
+    <Box p={[4, 5, 6]} bg="var(--card-bg)" borderRadius="md" border="1px solid" borderColor={borderColor} transition="all 0.2s" _hover={{ borderColor: 'cyan.400' }}>
       <Flex direction={["column", "column", "row"]} gap={[4, 4, 6]} align="stretch">
         {pub.featuredImage && (
           <Box flexShrink={0} w={["full", "full", "300px"]} minH={["200px", "220px", "auto"]}
@@ -39,13 +39,13 @@ const PublicationCard = ({ pub }: { pub: any }) => {
           </HStack>
           {(pub.links.arxiv || pub.links.paper || pub.links.projectPage) ? (
                     <Link href={pub.links.arxiv || pub.links.paper || pub.links.projectPage} isExternal _hover={{ textDecoration: 'underline' }}>
-                      <Heading size="sm" lineHeight="tall" fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')}>{pub.title}</Heading>
+                      <Heading size="sm" lineHeight="tall" fontWeight="semibold" color={'var(--heading-color)'}>{pub.title}</Heading>
                     </Link>
                   ) : (
-                    <Heading size="sm" lineHeight="tall" fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')}>{pub.title}</Heading>
+                    <Heading size="sm" lineHeight="tall" fontWeight="semibold" color={'var(--heading-color)'}>{pub.title}</Heading>
                   )}
           <VStack align="start" spacing={1.5} w="full">
-            <Text fontSize="xs" color={useColorModeValue('gray.500', 'gray.400')} lineHeight="base" noOfLines={2}>
+            <Text fontSize="xs" color={'var(--secondary-text)'} lineHeight="base" noOfLines={2}>
               {pub.authors.map((author: string, idx: number) => {
                 const isOwner = authorVariants.has(author.replace('*', ''))
                 const isCoFirst = pub.isCoFirst && pub.coFirstAuthors?.includes(author)
@@ -61,12 +61,12 @@ const PublicationCard = ({ pub }: { pub: any }) => {
               })}
             </Text>
           </VStack>
-          <Box w="full" h="1px" bg={useColorModeValue('gray.100', 'gray.700')} />
+          <Box w="full" h="1px" bg={'var(--divider-color)'} />
           <HStack spacing={1.5} flexWrap="wrap">
             {pub.abstract && (
               <HStack as="button" spacing={1.5} px={2.5} py={1} borderRadius="sm" border="1px solid"
                 borderColor={isAbstractOpen ? useColorModeValue('cyan.300', 'cyan.600') : borderColor}
-                color={isAbstractOpen ? 'cyan.400' : useColorModeValue('gray.600', 'gray.400')}
+                color={isAbstractOpen ? 'cyan.400' : 'var(--secondary-text)'}
                 fontSize="xs" fontFamily="mono" transition="all 0.15s" _hover={{ borderColor: 'cyan.400', color: 'cyan.400' }}
                 onClick={onToggleAbstract}
               >
@@ -77,7 +77,7 @@ const PublicationCard = ({ pub }: { pub: any }) => {
             {pub.links.code && (
               <Link href={pub.links.code} isExternal _hover={{ textDecoration: 'none' }}>
                 <HStack spacing={1.5} px={2.5} py={1} borderRadius="sm" border="1px solid" borderColor={borderColor}
-                  color={useColorModeValue('gray.600', 'gray.400')} fontSize="xs" fontFamily="mono" transition="all 0.15s" _hover={{ borderColor: 'cyan.400', color: 'cyan.400' }}>
+                  color={'var(--secondary-text)'} fontSize="xs" fontFamily="mono" transition="all 0.15s" _hover={{ borderColor: 'cyan.400', color: 'cyan.400' }}>
                   <DynamicIcon name="FaGithub" boxSize={2.5} />
                   <Text>Code</Text>
                 </HStack>
@@ -89,11 +89,11 @@ const PublicationCard = ({ pub }: { pub: any }) => {
       {pub.abstract && (
         <Collapse in={isAbstractOpen} animateOpacity>
           <Box mt={4} p={4} bg="var(--header-bg)" borderRadius="md" borderLeft="2px solid" borderLeftColor="cyan.400">
-            <Text fontSize={["xs", "sm"]} lineHeight="tall" color={useColorModeValue('gray.600', 'gray.400')}>{pub.abstract}</Text>
+            <Text fontSize={["xs", "sm"]} lineHeight="tall" color={'var(--secondary-text)'}>{pub.abstract}</Text>
             {pub.keywords && (
               <HStack mt={3} spacing={1.5} flexWrap="wrap">
                 {pub.keywords.map((keyword: string) => (
-                  <Text key={keyword} fontSize="2xs" fontFamily="mono" color={useColorModeValue('gray.500', 'gray.500')} px={1.5} py={0.5} bg="var(--hover-color)" borderRadius="sm">{keyword}</Text>
+                  <Text key={keyword} fontSize="2xs" fontFamily="mono" color={'var(--secondary-text)'} px={1.5} py={0.5} bg="var(--hover-color)" borderRadius="sm">{keyword}</Text>
                 ))}
               </HStack>
             )}
@@ -103,7 +103,7 @@ const PublicationCard = ({ pub }: { pub: any }) => {
       <Modal isOpen={isImageOpen} onClose={onImageClose} size="4xl" isCentered>
         <ModalOverlay />
         <ModalContent bg="transparent" boxShadow="none">
-          <ModalCloseButton color={useColorModeValue('gray.700', 'gray.200')} />
+          <ModalCloseButton color={'var(--text-color)'} />
           <ModalBody p={0} display="flex" alignItems="center" justifyContent="center">
             <Image src={pub.featuredImage} alt={`${pub.title} large preview`} maxH="80vh" maxW="90vw" objectFit="contain" borderRadius="lg" bg="var(--card-bg)" p={4} />
           </ModalBody>
@@ -130,7 +130,7 @@ const SelectedPublicationsSection: React.FC = () => {
         <Flex align="center" gap={3} mb={[3, 4]}>
           <Box h="2px" w="20px" bg="cyan.400" borderRadius="full" flexShrink={0} />
           <Heading size="md" fontWeight="semibold">{t('about.selectedPublications')}</Heading>
-          <Box flex="1" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
+          <Box flex="1" h="1px" bg="var(--border-color)" />
         </Flex>
         <VStack spacing={[4, 5, 6]} align="stretch">
           {selectedPubs.map((pub) => (
@@ -138,7 +138,7 @@ const SelectedPublicationsSection: React.FC = () => {
           ))}
           <Box textAlign="center" pt={2}>
             <Link as={RouterLink} to="/publications" _hover={{ textDecoration: 'none' }}>
-              <HStack spacing={2} justify="center" color={useColorModeValue('gray.500', 'gray.400')} fontSize="sm" fontFamily="mono" transition="all 0.15s" _hover={{ color: 'cyan.400' }}>
+              <HStack spacing={2} justify="center" color={'var(--secondary-text)'} fontSize="sm" fontFamily="mono" transition="all 0.15s" _hover={{ color: 'cyan.400' }}>
                 <Text>{t('about.viewAllPublications')}</Text>
                 <Text>→</Text>
               </HStack>

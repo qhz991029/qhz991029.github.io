@@ -11,8 +11,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const Navbar = useSlot('navbar')
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', colorMode)
-    document.documentElement.style.colorScheme = colorMode
+    const root = document.documentElement
+    root.setAttribute('data-theme', colorMode)
+    root.style.colorScheme = colorMode
+    root.className = colorMode === 'dark' ? 'chakra-ui-dark' : 'chakra-ui-light'
   }, [colorMode])
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, SimpleGrid, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 const MotionBox = motion(Box)
@@ -9,8 +9,8 @@ interface ResearchInterestsProps {
 }
 
 const ResearchInterests: React.FC<ResearchInterestsProps> = ({ interests }) => {
-  const textColor = useColorModeValue('gray.600', 'gray.400')
-  const bg = useColorModeValue('white', 'gray.800')
+  const textColor = 'var(--secondary-text)'
+  const bg = 'var(--card-bg)'
 
   return (
     <SimpleGrid 

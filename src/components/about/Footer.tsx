@@ -1,13 +1,13 @@
 import React from 'react'
-import { Box, Container, VStack, HStack, Text, Link, Image, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, VStack, HStack, Text, Link, Image } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 
 const Footer: React.FC = () => {
   const { t } = useTranslation()
   const { siteOwner } = useLocalizedData()
-  const footerBg = useColorModeValue('gray.50', 'gray.900')
-  const textColor = useColorModeValue('gray.600', 'gray.400')
+  const footerBg = 'var(--bg-color)'
+  const textColor = 'var(--secondary-text)'
 
   return (
     <Box
@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
       py={[6, 8]}
       mt={[6, 8]}
       borderTop="1px"
-      borderColor={useColorModeValue('gray.200', 'gray.700')}
+      borderColor="var(--border-color)"
     >
       <Container maxW="7xl" px={[4, 6, 8]}>
         <VStack spacing={[3, 4]} textAlign="center">

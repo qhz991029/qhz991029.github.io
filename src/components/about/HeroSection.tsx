@@ -1,4 +1,4 @@
-import { Box, VStack, Text, useColorModeValue, Image, HStack, Container, Link, Flex } from '@chakra-ui/react'
+import { Box, VStack, Text, Image, HStack, Container, Link, Flex } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { withBase } from '@/utils/asset'
 import DynamicIcon from '../DynamicIcon'
@@ -28,10 +28,10 @@ const BioLink = ({ href, children }: { href: string; children: React.ReactNode }
 const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: HeroSectionProps) => {
   const { t } = useTranslation()
   const { siteOwner } = useLocalizedData()
-  const headingColor = useColorModeValue('gray.800', 'white')
-  const textColor = useColorModeValue('gray.600', 'gray.400')
+  const headingColor = 'var(--heading-color)'
+  const textColor = 'var(--secondary-text)'
   const bg = 'var(--bg-color)'
-  const accentBg = useColorModeValue('blue.50', 'blue.900')
+  const accentBg = 'var(--accent-bg)'
   const primaryEmail = siteOwner.contact.academicEmail || siteOwner.contact.email
   const contactLinks = [
     primaryEmail && { icon: 'FaEnvelope', label: 'email', href: `mailto:${primaryEmail}` },
@@ -115,7 +115,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
               </MotionText>
             </MotionText>
 
-            <Box w="full" borderTop="1px dashed" borderColor={useColorModeValue('gray.200', 'gray.700')} />
+            <Box w="full" borderTop="1px dashed" borderColor="var(--border-color)" />
 
             {/* Avatar | Bio | Education — three columns on desktop */}
             {education.length > 0 && (
@@ -189,7 +189,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
               </Flex>
             )}
 
-            <Box w="full" borderTop="1px dashed" borderColor={useColorModeValue('gray.200', 'gray.700')} />
+            <Box w="full" borderTop="1px dashed" borderColor="var(--border-color)" />
 
             {/* Contact */}
             <Flex w="full" justify="flex-start">

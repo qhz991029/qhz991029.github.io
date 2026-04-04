@@ -1,12 +1,12 @@
-import { Box, Container, VStack, Text, Heading, Flex, Link, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, VStack, Text, Heading, Flex, Link } from '@chakra-ui/react'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 
 const MentorshipSection: React.FC = () => {
   const { about } = useLocalizedData()
-  const textColor = useColorModeValue('gray.500', 'gray.400')
-  const nameColor = useColorModeValue('gray.700', 'gray.200')
-  const lineColor = useColorModeValue('gray.200', 'gray.700')
-  const borderColor = useColorModeValue('gray.100', 'gray.800')
+  const textColor = 'var(--secondary-text)'
+  const nameColor = 'var(--text-color)'
+  const lineColor = 'var(--border-color)'
+  const borderColor = 'var(--tag-bg)'
 
   if (!about.mentorship) return null
 

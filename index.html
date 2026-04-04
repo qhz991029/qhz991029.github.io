@@ -22,8 +22,42 @@
       })();
     </script>
     <style>
-      html, body, #root { background: #f8f9fa; color: #212529; }
-      html.chakra-ui-dark, html.chakra-ui-dark body, html.chakra-ui-dark #root { background: #0d1117; color: #c9d1d9; }
+      :root {
+        --bg-color: #f8f9fa;
+        --text-color: #212529;
+        --heading-color: #212529;
+        --secondary-text: #6c757d;
+        --muted-color: #adb5bd;
+        --accent-color: #3a86ff;
+        --accent-light: rgba(58, 134, 255, 0.1);
+        --accent-bg: #ebf5ff;
+        --border-color: #dee2e6;
+        --divider-color: #e9ecef;
+        --card-bg: #ffffff;
+        --header-bg: #f1f3f5;
+        --hover-color: #e9ecef;
+        --tag-bg: #e9ecef;
+      }
+      .chakra-ui-dark, [data-theme='dark'] {
+        --bg-color: #0d1117;
+        --text-color: #c9d1d9;
+        --heading-color: #e6edf3;
+        --secondary-text: #8b949e;
+        --muted-color: #6e7681;
+        --accent-color: #58a6ff;
+        --accent-light: rgba(88,166,255,0.15);
+        --accent-bg: #0c2d6b;
+        --border-color: #30363d;
+        --divider-color: #21262d;
+        --card-bg: #161b22;
+        --header-bg: #161b22;
+        --hover-color: #21262d;
+        --tag-bg: #161b22;
+      }
+      html, body, #root {
+        background: var(--bg-color);
+        color: var(--text-color);
+      }
     </style>
   </head>
   <body>

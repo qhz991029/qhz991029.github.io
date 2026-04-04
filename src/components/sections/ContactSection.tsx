@@ -1,4 +1,4 @@
-import { Box, Container, VStack, HStack, Text, Heading, Flex, Link, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, VStack, HStack, Text, Heading, Flex, Link } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 import DynamicIcon from '../DynamicIcon'
@@ -6,8 +6,8 @@ import DynamicIcon from '../DynamicIcon'
 const ContactSection: React.FC = () => {
   const { t } = useTranslation()
   const { siteOwner } = useLocalizedData()
-  const textColor = useColorModeValue('gray.600', 'gray.400')
-  const linkColor = useColorModeValue('gray.700', 'gray.200')
+  const textColor = 'var(--secondary-text)'
+  const linkColor = 'var(--text-color)'
   const academicEmail = siteOwner.contact.academicEmail && siteOwner.contact.academicEmail !== siteOwner.contact.email
     ? siteOwner.contact.academicEmail
     : ''
@@ -30,7 +30,7 @@ const ContactSection: React.FC = () => {
         <Flex align="center" gap={3} mb={4}>
           <Box h="2px" w="20px" bg="cyan.400" borderRadius="full" flexShrink={0} />
           <Heading size="md" fontWeight="semibold">{t('about.contact', 'Contact')}</Heading>
-          <Box flex="1" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
+          <Box flex="1" h="1px" bg="var(--border-color)" />
         </Flex>
         <VStack spacing={2} align="stretch">
           {items.map((item) => (

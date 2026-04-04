@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import {
   Box, Collapse, Flex, HStack, Icon, Input, Link, Text, VStack,
-  Image, useColorMode, useColorModeValue,
+  Image, useColorMode,
   Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -345,7 +345,7 @@ const Projects: React.FC = () => {
   const promptPath = activeTab === 'all' ? '~' : `~/${activeTab}`
 
   return (
-    <Box w="full" minH="100vh" bg={useColorModeValue('gray.50', 'gray.900')} py={8}>
+    <Box w="full" minH="100vh" bg="var(--bg-color)" py={8}>
       <VStack maxW="1400px" mx="auto" spacing={4} px={[2, 4, 8]}>
         <Box
           w="full" borderRadius="md" fontFamily="mono" overflow="hidden"

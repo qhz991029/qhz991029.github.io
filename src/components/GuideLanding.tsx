@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Box, Container, Flex, Grid, GridItem, HStack, Heading, Icon, Image,
-  SimpleGrid, Text, VStack, useColorMode, useColorModeValue,
+  SimpleGrid, Text, VStack, useColorMode,
 } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
 import {
@@ -31,9 +31,9 @@ const StepCard: React.FC<{
   const { isDark, tc } = useTC()
   return (
     <VStack
-      bg={useColorModeValue('white', 'gray.800')}
+      bg={'var(--card-bg)'}
       border="1px solid"
-      borderColor={useColorModeValue('gray.200', 'gray.700')}
+      borderColor={'var(--border-color)'}
       borderRadius="lg"
       p={[5, 6]}
       spacing={4}
@@ -51,10 +51,10 @@ const StepCard: React.FC<{
         <Icon as={icon} color={color} boxSize={4} />
       </HStack>
       <Box>
-        <Text fontWeight="bold" fontSize="sm" color={useColorModeValue('gray.800', 'gray.100')} mb={1}>
+        <Text fontWeight="bold" fontSize="sm" color={'var(--heading-color)'} mb={1}>
           {title}
         </Text>
-        <Text fontSize="xs" color={useColorModeValue('gray.500', 'gray.400')} lineHeight="1.7">
+        <Text fontSize="xs" color={'var(--secondary-text)'} lineHeight="1.7">
           {desc}
         </Text>
       </Box>
@@ -84,9 +84,9 @@ const FeatureCard: React.FC<{
   const { isDark } = useTC()
   return (
     <HStack
-      bg={useColorModeValue('white', 'gray.800')}
+      bg={'var(--card-bg)'}
       border="1px solid"
-      borderColor={useColorModeValue('gray.200', 'gray.700')}
+      borderColor={'var(--border-color)'}
       borderRadius="lg"
       p={4}
       spacing={4}
@@ -102,10 +102,10 @@ const FeatureCard: React.FC<{
         <Icon as={icon} color={accent} boxSize={4} />
       </Flex>
       <Box>
-        <Text fontWeight="semibold" fontSize="sm" color={useColorModeValue('gray.800', 'gray.100')} mb={0.5}>
+        <Text fontWeight="semibold" fontSize="sm" color={'var(--heading-color)'} mb={0.5}>
           {title}
         </Text>
-        <Text fontSize="xs" color={useColorModeValue('gray.500', 'gray.400')} lineHeight="1.6">
+        <Text fontSize="xs" color={'var(--secondary-text)'} lineHeight="1.6">
           {desc}
         </Text>
       </Box>
@@ -151,11 +151,11 @@ const SectionHead: React.FC<{ label: string; title: string; desc?: string; color
       </Text>
       <Box h="2px" w="16px" bg={color} borderRadius="full" />
     </Flex>
-    <Heading as="h2" fontSize={['lg', 'xl']} fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')}>
+    <Heading as="h2" fontSize={['lg', 'xl']} fontWeight="semibold" color={'var(--heading-color)'}>
       {title}
     </Heading>
     {desc && (
-      <Text fontSize="sm" color={useColorModeValue('gray.500', 'gray.400')} maxW="500px">
+      <Text fontSize="sm" color={'var(--secondary-text)'} maxW="500px">
         {desc}
       </Text>
     )}
@@ -180,10 +180,10 @@ const GuideLanding: React.FC = () => {
     hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit',
   })
 
-  const borderColor = useColorModeValue('gray.200', 'gray.700')
-  const pageBg = useColorModeValue('gray.50', 'gray.900')
-  const cardBg = useColorModeValue('white', 'gray.800')
-  const subtitleColor = useColorModeValue('gray.500', 'gray.400')
+  const borderColor = 'var(--border-color)'
+  const pageBg = 'var(--bg-color)'
+  const cardBg = 'var(--card-bg)'
+  const subtitleColor = 'var(--secondary-text)'
 
   return (
     <Box w="full" minH="100vh" bg={pageBg}>
@@ -212,7 +212,7 @@ const GuideLanding: React.FC = () => {
             as="h1"
             fontSize={['xl', '2xl', '3xl']}
             fontWeight="bold"
-            color={useColorModeValue('gray.800', 'gray.50')}
+            color={'var(--heading-color)'}
             mb={3}
             lineHeight="1.3"
           >
@@ -340,7 +340,7 @@ const GuideLanding: React.FC = () => {
               fontSize="sm"
               align="center"
               gap={2}
-              _hover={{ borderColor: tc.secondary, color: useColorModeValue('gray.700', 'gray.200') }}
+              _hover={{ borderColor: tc.secondary, color: 'var(--text-color)' }}
               transition="all 0.2s"
             >
               <Icon as={FaGithub} boxSize={3.5} />
@@ -501,7 +501,7 @@ const GuideLanding: React.FC = () => {
                 AI-Powered
               </Text>
             </Flex>
-            <Heading as="h2" fontSize={['lg', 'xl']} fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')}>
+            <Heading as="h2" fontSize={['lg', 'xl']} fontWeight="semibold" color={'var(--heading-color)'}>
               Supports MCP — CV to Homepage, Fully Automated
             </Heading>
             <Text fontSize="sm" color={subtitleColor} maxW="600px">
@@ -573,7 +573,7 @@ const GuideLanding: React.FC = () => {
                       <Icon as={item.icon} color={item.color} boxSize={4} />
                     </Flex>
                     <Box>
-                      <Text fontWeight="semibold" fontSize="sm" color={useColorModeValue('gray.800', 'gray.100')} mb={0.5}>{item.title}</Text>
+                      <Text fontWeight="semibold" fontSize="sm" color={'var(--heading-color)'} mb={0.5}>{item.title}</Text>
                       <Text fontSize="xs" color={subtitleColor} lineHeight="1.6">{item.desc}</Text>
                     </Box>
                   </HStack>
@@ -596,7 +596,7 @@ const GuideLanding: React.FC = () => {
           >
             <HStack spacing={2}>
               <Text fontSize="xs" color="#88c0d0" fontWeight="bold" fontFamily="mono" flexShrink={0}>MCP</Text>
-              <Text fontSize="xs" color={useColorModeValue('gray.600', 'gray.300')} lineHeight="1.7">
+              <Text fontSize="xs" color={'var(--secondary-text)'} lineHeight="1.7">
                 Setup: <Text as="span" fontFamily="mono" color={tc.command}>cd mcp-server && npm install</Text> — then configure Claude Desktop or Code.
               </Text>
             </HStack>
@@ -682,7 +682,7 @@ const GuideLanding: React.FC = () => {
             gap={3}
           >
             <Text fontSize="xs" color={tc.success} fontWeight="bold" fontFamily="mono" flexShrink={0}>REQ</Text>
-            <Text fontSize="xs" color={useColorModeValue('gray.600', 'gray.300')} lineHeight="1.7">
+            <Text fontSize="xs" color={'var(--secondary-text)'} lineHeight="1.7">
               <Text as="span" fontWeight="bold">Node.js v18+</Text>
               {' '}— download from nodejs.org (choose LTS). That's it!
             </Text>
@@ -702,7 +702,7 @@ const GuideLanding: React.FC = () => {
           >
             <HStack spacing={2} flex={1}>
               <Text fontSize="xs" color={tc.command} fontWeight="bold" fontFamily="mono" flexShrink={0}>TIP</Text>
-              <Text fontSize="xs" color={useColorModeValue('gray.600', 'gray.300')} lineHeight="1.7">
+              <Text fontSize="xs" color={'var(--secondary-text)'} lineHeight="1.7">
                 <Text as="span" fontWeight="bold">Don&apos;t want to set up a dev environment?</Text>
                 {' '}We also offer a hosted solution — just upload your resume and get a live portfolio. No Git, no terminal, no coding required.
               </Text>
@@ -796,7 +796,7 @@ const GuideLanding: React.FC = () => {
               <Box bg={cardBg} border="1px solid" borderColor={borderColor} borderRadius="lg" p={5}>
                 <HStack mb={3} spacing={2}>
                   <Box h="2px" w="12px" bg="#5e81ac" borderRadius="full" />
-                  <Text fontWeight="bold" fontSize="sm" color={useColorModeValue('gray.700', 'gray.200')}>
+                  <Text fontWeight="bold" fontSize="sm" color={'var(--text-color)'}>
                     Markdown (.md)
                   </Text>
                   <Text fontSize="2xs" color={subtitleColor}>projects, papers, articles</Text>
@@ -813,7 +813,7 @@ const GuideLanding: React.FC = () => {
               <Box bg={cardBg} border="1px solid" borderColor={borderColor} borderRadius="lg" p={5}>
                 <HStack mb={3} spacing={2}>
                   <Box h="2px" w="12px" bg="#a3be8c" borderRadius="full" />
-                  <Text fontWeight="bold" fontSize="sm" color={useColorModeValue('gray.700', 'gray.200')}>
+                  <Text fontWeight="bold" fontSize="sm" color={'var(--text-color)'}>
                     JSON (.json)
                   </Text>
                   <Text fontSize="2xs" color={subtitleColor}>config, experience, news</Text>
@@ -904,7 +904,7 @@ const GuideLanding: React.FC = () => {
                 >
                   <Icon as={p.icon} color={p.color} boxSize={3.5} />
                   <Box>
-                    <Text fontSize="xs" fontWeight="bold" color={useColorModeValue('gray.700', 'gray.200')}>{p.label}</Text>
+                    <Text fontSize="xs" fontWeight="bold" color={'var(--text-color)'}>{p.label}</Text>
                     <Text fontSize="2xs" color={subtitleColor}>{p.features}</Text>
                   </Box>
                 </HStack>
@@ -965,7 +965,7 @@ const GuideLanding: React.FC = () => {
               <HStack spacing={3}>
                 <Icon as={item.icon} color={item.color} boxSize={4} />
                 <Box>
-                  <Text fontWeight="semibold" fontSize="sm" color={useColorModeValue('gray.700', 'gray.200')}>
+                  <Text fontWeight="semibold" fontSize="sm" color={'var(--text-color)'}>
                     {item.title}
                   </Text>
                   <Text fontSize="xs" color={subtitleColor}>{item.desc}</Text>
@@ -1004,7 +1004,7 @@ const GuideLanding: React.FC = () => {
               transition="all 0.2s"
             >
               <Icon as={FaStar} color={tc.highlight} boxSize={5} />
-              <Text fontSize="sm" fontWeight="bold" color={useColorModeValue('gray.700', 'gray.200')}>Star</Text>
+              <Text fontSize="sm" fontWeight="bold" color={'var(--text-color)'}>Star</Text>
               <Text fontSize="2xs" color={subtitleColor}>Show your support</Text>
             </Flex>
 
@@ -1024,7 +1024,7 @@ const GuideLanding: React.FC = () => {
               transition="all 0.2s"
             >
               <Icon as={FaCodeBranch} color={tc.success} boxSize={5} />
-              <Text fontSize="sm" fontWeight="bold" color={useColorModeValue('gray.700', 'gray.200')}>Fork</Text>
+              <Text fontSize="sm" fontWeight="bold" color={'var(--text-color)'}>Fork</Text>
               <Text fontSize="2xs" color={subtitleColor}>Create your own</Text>
             </Flex>
 
@@ -1044,7 +1044,7 @@ const GuideLanding: React.FC = () => {
               transition="all 0.2s"
             >
               <Icon as={FaGithub} color={tc.command} boxSize={5} />
-              <Text fontSize="sm" fontWeight="bold" color={useColorModeValue('gray.700', 'gray.200')}>Issues</Text>
+              <Text fontSize="sm" fontWeight="bold" color={'var(--text-color)'}>Issues</Text>
               <Text fontSize="2xs" color={subtitleColor}>Report bugs & ideas</Text>
             </Flex>
 
@@ -1064,7 +1064,7 @@ const GuideLanding: React.FC = () => {
               transition="all 0.2s"
             >
               <Icon as={FaHeart} color={tc.param} boxSize={5} />
-              <Text fontSize="sm" fontWeight="bold" color={useColorModeValue('gray.700', 'gray.200')}>Contribute</Text>
+              <Text fontSize="sm" fontWeight="bold" color={'var(--text-color)'}>Contribute</Text>
               <Text fontSize="2xs" color={subtitleColor}>Pull requests welcome</Text>
             </Flex>
 
@@ -1084,7 +1084,7 @@ const GuideLanding: React.FC = () => {
               transition="all 0.2s"
             >
               <Icon as={FaDiscord} color="#7289da" boxSize={5} />
-              <Text fontSize="sm" fontWeight="bold" color={useColorModeValue('gray.700', 'gray.200')}>Discord</Text>
+              <Text fontSize="sm" fontWeight="bold" color={'var(--text-color)'}>Discord</Text>
               <Text fontSize="2xs" color={subtitleColor}>Join the community</Text>
             </Flex>
           </SimpleGrid>
@@ -1111,7 +1111,7 @@ const GuideLanding: React.FC = () => {
 
       {/* ═══════════ CTA ═══════════ */}
       <Container maxW="4xl" py={[10, 14]} textAlign="center">
-        <Heading as="h2" fontSize={['lg', 'xl']} fontWeight="semibold" color={useColorModeValue('gray.800', 'gray.100')} mb={3}>
+        <Heading as="h2" fontSize={['lg', 'xl']} fontWeight="semibold" color={'var(--heading-color)'} mb={3}>
           Ready to Build Your Portfolio?
         </Heading>
         <Text fontSize="sm" color={subtitleColor} maxW="420px" mx="auto" mb={6}>
@@ -1171,7 +1171,7 @@ const GuideLanding: React.FC = () => {
           align="center"
           gap={3}
         >
-          <Text fontSize="sm" color={useColorModeValue('gray.600', 'gray.300')} textAlign="center" lineHeight="1.7">
+          <Text fontSize="sm" color={'var(--secondary-text)'} textAlign="center" lineHeight="1.7">
             <Text as="span" fontWeight="bold" color={tc.command}>Don&apos;t want to touch code?</Text>
             {' '}We also offer a hosted solution — upload your resume, and we build your portfolio for you. No Git, no terminal, no setup.
           </Text>
@@ -1209,7 +1209,7 @@ const GuideLanding: React.FC = () => {
 const HideGuideHint: React.FC = () => {
   const [open, setOpen] = React.useState(false)
   const { isDark, tc } = useTC()
-  const subtitleColor = useColorModeValue('gray.500', 'gray.400')
+  const subtitleColor = 'var(--secondary-text)'
 
   return (
     <VStack spacing={0} mt={8}>

@@ -18,7 +18,7 @@ const SocialButton: React.FC<SocialButtonProps> = ({
   hoverBg = 'gray.100',
   shadowColor = 'gray.500'
 }) => {
-  const borderColor = useColorModeValue('gray.300', 'gray.600')
+  const borderColor = 'var(--muted-color)'
   const hoverBorderColor = useColorModeValue('cyan.400', 'cyan.300')
 
   return (

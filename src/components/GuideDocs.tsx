@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Box, Collapse, Container, Flex, Grid, GridItem, Heading, HStack, Icon, Image,
-  Text, VStack, useColorMode, useColorModeValue, Badge,
+  Text, VStack, useColorMode, Badge,
 } from '@chakra-ui/react'
 import {
   FaRocket, FaFolderOpen, FaCog, FaToggleOn, FaFileAlt,
@@ -638,12 +638,12 @@ const GuideDocs: React.FC = () => {
   const [expandedCode, setExpandedCode] = useState<Record<string, boolean>>({})
 
   const tc = terminalPalette.colors(isDark)
-  const cardBg = useColorModeValue('white', 'gray.800')
-  const borderColor = useColorModeValue('gray.200', 'gray.700')
-  const subtitleColor = useColorModeValue('gray.500', 'gray.400')
-  const pageBg = useColorModeValue('gray.50', 'gray.900')
-  const mutedText = useColorModeValue('gray.600', 'gray.300')
-  const headingColor = useColorModeValue('gray.800', 'gray.50')
+  const cardBg = 'var(--card-bg)'
+  const borderColor = 'var(--border-color)'
+  const subtitleColor = 'var(--secondary-text)'
+  const pageBg = 'var(--bg-color)'
+  const mutedText = 'var(--secondary-text)'
+  const headingColor = 'var(--heading-color)'
 
   /* Scroll to hash section on mount (from landing page links) */
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Box, Container, Text, Heading, Flex, Link, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, Text, Heading, Flex, Link } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 
@@ -17,7 +17,7 @@ const renderLinkedText = (text: string) => {
 const BioSection: React.FC = () => {
   const { t } = useTranslation()
   const { about } = useLocalizedData()
-  const textColor = useColorModeValue('gray.600', 'gray.400')
+  const textColor = 'var(--secondary-text)'
 
   if (!about.journey) return null
 
@@ -27,7 +27,7 @@ const BioSection: React.FC = () => {
         <Flex align="center" gap={3} mb={4}>
           <Box h="2px" w="20px" bg="cyan.400" borderRadius="full" flexShrink={0} />
           <Heading size="md" fontWeight="semibold">{t('about.bio', 'About')}</Heading>
-          <Box flex="1" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
+          <Box flex="1" h="1px" bg="var(--border-color)" />
         </Flex>
         <Text fontSize="sm" lineHeight="tall" color={textColor}>
           {renderLinkedText(about.journey)}

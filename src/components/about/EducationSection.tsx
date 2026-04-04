@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, HStack, VStack, SimpleGrid, Heading, Text, Image, useColorModeValue } from '@chakra-ui/react'
+import { Box, HStack, VStack, SimpleGrid, Heading, Text, Image } from '@chakra-ui/react'
 
 interface Course {
   course: string
@@ -13,9 +13,9 @@ interface EducationSectionProps {
 }
 
 const EducationSection: React.FC<EducationSectionProps> = ({ courses, logos = {} }) => {
-  const textColor = useColorModeValue('gray.600', 'gray.400')
-  const bg = useColorModeValue('white', 'gray.800')
-  const accentBg = useColorModeValue('blue.50', 'blue.900')
+  const textColor = 'var(--secondary-text)'
+  const bg = 'var(--card-bg)'
+  const accentBg = 'var(--accent-bg)'
 
   return (
     <SimpleGrid columns={[1, 1, 2]} spacing={[3, 3, 4]} w="full">

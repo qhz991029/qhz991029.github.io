@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Flex, HStack, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, Heading, Flex, HStack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 import DynamicIcon from '../DynamicIcon'
@@ -9,9 +9,9 @@ const SkillsSection: React.FC = () => {
   const { t } = useTranslation()
   const { siteOwner } = useLocalizedData()
   const skills = (siteOwner.skills ?? []) as SkillItem[]
-  const tagBg = useColorModeValue('gray.100', 'gray.800')
-  const tagColor = useColorModeValue('gray.700', 'gray.300')
-  const iconColor = useColorModeValue('gray.500', 'gray.400')
+  const tagBg = 'var(--tag-bg)'
+  const tagColor = 'var(--text-color)'
+  const iconColor = 'var(--secondary-text)'
 
   if (skills.length === 0) return null
 
@@ -24,7 +24,7 @@ const SkillsSection: React.FC = () => {
         <Flex align="center" gap={3} mb={4}>
           <Box h="2px" w="20px" bg="cyan.400" borderRadius="full" flexShrink={0} />
           <Heading size="md" fontWeight="semibold">{t('about.skills', 'Skills')}</Heading>
-          <Box flex="1" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
+          <Box flex="1" h="1px" bg="var(--border-color)" />
         </Flex>
         <HStack spacing={2} flexWrap="wrap">
           {skills.map((skill) => (

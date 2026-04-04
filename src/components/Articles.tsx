@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import {
   Box, Collapse, Flex, HStack, Icon, Input, Link, Select, Text, VStack,
-  useColorMode, useColorModeValue,
+  useColorMode,
 } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
 import { IconType } from 'react-icons'
@@ -138,7 +138,7 @@ const Articles: React.FC = () => {
   const promptPath = selectedCategory === 'all' ? '~' : `~/${selectedCategory}`
 
   return (
-    <Box w="full" minH="100vh" bg={useColorModeValue('gray.50', 'gray.900')} py={8}>
+    <Box w="full" minH="100vh" bg="var(--bg-color)" py={8}>
       <VStack spacing={6} maxW="1400px" mx="auto" px={[2, 4, 6]}>
         <Box
           w="full"

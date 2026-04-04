@@ -1,4 +1,4 @@
-import { Box, Container, VStack, HStack, Text, Heading, Flex, Link, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, VStack, HStack, Text, Heading, Flex, Link } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { Link as RouterLink } from 'react-router-dom'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
@@ -21,13 +21,13 @@ const renderRichText = (text: string, color: string, boldColor: string) => {
 const JourneySection: React.FC = () => {
   const { t } = useTranslation()
   const { about } = useLocalizedData()
-  const textColor = useColorModeValue('gray.500', 'gray.400')
-  const boldColor = useColorModeValue('gray.700', 'gray.200')
-  const headingColor = useColorModeValue('gray.800', 'gray.100')
-  const lineColor = useColorModeValue('gray.200', 'gray.700')
-  const dotBorder = useColorModeValue('gray.300', 'gray.600')
-  const dotBg = useColorModeValue('white', 'gray.800')
-  const tagBg = useColorModeValue('gray.100', 'gray.800')
+  const textColor = 'var(--secondary-text)'
+  const boldColor = 'var(--text-color)'
+  const headingColor = 'var(--heading-color)'
+  const lineColor = 'var(--border-color)'
+  const dotBorder = 'var(--muted-color)'
+  const dotBg = 'var(--card-bg)'
+  const tagBg = 'var(--tag-bg)'
 
   if (!about.journeyPhases || about.journeyPhases.length === 0) return null
 
@@ -58,8 +58,8 @@ const JourneySection: React.FC = () => {
                     <Text fontSize="2xs" fontFamily="mono" color="cyan.400" fontWeight="semibold" textTransform="uppercase" letterSpacing="wide">
                       {phase.period}
                     </Text>
-                    <Text fontSize="2xs" color={useColorModeValue('gray.400', 'gray.600')}>/</Text>
-                    <Text fontSize="2xs" fontFamily="mono" color={useColorModeValue('gray.400', 'gray.500')}>{phase.org}</Text>
+                    <Text fontSize="2xs" color="var(--muted-color)">/</Text>
+                    <Text fontSize="2xs" fontFamily="mono" color="var(--muted-color)">{phase.org}</Text>
                   </HStack>
                   <Text fontSize="sm" fontWeight="semibold" color={headingColor} mb={1}>{phase.title}</Text>
                   <Text fontSize="xs" lineHeight="tall" mb={2}>

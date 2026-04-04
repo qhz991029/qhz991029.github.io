@@ -1,5 +1,5 @@
 import React from 'react'
-import { Popover, PopoverTrigger, PopoverContent, PopoverBody, PopoverArrow, VStack, Text, Badge, useColorModeValue } from '@chakra-ui/react'
+import { Popover, PopoverTrigger, PopoverContent, PopoverBody, PopoverArrow, VStack, Text, Badge } from '@chakra-ui/react'
 
 interface EasterEggProps {
   trigger: React.ReactNode
@@ -31,14 +31,14 @@ const EasterEgg: React.FC<EasterEggProps> = ({
       <PopoverContent 
         p={4} 
         maxW="400px" 
-        bg={useColorModeValue('white', 'gray.800')} 
-        borderColor={useColorModeValue('gray.200', 'gray.600')} 
+        bg="var(--card-bg)"
+        borderColor="var(--border-color)"
         shadow="xl" 
         zIndex={9999}
         position="relative"
         _focus={{ outline: 'none' }}
       >
-        <PopoverArrow bg={useColorModeValue('white', 'gray.800')} />
+        <PopoverArrow bg="var(--card-bg)" />
         <PopoverBody>
           <VStack align="start" spacing={3}>
             <Badge {...getBadgeProps()} />

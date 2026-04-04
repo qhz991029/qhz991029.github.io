@@ -5,7 +5,6 @@ import {
   HStack,
   Text,
   Link,
-  useColorModeValue,
   Flex,
   Badge,
   useColorMode,
@@ -200,7 +199,7 @@ const PublicationsTerminal: React.FC = () => {
   }, [openImageModal])
   
   return (
-    <Box w="full" minH="100vh" bg={useColorModeValue('gray.50', 'gray.900')} py={8}>
+    <Box w="full" minH="100vh" bg="var(--bg-color)" py={8}>
       <VStack spacing={6} maxW="1400px" mx="auto" px={[2, 4, 6]}>
         {/* Terminal Container */}
         <Box

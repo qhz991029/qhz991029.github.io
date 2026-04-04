@@ -1,4 +1,4 @@
-import { Box, Container, VStack, HStack, Text, Heading, Flex, Link, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, VStack, HStack, Text, Heading, Flex, Link } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { useLocalizedData } from '@/hooks/useLocalizedData'
 import DynamicIcon from '../DynamicIcon'
@@ -14,10 +14,10 @@ const roleIcons: Record<string, string> = {
 const TeachingSection: React.FC = () => {
   const { t } = useTranslation()
   const { teaching } = useLocalizedData()
-  const borderColor = useColorModeValue('gray.100', 'gray.800')
-  const textColor = useColorModeValue('gray.500', 'gray.400')
-  const titleColor = useColorModeValue('gray.800', 'gray.100')
-  const mutedColor = useColorModeValue('gray.400', 'gray.500')
+  const borderColor = 'var(--tag-bg)'
+  const textColor = 'var(--secondary-text)'
+  const titleColor = 'var(--heading-color)'
+  const mutedColor = 'var(--muted-color)'
 
   if (!teaching || teaching.length === 0) return null
 
@@ -27,7 +27,7 @@ const TeachingSection: React.FC = () => {
         <Flex align="center" gap={3} mb={4}>
           <Box h="2px" w="20px" bg="cyan.400" borderRadius="full" flexShrink={0} />
           <Heading size="md" fontWeight="semibold">{t('about.teaching', 'Teaching')}</Heading>
-          <Box flex="1" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
+          <Box flex="1" h="1px" bg="var(--border-color)" />
         </Flex>
         <VStack spacing={0} align="stretch">
           {teaching.map((entry, i) => (

@@ -21,7 +21,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
   return (
     <Box 
       p={0}
-      bg={useColorModeValue('white', 'gray.800')} 
+      bg="var(--card-bg)"
       borderRadius="lg" 
       shadow="sm"
       transition="all 0.3s"
@@ -31,7 +31,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
       role="article"
       aria-labelledby={`news-title-${news.title.replace(/\s+/g, '-').toLowerCase()}`}
       borderWidth="1px"
-      borderColor={useColorModeValue('gray.100', 'gray.700')}
+      borderColor="var(--divider-color)"
     >
       {/* Top color bar */}
       <Box 
@@ -48,7 +48,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
           right={2}
           colorScheme={news.iconColor.split('.')[0]}
           bg={useColorModeValue(`${news.iconColor.split('.')[0]}.500`, `${news.iconColor.split('.')[0]}.600`)}
-          color={useColorModeValue('white', 'white')}
+          color="white"
           px={2}
           py={1}
           borderRadius="md"
@@ -110,7 +110,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
         {/* Description text */}
         <Text 
           fontSize="sm" 
-          color={useColorModeValue('gray.600', 'gray.400')}
+          color="var(--secondary-text)"
           mb={3}
           lineHeight="taller"
         >

@@ -1,4 +1,4 @@
-import { Box, VStack, Flex, Heading, Container, useColorModeValue } from '@chakra-ui/react'
+import { Box, VStack, Flex, Heading, Container } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { institutionLogos } from '../data'
@@ -12,7 +12,7 @@ const universityLogos = institutionLogos
 function About() {
   const { t } = useTranslation()
   const { experience, news, siteConfig } = useLocalizedData()
-  const lineColor = useColorModeValue('gray.200', 'gray.700')
+  const lineColor = 'var(--border-color)'
 
   const cfg = siteConfig as Record<string, unknown>
   const sectionOrder = (cfg.sections as string[] | undefined) ?? DEFAULT_SECTIONS

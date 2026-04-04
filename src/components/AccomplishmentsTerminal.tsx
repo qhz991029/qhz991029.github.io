@@ -39,9 +39,9 @@ const kindMeta: Record<string, { labelKey: string; color: [string, string] }> = 
 
 const AwardRow = ({ award }: { award: Award }) => {
   const { t } = useTranslation()
-  const borderColor = useColorModeValue('gray.100', 'gray.800')
-  const titleColor = useColorModeValue('gray.800', 'gray.100')
-  const mutedColor = useColorModeValue('gray.400', 'gray.500')
+  const borderColor = 'var(--tag-bg)'
+  const titleColor = 'var(--heading-color)'
+  const mutedColor = 'var(--muted-color)'
   const meta = kindMeta[award.kind || 'other']
   const kindColor = useColorModeValue(meta.color[0], meta.color[1])
 
@@ -87,8 +87,8 @@ const AwardRow = ({ award }: { award: Award }) => {
           {content}
         </PopoverTrigger>
         <PopoverContent
-          bg={useColorModeValue('white', 'gray.800')}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
+          bg="var(--card-bg)"
+          borderColor="var(--border-color)"
           maxW="360px"
           boxShadow="lg"
         >
@@ -100,7 +100,7 @@ const AwardRow = ({ award }: { award: Award }) => {
                 Easter Egg
               </Text>
             </HStack>
-            <Text fontSize="xs" color={useColorModeValue('gray.600', 'gray.300')} lineHeight="tall">
+            <Text fontSize="xs" color="var(--secondary-text)" lineHeight="tall">
               {award.egg}
             </Text>
           </PopoverBody>
@@ -118,7 +118,7 @@ const AccomplishmentsTerminal: React.FC = () => {
   return (
     <Container maxW={["full", "full", "7xl"]} px={[2, 4, 8]}>
       <Heading size={["sm", "md"]} mb={3}>{t('about.awardsAndHonors')}</Heading>
-      <Text fontSize="xs" color={useColorModeValue('gray.500', 'gray.400')} mb={4}>
+      <Text fontSize="xs" color="var(--secondary-text)" mb={4}>
         {awards.length} {t('about.awardsSpanning')} {new Set(awards.map(a => a.kind)).size} {t('about.categories')}
       </Text>
       <VStack spacing={0} align="stretch">
