@@ -48,15 +48,14 @@ const PublicationCard = ({ pub }: { pub: any }) => {
             <Text fontSize="xs" color={useColorModeValue('gray.500', 'gray.400')} lineHeight="base" noOfLines={2}>
               {pub.authors.map((author: string, idx: number) => {
                 const isOwner = authorVariants.has(author.replace('*', ''))
-                const isHighlighted = pub.isCoFirst && pub.coFirstAuthors?.includes(author)
+                const isCoFirst = pub.isCoFirst && pub.coFirstAuthors?.includes(author)
                 return (
                   <Text
                     as="span"
                     key={idx}
-                    fontWeight={isOwner || isHighlighted ? 'bold' : 'normal'}
-                    color={isHighlighted ? useColorModeValue('gray.700', 'gray.200') : undefined}
+                    fontWeight={isOwner ? 'bold' : 'normal'}
                   >
-                    {author}{isHighlighted && <Text as="sup" fontSize="2xs" color="cyan.400">*</Text>}{idx < pub.authors.length - 1 && ', '}
+                    {author}{isCoFirst && <Text as="sup" fontSize="2xs" color="cyan.400">*</Text>}{idx < pub.authors.length - 1 && ', '}
                   </Text>
                 )
               })}

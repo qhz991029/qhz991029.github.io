@@ -35,7 +35,8 @@
   },
   "hero": {
     "greeting": "Hi there, I'm",
-    "sometimesI": "Sometimes I"
+    "sometimesI": "Sometimes I",
+    "bio": "Huaizhi Qu is an incoming PhD student at The Hong Kong University of Science and Technology (HKUST), where he will join the AMC group and World Mind Lab. His research interests center on 3D vision, world models, large language models (LLMs), vision-language models (VLMs), and multimodal learning. He received his M.S. in Computer Science from the University of North Carolina at Chapel Hill and his B.E. in Computer Science from the University of Science and Technology of China."
   },
   "footer": {
     "poweredBy": "Powered by"

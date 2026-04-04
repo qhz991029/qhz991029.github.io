@@ -113,7 +113,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
 
             <Box w="full" borderTop="1px dashed" borderColor={useColorModeValue('gray.200', 'gray.700')} />
 
-            {/* Avatar + Education */}
+            {/* Avatar + Bio + Education */}
             {education.length > 0 && (
               <Stack direction={['column', 'row']} spacing={[3, 4, 6]} align={['center', 'flex-start']} w="full">
                 <Box flexShrink={0}>
@@ -127,7 +127,19 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                     bg={useColorModeValue('gray.100', 'gray.700')}
                   />
                 </Box>
-                <VStack align="start" spacing={2}>
+                <VStack align="start" spacing={3} flex={1}>
+                  {/* Bio */}
+                  <Text
+                    fontSize={["xs", "sm"]}
+                    color={textColor}
+                    lineHeight="tall"
+                    textAlign="justify"
+                  >
+                    {t('hero.bio')}
+                  </Text>
+
+                  <Box w="full" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
+
                   <Heading size="xs" color={textColor} textTransform="uppercase" letterSpacing="wider" fontSize="2xs">
                     Education
                   </Heading>
