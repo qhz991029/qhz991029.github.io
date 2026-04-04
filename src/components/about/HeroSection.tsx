@@ -134,7 +134,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                 </Box>
 
                 {/* Bio */}
-                <Box flex={1} maxW={["full", "full", "360px"]}>
+                <Box flex={1} maxW={["full", "full", "400px"]}>
                   <Text
                     fontSize={["xs", "sm"]}
                     color={textColor}
