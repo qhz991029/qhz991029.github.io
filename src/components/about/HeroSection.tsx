@@ -21,8 +21,12 @@ interface HeroSectionProps {
   educationLogos?: Record<string, string>
 }
 
+const BioLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <Link href={href} isExternal color="blue.500" _hover={{ textDecoration: 'underline' }}>{children}</Link>
+)
+
 const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: HeroSectionProps) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { siteOwner } = useLocalizedData()
   const headingColor = useColorModeValue('gray.800', 'white')
   const textColor = useColorModeValue('gray.600', 'gray.400')
@@ -135,7 +139,15 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                     lineHeight="tall"
                     textAlign="justify"
                   >
-                    {t('hero.bio')}
+                    {i18n.language === 'zh' ? (
+                      <>
+                        屈华志即将加入<BioLink href="https://cse.hkust.edu.hk/">香港科技大学</BioLink>（HKUST）<BioLink href="https://github.com/World-Mind-Lab">World Mind Lab</BioLink>攻读博士学位，导师为<BioLink href="https://fnzhan.com/">詹芳能</BioLink>教授，联合指导教授为<BioLink href="https://hongbofu.people.ust.hk/">傅洪波</BioLink>教授。他的研究方向集中在3D视觉、世界模型、大语言模型（LLM）、视觉语言模型（VLM）和多模态学习。他于<BioLink href="https://cs.unc.edu/">北卡罗来纳大学教堂山分校</BioLink>获得计算机科学硕士学位，于<BioLink href="https://en.cs.ustc.edu.cn/main.htm">中国科学技术大学</BioLink>获得计算机科学工学学士学位。
+                      </>
+                    ) : (
+                      <>
+                        Huaizhi Qu is an incoming PhD student at <BioLink href="https://github.com/World-Mind-Lab">World Mind Lab</BioLink>, <BioLink href="https://cse.hkust.edu.hk/">HKUST</BioLink>, advised by Prof. <BioLink href="https://fnzhan.com/">Fangneng Zhan</BioLink> and co-advised by Prof. <BioLink href="https://hongbofu.people.ust.hk/">Hongbo Fu</BioLink>. His research interests center on 3D vision, world models, large language models (LLMs), vision-language models (VLMs), and multimodal learning. He received his M.S. in Computer Science from <BioLink href="https://cs.unc.edu/">UNC Chapel Hill</BioLink> and his B.E. in Computer Science from <BioLink href="https://en.cs.ustc.edu.cn/main.htm">USTC</BioLink>.
+                      </>
+                    )}
                   </Text>
 
                   <Box w="full" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
