@@ -1,4 +1,4 @@
-import { Box, VStack, Text, useColorModeValue, Image, HStack, Container, Stack, Link, Flex, Heading } from '@chakra-ui/react'
+import { Box, VStack, Text, useColorModeValue, Image, HStack, Container, Link, Flex, Heading } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { withBase } from '@/utils/asset'
 import DynamicIcon from '../DynamicIcon'
@@ -26,7 +26,7 @@ const BioLink = ({ href, children }: { href: string; children: React.ReactNode }
 )
 
 const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: HeroSectionProps) => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const { siteOwner } = useLocalizedData()
   const headingColor = useColorModeValue('gray.800', 'white')
   const textColor = useColorModeValue('gray.600', 'gray.400')
@@ -117,9 +117,10 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
 
             <Box w="full" borderTop="1px dashed" borderColor={useColorModeValue('gray.200', 'gray.700')} />
 
-            {/* Avatar + Bio + Education */}
+            {/* Avatar | Bio | Education — three columns on desktop */}
             {education.length > 0 && (
-              <Stack direction={['column', 'row']} spacing={[3, 4, 6]} align={['center', 'flex-start']} w="full">
+              <Flex direction={['column', 'column', 'row']} gap={[4, 4, 6]} align={['center', 'center', 'flex-start']} w="full">
+                {/* Avatar */}
                 <Box flexShrink={0}>
                   <Image
                     src={withBase(`images/${avatar}`)}
@@ -131,43 +132,37 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                     bg={useColorModeValue('gray.100', 'gray.700')}
                   />
                 </Box>
-                <VStack align="start" spacing={3} flex={1}>
-                  {/* Bio */}
+
+                {/* Bio */}
+                <Box flex={1}>
                   <Text
                     fontSize={["xs", "sm"]}
                     color={textColor}
                     lineHeight="tall"
                     textAlign="justify"
                   >
-                    {i18n.language === 'zh' ? (
-                      <>
-                        屈华志即将加入<BioLink href="https://cse.hkust.edu.hk/">香港科技大学</BioLink>（HKUST）<BioLink href="https://github.com/World-Mind-Lab">World Mind Lab</BioLink>攻读博士学位，由<BioLink href="https://fnzhan.com/">詹芳能</BioLink>教授和<BioLink href="https://hongbofu.people.ust.hk/">傅洪波</BioLink>教授联合指导。他的研究方向集中在3D视觉、世界模型、大语言模型（LLM）、视觉语言模型（VLM）和多模态学习。他于<BioLink href="https://cs.unc.edu/">北卡罗来纳大学教堂山分校</BioLink>获得计算机科学硕士学位，于<BioLink href="https://en.cs.ustc.edu.cn/main.htm">中国科学技术大学</BioLink>获得计算机科学工学学士学位。
-                      </>
-                    ) : (
-                      <>
-                        Huaizhi Qu is an incoming PhD student at <BioLink href="https://github.com/World-Mind-Lab">World Mind Lab</BioLink>, <BioLink href="https://cse.hkust.edu.hk/">HKUST</BioLink>, co-advised by Prof. <BioLink href="https://fnzhan.com/">Fangneng Zhan</BioLink> and Prof. <BioLink href="https://hongbofu.people.ust.hk/">Hongbo Fu</BioLink>. His research interests center on 3D vision, world models, large language models (LLMs), vision-language models (VLMs), and multimodal learning. He received his M.S. in Computer Science from <BioLink href="https://cs.unc.edu/">UNC Chapel Hill</BioLink> and his B.E. in Computer Science from <BioLink href="https://en.cs.ustc.edu.cn/main.htm">USTC</BioLink>.
-                      </>
-                    )}
+                    Huaizhi Qu is an incoming PhD student at <BioLink href="https://github.com/World-Mind-Lab">World Mind Lab</BioLink>, <BioLink href="https://cse.hkust.edu.hk/">HKUST</BioLink>, co-advised by Prof. <BioLink href="https://fnzhan.com/">Fangneng Zhan</BioLink> and Prof. <BioLink href="https://hongbofu.people.ust.hk/">Hongbo Fu</BioLink>. His research interests center on 3D vision, world models, large language models (LLMs), vision-language models (VLMs), and multimodal learning. He received his M.S. in Computer Science from <BioLink href="https://cs.unc.edu/">UNC Chapel Hill</BioLink> and his B.E. in Computer Science from <BioLink href="https://en.cs.ustc.edu.cn/main.htm">USTC</BioLink>.
                   </Text>
+                </Box>
 
-                  <Box w="full" h="1px" bg={useColorModeValue('gray.200', 'gray.700')} />
-
+                {/* Education */}
+                <VStack align="start" spacing={2} flexShrink={0} w={["full", "full", "auto"]}>
                   <Heading size="xs" color={textColor} textTransform="uppercase" letterSpacing="wider" fontSize="2xs">
                     Education
                   </Heading>
                   {education.map((item, index) => {
                     const logo = educationLogos[item.institution]
                     return (
-                      <HStack key={index} spacing={2.5} p={2} borderRadius="md" w="full">
+                      <HStack key={index} spacing={2} p={1.5} borderRadius="md">
                         {logo ? (
-                          <Image src={logo} alt={item.institution} w="28px" h="28px" borderRadius="sm" objectFit="contain" flexShrink={0} />
+                          <Image src={logo} alt={item.institution} w="24px" h="24px" borderRadius="sm" objectFit="contain" flexShrink={0} />
                         ) : (
-                          <Flex w="28px" h="28px" borderRadius="sm" bg={accentBg} align="center" justify="center" flexShrink={0}>
-                            <Text fontSize="sm" fontWeight="bold" color="blue.500">{item.institution.charAt(0)}</Text>
+                          <Flex w="24px" h="24px" borderRadius="sm" bg={accentBg} align="center" justify="center" flexShrink={0}>
+                            <Text fontSize="xs" fontWeight="bold" color="blue.500">{item.institution.charAt(0)}</Text>
                           </Flex>
                         )}
-                        <VStack align="start" spacing={0} flex={1}>
-                          <Text fontSize={["xs", "sm"]} fontWeight="medium" lineHeight="short" color={headingColor}>
+                        <VStack align="start" spacing={0}>
+                          <Text fontSize={["2xs", "xs"]} fontWeight="medium" lineHeight="short" color={headingColor} whiteSpace="nowrap">
                             {item.course.includes('World Mind Lab') ? (
                               <>
                                 {item.course.split('World Mind Lab')[0]}
@@ -176,13 +171,13 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                               </>
                             ) : item.course}
                           </Text>
-                          <Text fontSize="2xs" color={textColor} lineHeight="short">{item.institution} · {item.year}</Text>
+                          <Text fontSize="2xs" color={textColor} lineHeight="short" whiteSpace="nowrap">{item.year}</Text>
                         </VStack>
                       </HStack>
                     )
                   })}
                 </VStack>
-              </Stack>
+              </Flex>
             )}
 
             <Box w="full" borderTop="1px dashed" borderColor={useColorModeValue('gray.200', 'gray.700')} />
