@@ -194,7 +194,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
             {/* Contact */}
             <Flex w="full" justify="flex-start">
               {contactLinks.length > 0 && (
-                <HStack spacing={2} flexShrink={0} flexWrap="wrap" justify="flex-start">
+                <HStack spacing={2} flexWrap="wrap" justify="flex-start">
                   {contactLinks.map((item, index) => (
                     <HStack key={item.label} spacing={2}>
                       {index > 0 && <Text color={textColor} opacity={0.2}>/</Text>}
