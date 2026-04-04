@@ -146,10 +146,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                 </Box>
 
                 {/* Education */}
-                <VStack align="start" spacing={4} flexShrink={0} flex={1} justify="center" h="full">
-                  <Heading size="xs" color={textColor} textTransform="uppercase" letterSpacing="wider" fontSize="2xs">
-                    Education
-                  </Heading>
+                <VStack align="start" spacing={0} flexShrink={0} flex={1} justify="space-between" alignSelf="stretch">
                   {education.map((item, index) => {
                     const logo = educationLogos[item.institution]
                     const instInfo: Record<string, { abbr: string; url: string }> = {
