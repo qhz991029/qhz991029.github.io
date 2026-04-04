@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Box, useColorMode } from '@chakra-ui/react'
 import { useSlot } from '@/templates/context'
 
@@ -8,6 +9,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { colorMode } = useColorMode()
   const Navbar = useSlot('navbar')
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', colorMode)
+    document.documentElement.style.colorScheme = colorMode
+  }, [colorMode])
 
   return (
     <Box minH="100vh" w="100vw" className={colorMode === 'dark' ? 'dark-theme' : ''}>

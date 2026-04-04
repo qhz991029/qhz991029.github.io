@@ -19,7 +19,7 @@ const PublicationCard = ({ pub }: { pub: any }) => {
 
 
   return (
-    <Box p={[4, 5, 6]} bg={useColorModeValue('white', 'gray.800')} borderRadius="md" border="1px solid" borderColor={borderColor} transition="all 0.2s" _hover={{ borderColor: useColorModeValue('cyan.300', 'cyan.600') }}>
+    <Box p={[4, 5, 6]} bg="var(--card-bg)" borderRadius="md" border="1px solid" borderColor={borderColor} transition="all 0.2s" _hover={{ borderColor: useColorModeValue('cyan.300', 'cyan.600') }}>
       <Flex direction={["column", "column", "row"]} gap={[4, 4, 6]} align="stretch">
         {pub.featuredImage && (
           <Box flexShrink={0} w={["full", "full", "300px"]} minH={["200px", "220px", "auto"]}
@@ -27,7 +27,7 @@ const PublicationCard = ({ pub }: { pub: any }) => {
             onKeyDown={(e: React.KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onImageOpen() } }}
             cursor="zoom-in" overflow="hidden" borderRadius="sm"
           >
-            <Image src={pub.featuredImage} alt={pub.title} w="full" h="full" objectFit="contain" bg={useColorModeValue('gray.50', 'gray.900')} p={1} transition="transform 0.3s" _hover={{ transform: 'scale(1.03)' }} />
+            <Image src={pub.featuredImage} alt={pub.title} w="full" h="full" objectFit="contain" bg="var(--header-bg)" p={1} transition="transform 0.3s" _hover={{ transform: 'scale(1.03)' }} />
           </Box>
         )}
         <VStack align="start" spacing={2.5} flex={1} justify="center">
@@ -88,12 +88,12 @@ const PublicationCard = ({ pub }: { pub: any }) => {
       </Flex>
       {pub.abstract && (
         <Collapse in={isAbstractOpen} animateOpacity>
-          <Box mt={4} p={4} bg={useColorModeValue('gray.50', 'gray.900')} borderRadius="md" borderLeft="2px solid" borderLeftColor="cyan.400">
+          <Box mt={4} p={4} bg="var(--header-bg)" borderRadius="md" borderLeft="2px solid" borderLeftColor="cyan.400">
             <Text fontSize={["xs", "sm"]} lineHeight="tall" color={useColorModeValue('gray.600', 'gray.400')}>{pub.abstract}</Text>
             {pub.keywords && (
               <HStack mt={3} spacing={1.5} flexWrap="wrap">
                 {pub.keywords.map((keyword: string) => (
-                  <Text key={keyword} fontSize="2xs" fontFamily="mono" color={useColorModeValue('gray.500', 'gray.500')} px={1.5} py={0.5} bg={useColorModeValue('gray.100', 'gray.800')} borderRadius="sm">{keyword}</Text>
+                  <Text key={keyword} fontSize="2xs" fontFamily="mono" color={useColorModeValue('gray.500', 'gray.500')} px={1.5} py={0.5} bg="var(--hover-color)" borderRadius="sm">{keyword}</Text>
                 ))}
               </HStack>
             )}
@@ -105,7 +105,7 @@ const PublicationCard = ({ pub }: { pub: any }) => {
         <ModalContent bg="transparent" boxShadow="none">
           <ModalCloseButton color={useColorModeValue('gray.700', 'gray.200')} />
           <ModalBody p={0} display="flex" alignItems="center" justifyContent="center">
-            <Image src={pub.featuredImage} alt={`${pub.title} large preview`} maxH="80vh" maxW="90vw" objectFit="contain" borderRadius="lg" bg={useColorModeValue('white', 'gray.900')} p={4} />
+            <Image src={pub.featuredImage} alt={`${pub.title} large preview`} maxH="80vh" maxW="90vw" objectFit="contain" borderRadius="lg" bg="var(--card-bg)" p={4} />
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -30,7 +30,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
   const { siteOwner } = useLocalizedData()
   const headingColor = useColorModeValue('gray.800', 'white')
   const textColor = useColorModeValue('gray.600', 'gray.400')
-  const bg = useColorModeValue('gray.50', 'gray.900')
+  const bg = 'var(--bg-color)'
   const accentBg = useColorModeValue('blue.50', 'blue.900')
   const primaryEmail = siteOwner.contact.academicEmail || siteOwner.contact.email
   const contactLinks = [
@@ -129,7 +129,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                     borderRadius="xl"
                     boxSize={["150px", "180px", "200px"]}
                     objectFit="cover"
-                    bg={useColorModeValue('gray.100', 'gray.700')}
+                    bg="var(--hover-color)"
                   />
                 </Box>
 
