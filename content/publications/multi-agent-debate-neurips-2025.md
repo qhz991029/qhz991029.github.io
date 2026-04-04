@@ -12,7 +12,7 @@ venueType: conference
 year: 2025
 status: published
 links:
-  arxiv: "https://arxiv.org/abs/2510.12697"
+  paper: "https://neurips.cc/virtual/2025/loc/san-diego/poster/117644"
   code: "https://github.com/tyrionhuu/Multi-LLM-Debate"
 ---
 
