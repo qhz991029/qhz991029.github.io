@@ -134,7 +134,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                 </Box>
 
                 {/* Bio */}
-                <Box flex={1}>
+                <Box flex={1} maxW={["full", "full", "360px"]}>
                   <Text
                     fontSize={["xs", "sm"]}
                     color={textColor}
@@ -146,23 +146,29 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                 </Box>
 
                 {/* Education */}
-                <VStack align="start" spacing={2} flexShrink={0} w={["full", "full", "auto"]}>
+                <VStack align="start" spacing={2} flexShrink={0} flex={1}>
                   <Heading size="xs" color={textColor} textTransform="uppercase" letterSpacing="wider" fontSize="2xs">
                     Education
                   </Heading>
                   {education.map((item, index) => {
                     const logo = educationLogos[item.institution]
+                    const instInfo: Record<string, { abbr: string; url: string }> = {
+                      'The Hong Kong University of Science and Technology': { abbr: 'HKUST', url: 'https://cse.hkust.edu.hk/' },
+                      'University of North Carolina at Chapel Hill': { abbr: 'UNC Chapel Hill', url: 'https://cs.unc.edu/' },
+                      'University of Science and Technology of China': { abbr: 'USTC', url: 'https://en.cs.ustc.edu.cn/main.htm' },
+                    }
+                    const inst = instInfo[item.institution]
                     return (
-                      <HStack key={index} spacing={2} p={1.5} borderRadius="md">
+                      <HStack key={index} spacing={2.5} p={1.5} borderRadius="md">
                         {logo ? (
-                          <Image src={logo} alt={item.institution} w="24px" h="24px" borderRadius="sm" objectFit="contain" flexShrink={0} />
+                          <Image src={logo} alt={item.institution} w="28px" h="28px" borderRadius="sm" objectFit="contain" flexShrink={0} />
                         ) : (
-                          <Flex w="24px" h="24px" borderRadius="sm" bg={accentBg} align="center" justify="center" flexShrink={0}>
+                          <Flex w="28px" h="28px" borderRadius="sm" bg={accentBg} align="center" justify="center" flexShrink={0}>
                             <Text fontSize="xs" fontWeight="bold" color="blue.500">{item.institution.charAt(0)}</Text>
                           </Flex>
                         )}
                         <VStack align="start" spacing={0}>
-                          <Text fontSize={["2xs", "xs"]} fontWeight="medium" lineHeight="short" color={headingColor} whiteSpace="nowrap">
+                          <Text fontSize={["xs", "sm"]} fontWeight="medium" lineHeight="short" color={headingColor}>
                             {item.course.includes('World Mind Lab') ? (
                               <>
                                 {item.course.split('World Mind Lab')[0]}
@@ -171,7 +177,13 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                               </>
                             ) : item.course}
                           </Text>
-                          <Text fontSize="2xs" color={textColor} lineHeight="short" whiteSpace="nowrap">{item.year}</Text>
+                          <Text fontSize="2xs" color={textColor} lineHeight="short">
+                            {inst ? (
+                              <><Link href={inst.url} isExternal color="blue.500" _hover={{ textDecoration: 'underline' }}>{inst.abbr}</Link> · {item.year}</>
+                            ) : (
+                              <>{item.institution} · {item.year}</>
+                            )}
+                          </Text>
                         </VStack>
                       </HStack>
                     )
