@@ -194,10 +194,10 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
             {/* Contact */}
             <Flex w="full" justify="flex-start">
               {contactLinks.length > 0 && (
-                <HStack spacing={2} flexWrap="wrap" justify="flex-start">
+                <Flex flexWrap="wrap" gap={0} align="center">
                   {contactLinks.map((item, index) => (
-                    <HStack key={item.label} spacing={2}>
-                      {index > 0 && <Text color={textColor} opacity={0.2}>/</Text>}
+                    <HStack key={item.label} spacing={0}>
+                      {index > 0 && <Text color={textColor} opacity={0.2} px={1.5}>/</Text>}
                       <Link href={item.href} isExternal _hover={{ textDecoration: 'none' }}>
                         <HStack spacing={1.5} color={textColor} transition="all 0.15s" _hover={{ color: 'cyan.400' }}>
                           <DynamicIcon name={item.icon} boxSize={3.5} />
@@ -206,7 +206,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                       </Link>
                     </HStack>
                   ))}
-                </HStack>
+                </Flex>
               )}
             </Flex>
         </VStack>
