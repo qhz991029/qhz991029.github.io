@@ -75,7 +75,7 @@
     "icon": "FaFileAlt",
     "iconColor": "orange.400",
     "title": "Bit-Flip Error Resilience accepted to EMNLP 2025",
-    "description": "A comprehensive analysis and defense framework for bit-flip error resilience in LLMs.",
+    "description": "Bit-Flip Error Resilience in LLMs proposes a comprehensive analysis and defense framework.",
     "date": "2025",
     "sortDate": "2025-08-01",
     "links": []
@@ -169,7 +169,7 @@
     "icon": "FaFileAlt",
     "iconColor": "gray.400",
     "title": "GPU Occupancy Prediction accepted to Cluster 2023",
-    "description": "GPU occupancy prediction of deep learning models using graph neural network.",
+    "description": "GPU Occupancy Prediction studies deep learning model performance prediction using graph neural networks.",
     "date": "2023",
     "sortDate": "2023-08-01",
     "links": []
