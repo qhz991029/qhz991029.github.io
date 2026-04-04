@@ -90,7 +90,7 @@
     "date": "2025",
     "sortDate": "2025-07-01",
     "links": [
-      { "text": "Code", "url": "https://github.com/UMN-ZhaoLab/RTGS", "icon": "FaGithub" }
+      { "text": "RTGSSLAM Code", "url": "https://github.com/UMN-ZhaoLab/RTGS", "icon": "FaGithub" }
     ]
   },
   {
@@ -114,7 +114,7 @@
     "date": "2025",
     "sortDate": "2025-05-01",
     "links": [
-      { "text": "Code", "url": "https://github.com/UNITES-Lab/UQ-Merge", "icon": "FaGithub" }
+      { "text": "UQ-Merge Code", "url": "https://github.com/UNITES-Lab/UQ-Merge", "icon": "FaGithub" }
     ]
   },
   {
@@ -160,7 +160,7 @@
     "date": "2024",
     "sortDate": "2024-09-01",
     "links": [
-      { "text": "Code", "url": "https://github.com/GATECH-EIC/Omni-Recon", "icon": "FaGithub" }
+      { "text": "Omni-Recon Code", "url": "https://github.com/GATECH-EIC/Omni-Recon", "icon": "FaGithub" }
     ]
   },
   {

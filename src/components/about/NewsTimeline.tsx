@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useMemo } from 'react'
 import { Box, HStack, Text, Link, Flex, useColorMode, Collapse } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
@@ -87,7 +87,29 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
   const { colorMode } = useColorMode();
   const isDark = colorMode === 'dark';
   const { t } = useTranslation();
-  const { siteOwner } = useLocalizedData();
+  const { siteOwner, publications } = useLocalizedData();
+
+  // Build paper name → URL map from publications for linkifying descriptions
+  const paperLinkMap = useMemo(() => {
+    const map: Record<string, string> = {};
+    if (publications) {
+      for (const pub of publications) {
+        const url = pub.links.arxiv || pub.links.paper || pub.links.projectPage;
+        if (!url) continue;
+        // Extract short name: first word or acronym from title (e.g. "MonoVLM", "VLM-3R", "BetaConform")
+        // Use the part before ":" or the first recognizable name
+        const colonIdx = pub.title.indexOf(':');
+        if (colonIdx > 0) {
+          const shortName = pub.title.substring(0, colonIdx).trim();
+          map[shortName] = url;
+        }
+        // Also map full title
+        map[pub.title] = url;
+      }
+    }
+    return map;
+  }, [publications]);
+
   const [currentTime, setCurrentTime] = useState(new Date());
   const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>({});
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
@@ -148,6 +170,39 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
   const termSuccess = tc.success;
   const termWarning = tc.warning;
   const termSecondary = tc.secondary;
+
+  // Linkify paper names in description text
+  const linkifyDescription = useCallback((text: string, colors: { num: string; kw: string; str: string }) => {
+    if (!text) return null;
+    const names = Object.keys(paperLinkMap).sort((a, b) => b.length - a.length);
+    if (names.length === 0) return highlightData(text, colors);
+
+    const escaped = names.map(n => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const rx = new RegExp(`(${escaped.join('|')})`, 'g');
+
+    const parts: React.ReactNode[] = [];
+    let last = 0;
+    let key = 0;
+    let m: RegExpExecArray | null;
+
+    while ((m = rx.exec(text)) !== null) {
+      if (m.index > last) {
+        parts.push(<React.Fragment key={key++}>{highlightData(text.slice(last, m.index), colors)}</React.Fragment>);
+      }
+      const url = paperLinkMap[m[0]];
+      parts.push(
+        <Link key={key++} href={url} isExternal color={termCommand} fontWeight="medium" _hover={{ textDecoration: 'underline', color: termHighlight }} onClick={(e) => e.stopPropagation()}>
+          {m[0]}
+        </Link>
+      );
+      last = m.index + m[0].length;
+    }
+
+    if (last < text.length) {
+      parts.push(<React.Fragment key={key++}>{highlightData(text.slice(last), colors)}</React.Fragment>);
+    }
+    return <>{parts}</>;
+  }, [paperLinkMap, termCommand, termHighlight]);
 
   // Type colors (for ANSI-like color coding)
   const typeColors: Record<string, { bg: string, fg: string, icon: string }> = {
@@ -623,7 +678,7 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                         '&::-webkit-scrollbar-thumb': { background: tc.border, borderRadius: '2px' },
                       }}
                     >
-                      {highlightData(item.description, { num: termHighlight, kw: termCommand, str: termSuccess })}
+                      {linkifyDescription(item.description, { num: termHighlight, kw: termCommand, str: termSuccess })}
                     </Text>
                   )}
                   {item.links.length > 0 && (
