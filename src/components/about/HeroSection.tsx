@@ -134,7 +134,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                 </Box>
 
                 {/* Bio */}
-                <Box flex={1} maxW={["full", "full", "400px"]}>
+                <Box flex={1} maxW={["full", "full", "380px"]}>
                   <Text
                     fontSize={["xs", "sm"]}
                     color={textColor}
@@ -146,7 +146,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                 </Box>
 
                 {/* Education */}
-                <VStack align="start" spacing={2} flexShrink={0} flex={1}>
+                <VStack align="start" spacing={4} flexShrink={0} flex={1} justify="center" h="full">
                   <Heading size="xs" color={textColor} textTransform="uppercase" letterSpacing="wider" fontSize="2xs">
                     Education
                   </Heading>
@@ -177,7 +177,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                               </>
                             ) : item.course}
                           </Text>
-                          <Text fontSize="2xs" color={textColor} lineHeight="short">
+                          <Text fontSize="xs" color={textColor} lineHeight="short">
                             {inst ? (
                               <><Link href={inst.url} isExternal color="blue.500" _hover={{ textDecoration: 'underline' }}>{inst.abbr}</Link> · {item.year}</>
                             ) : (
