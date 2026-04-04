@@ -81,7 +81,6 @@ const researchStatuses = [
 const COL_DATE = { base: "70px", sm: "100px", md: "120px" };
 const COL_TYPE = { base: "60px", sm: "80px", md: "100px" };
 const COL_ID = { base: "60px", sm: "70px", md: "80px" };
-const COL_LINKS = { base: "80px", sm: "100px", md: "130px" };
 const COL_CTRL = { base: "30px", sm: "40px", md: "50px" };
 
 const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHeader = false }) => {
@@ -465,7 +464,6 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
               <Box as="span" color={termSecondary}>.</Box>
               <Box as="span" color={termCommand}>DUMP</Box>
             </Text>
-            <Text w={COL_LINKS} color={termWarning} display={{ base: "none", lg: "block" }}>{t('newsTimeline.links')}</Text>
             <Text w={COL_CTRL} color={termPrompt} textAlign="center">
               <Box as="span" display={{ base: "inline", sm: "none" }}>+</Box>
               <Box as="span" display={{ base: "none", sm: "inline" }}>{t('newsTimeline.ctrl')}</Box>
@@ -548,20 +546,6 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
                     </Text>
                   </Box>
                 </Box>
-                <Flex w={COL_LINKS} align="center" justify="flex-start" display={{ base: "none", lg: "flex" }}>
-                  {item.links.length > 0 ? (
-                    <HStack spacing={1}>
-                      {item.links.slice(0, 3).map((link, i) => (
-                        <Link key={i} href={link.url} isExternal color={termCommand} _hover={{ color: termHighlight }} onClick={(e) => e.stopPropagation()}>
-                          <Box>[<DynamicIcon name={link.icon || 'FaExternalLinkAlt'} boxSize={[2, 2.5, 3]} />]</Box>
-                        </Link>
-                      ))}
-                      {item.links.length > 3 && <Text color={termInfo}>+{item.links.length - 3}</Text>}
-                    </HStack>
-                  ) : (
-                    <Text color={termInfo}>{t('newsTimeline.devNull')}</Text>
-                  )}
-                </Flex>
                 <Flex w={COL_CTRL} align="center" justify="center">
                   <Box
                     color={expandedItems[index] ? termInfo : termCommand}
