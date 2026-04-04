@@ -96,15 +96,26 @@ const NewsTimeline: React.FC<NewsTimelineProps> = ({ news, showHeader: _showHead
       for (const pub of publications) {
         const url = pub.links.arxiv || pub.links.paper || pub.links.projectPage;
         if (!url) continue;
-        // Extract short name: first word or acronym from title (e.g. "MonoVLM", "VLM-3R", "BetaConform")
-        // Use the part before ":" or the first recognizable name
+        // 1. Short name from title before ":"
         const colonIdx = pub.title.indexOf(':');
         if (colonIdx > 0) {
-          const shortName = pub.title.substring(0, colonIdx).trim();
-          map[shortName] = url;
+          map[pub.title.substring(0, colonIdx).trim()] = url;
         }
-        // Also map full title
+        // 2. Full title
         map[pub.title] = url;
+        // 3. For titles without ":", find the longest prefix that ends before
+        //    a common stop word (for, in, of, with, via, using, a, an, the, and)
+        if (colonIdx <= 0) {
+          const stop = /^(for|in|of|with|via|using|a|an|the|and)$/i;
+          const words = pub.title.replace(/^\(.*?\)\s*/, '').split(' ');
+          let cutoff = words.length;
+          for (let i = 1; i < words.length; i++) {
+            if (stop.test(words[i])) { cutoff = i; break; }
+          }
+          if (cutoff >= 2 && cutoff < words.length) {
+            map[words.slice(0, cutoff).join(' ')] = url;
+          }
+        }
       }
     }
     return map;
