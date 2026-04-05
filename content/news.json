@@ -141,6 +141,17 @@
   },
   {
     "type": "education",
+    "badge": "M.S.",
+    "icon": "FaGraduationCap",
+    "iconColor": "blue.400",
+    "title": "Started M.S. in Computer Science at UNC Chapel Hill",
+    "description": "Joined the University of North Carolina at Chapel Hill as an M.S. student in Computer Science.",
+    "date": "2024",
+    "sortDate": "2024-08-01",
+    "links": []
+  },
+  {
+    "type": "education",
     "badge": "B.E.",
     "icon": "FaGraduationCap",
     "iconColor": "blue.400",
