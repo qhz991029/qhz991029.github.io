@@ -2,8 +2,8 @@
 id: pets-icml-2026-submission
 title: "PETS: A Principled Framework Towards Optimal Trajectory Allocation for Efficient Test-Time Self-Consistency"
 authors:
-  - Huaizhi Qu
   - Zhangyi Liu
+  - Huaizhi Qu
   - Xiaowei Yin
   - He Sun
   - Yanjun Han
