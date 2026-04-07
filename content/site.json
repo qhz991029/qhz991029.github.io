@@ -5,8 +5,8 @@
   "sections": [
     "hero",
     "bio",
-    "selectedPublications",
     "newsDisplay",
+    "selectedPublications",
     "journey",
     "accomplishments",
     "footer"
