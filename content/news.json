@@ -1,5 +1,16 @@
 [
   {
+    "type": "award",
+    "badge": "Internship",
+    "icon": "FaBriefcase",
+    "iconColor": "blue.400",
+    "title": "Joining Tencent Hunyuan 3D as a Qingyun Plan (青云计划) Intern",
+    "description": "Excited to join Tencent Hunyuan 3D team as a research intern through the Tencent Qingyun Plan (青云计划), working on 3D generation and reconstruction.",
+    "date": "2026",
+    "sortDate": "2026-04-09",
+    "links": []
+  },
+  {
     "type": "education",
     "badge": "PhD",
     "icon": "FaGraduationCap",
