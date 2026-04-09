@@ -81,6 +81,17 @@
     ]
   },
   {
+    "type": "career",
+    "badge": "Internship",
+    "icon": "FaBriefcase",
+    "iconColor": "blue.400",
+    "title": "Joined ByteDance as a Research Intern",
+    "description": "Started a part-time research internship at ByteDance in San Jose, CA.",
+    "date": "2025",
+    "sortDate": "2025-09-15",
+    "links": []
+  },
+  {
     "type": "publication",
     "badge": "EMNLP 2025",
     "icon": "FaFileAlt",
@@ -127,6 +138,17 @@
     "links": [
       { "text": "UQ-Merge Code", "url": "https://github.com/UNITES-Lab/UQ-Merge", "icon": "FaGithub" }
     ]
+  },
+  {
+    "type": "career",
+    "badge": "Internship",
+    "icon": "FaBriefcase",
+    "iconColor": "blue.400",
+    "title": "Joined Honda Research Institute USA as a Research Intern",
+    "description": "Started a full-time research internship at Honda Research Institute USA in San Jose, CA.",
+    "date": "2025",
+    "sortDate": "2025-05-15",
+    "links": []
   },
   {
     "type": "publication",
