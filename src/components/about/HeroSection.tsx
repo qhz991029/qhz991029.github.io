@@ -142,7 +142,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                     lineHeight="tall"
                     textAlign="justify"
                   >
-                    Huaizhi Qu is an incoming PhD student at <BioLink href="https://github.com/World-Mind-Lab">World Mind Lab</BioLink>, <BioLink href="https://cse.hkust.edu.hk/">HKUST</BioLink>, co-advised by Prof. <BioLink href="https://fnzhan.com/">Fangneng Zhan</BioLink> and Prof. <BioLink href="https://hongbofu.people.ust.hk/">Hongbo Fu</BioLink>. His research interests center on 3D vision, world models, large language models (LLMs), vision-language models (VLMs), and multimodal learning. He received his M.S. in Computer Science from <BioLink href="https://cs.unc.edu/">UNC Chapel Hill</BioLink> and his B.E. in Computer Science from <BioLink href="https://en.cs.ustc.edu.cn/main.htm">USTC</BioLink>.
+                    Huaizhi Qu is an incoming PhD student at <BioLink href="https://worldmind-lab.com/">World Mind Lab</BioLink>, <BioLink href="https://cse.hkust.edu.hk/">HKUST</BioLink>, co-advised by Prof. <BioLink href="https://fnzhan.com/">Fangneng Zhan</BioLink> and Prof. <BioLink href="https://hongbofu.people.ust.hk/">Hongbo Fu</BioLink>. His research interests center on 3D vision, world models, large language models (LLMs), vision-language models (VLMs), and multimodal learning. He received his M.S. in Computer Science from <BioLink href="https://cs.unc.edu/">UNC Chapel Hill</BioLink> and his B.E. in Computer Science from <BioLink href="https://en.cs.ustc.edu.cn/main.htm">USTC</BioLink>.
                   </Text>
                 </Box>
 
@@ -170,7 +170,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                             {item.course.includes('World Mind Lab') ? (
                               <>
                                 {item.course.split('World Mind Lab')[0]}
-                                <Link href="https://github.com/World-Mind-Lab" isExternal color="blue.500" _hover={{ textDecoration: 'underline' }}>World Mind Lab</Link>
+                                <Link href="https://worldmind-lab.com/" isExternal color="blue.500" _hover={{ textDecoration: 'underline' }}>World Mind Lab</Link>
                                 {item.course.split('World Mind Lab')[1]}
                               </>
                             ) : item.course}
