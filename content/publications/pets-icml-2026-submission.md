@@ -18,7 +18,6 @@ coFirstAuthors:
   - Huaizhi Qu
   - Zhangyi Liu
   - Xiaowei Yin
-coFirstNote: "sorted alphabetically"
 specialBadges:
   - Co-First
 links:
