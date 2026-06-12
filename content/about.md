@@ -10,11 +10,6 @@ journeyPhases:
     org: University of North Carolina at Chapel Hill
     description: "Pursued graduate study at UNC Chapel Hill and conducted research with Professor Tianlong Chen on efficient and reliable machine learning, multimodal models, and uncertainty-aware methods."
     tags: [UNC Chapel Hill, Foundation Models, Reliability]
-  - period: "2023 - 2024"
-    title: Undergraduate Researcher
-    org: Georgia Tech EIC Lab
-    description: "Worked with Professor Yingyan (Celine) Lin and collaborators on 3D vision and neural rendering problems, contributing to projects such as Omni-Recon and HoloZip."
-    tags: [Georgia Tech, 3D Vision, Neural Rendering]
   - period: "2018 - 2024"
     title: B.E. in Computer Science
     org: University of Science and Technology of China
