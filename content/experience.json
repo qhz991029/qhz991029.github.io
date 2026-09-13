@@ -2,7 +2,7 @@
   "education": {
     "courses": [
       {
-        "course": "PhD in AMC, World Mind Lab",
+        "course": "PhD in World Mind Lab",
         "institution": "The Hong Kong University of Science and Technology",
         "year": "Sep 2026 -"
       },
@@ -38,7 +38,7 @@
       "start": "2026-09-01",
       "category": "academic",
       "roleType": "research",
-      "summary": "PhD student in AMC, World Mind Lab advised by Professor Fangneng Zhan and Professor Hongbo Fu.",
+      "summary": "PhD student in World Mind Lab advised by Professor Fangneng Zhan and Professor Hongbo Fu.",
       "highlights": [
         "Research focus: multimodal LLMs, efficient foundation models, uncertainty quantification, 3D vision, and neural rendering.",
         "Building on prior work in vision-language grounding, multimodal model merging, and reliable LLM evaluation."

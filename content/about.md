@@ -1,9 +1,9 @@
 ---
 journeyPhases:
   - period: "2026 -"
-    title: PhD in AMC, World Mind Lab
+    title: PhD in World Mind Lab
     org: The Hong Kong University of Science and Technology
-    description: "Joining HKUST as a PhD student in AMC and [World Mind Lab](https://worldmind-lab.com/) under the supervision of Professor Fangneng Zhan and Professor Hongbo Fu. Current interests include multimodal LLMs, efficient inference, uncertainty quantification, 3D vision, and neural rendering."
+    description: "Joining HKUST as a PhD student in [World Mind Lab](https://worldmind-lab.com/) under the supervision of Professor Fangneng Zhan and Professor Hongbo Fu. Current interests include multimodal LLMs, efficient inference, uncertainty quantification, 3D vision, and neural rendering."
     tags: [HKUST, World Mind Lab, Multimodal LLMs]
   - period: "2024 - 2025"
     title: M.S. in Computer Science
@@ -26,7 +26,7 @@ version:
         - Academic news and honors
 ---
 
-Huaizhi Qu is an HKUST PhD student in AMC and [World Mind Lab](https://worldmind-lab.com/). His research interests lie at the intersection of foundation models and computer vision, with a current focus on multimodal LLMs, efficiency for foundation models, uncertainty quantification, 3D vision, and neural rendering.
+Huaizhi Qu is an HKUST PhD student in [World Mind Lab](https://worldmind-lab.com/). His research interests lie at the intersection of foundation models and computer vision, with a current focus on multimodal LLMs, efficiency for foundation models, uncertainty quantification, 3D vision, and neural rendering.
 
 Before joining HKUST, he received his M.S. in Computer Science from the University of North Carolina at Chapel Hill and his B.E. in Computer Science from the University of Science and Technology of China. He has also worked as an undergraduate researcher at Georgia Tech EIC Lab and at the Algorithm and Data Application Lab at USTC.
 
