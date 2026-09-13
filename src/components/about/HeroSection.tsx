@@ -142,7 +142,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                     lineHeight="tall"
                     textAlign="justify"
                   >
-                    Huaizhi Qu is an incoming PhD student at <BioLink href="https://worldmind-lab.com/">World Mind Lab</BioLink>, <BioLink href="https://cse.hkust.edu.hk/">HKUST</BioLink>, co-advised by Prof. <BioLink href="https://fnzhan.com/">Fangneng Zhan</BioLink> and Prof. <BioLink href="https://hongbofu.people.ust.hk/">Hongbo Fu</BioLink>. His research interests center on 3D vision, world models, large language models (LLMs), vision-language models (VLMs), and multimodal learning. He received his M.S. in Computer Science from <BioLink href="https://cs.unc.edu/">UNC Chapel Hill</BioLink> and his B.E. in Computer Science from <BioLink href="https://en.cs.ustc.edu.cn/main.htm">USTC</BioLink>.
+                    Huaizhi Qu is an incoming PhD student at <BioLink href="https://worldmind-lab.com/">World Mind Lab</BioLink>, <BioLink href="https://hkust.edu.hk/">HKUST</BioLink>, co-advised by Prof. <BioLink href="https://fnzhan.com/">Fangneng Zhan</BioLink> and Prof. <BioLink href="https://hongbofu.people.ust.hk/">Hongbo Fu</BioLink>. His research interests center on 3D vision, world models, large language models (LLMs), vision-language models (VLMs), and multimodal learning. He received his M.S. in Computer Science from <BioLink href="https://cs.unc.edu/">UNC Chapel Hill</BioLink> and his B.E. in Computer Science from <BioLink href="https://en.cs.ustc.edu.cn/main.htm">USTC</BioLink>.
                   </Text>
                 </Box>
 
@@ -151,7 +151,7 @@ const HeroSection = ({ title, avatar, education = [], educationLogos = {} }: Her
                   {education.map((item, index) => {
                     const logo = educationLogos[item.institution]
                     const instInfo: Record<string, { abbr: string; url: string }> = {
-                      'The Hong Kong University of Science and Technology': { abbr: 'HKUST', url: 'https://cse.hkust.edu.hk/' },
+                      'The Hong Kong University of Science and Technology': { abbr: 'HKUST', url: 'https://hkust.edu.hk/' },
                       'University of North Carolina at Chapel Hill': { abbr: 'UNC Chapel Hill', url: 'https://cs.unc.edu/' },
                       'University of Science and Technology of China': { abbr: 'USTC', url: 'https://en.cs.ustc.edu.cn/main.htm' },
                     }
